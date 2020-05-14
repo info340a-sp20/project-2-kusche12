@@ -7,7 +7,61 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.header {
+  text-align: center;
+}
+
+.answer-choice {
+  display: block;
+}
+.text-input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.maker-space {
+  display: flex;
+  flex-direction: row;
+  background-color: pink;
+}
+
+button {
+  display: block;
+  margin: 20px;
+}
+
+.back-forth-button button {
+  display: inline;
+  margin: 0;
+}
+
+
+/* CARD LAYOUT */
+
+.card {
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+
+  margin-left: 200px;
+  height: 300px;
+  width: 600px;
+  background-color: lightblue;
+}
+
+.card-question {
+  margin-bottom: 20px;
+}
+
+.card-answer {
+  margin: 20px;
+}
+
+.card-answer-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90%;
 }
