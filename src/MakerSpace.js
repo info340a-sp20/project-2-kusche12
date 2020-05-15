@@ -2,16 +2,20 @@ import React from 'react';
 import Card from './Card';
 import './index.css';
 
+// User can delete current card
+// Render correct card based on position <-- Work on this one next
+
 class MakerSpace extends React.Component {
     constructor(props) {
       super(props);
+      let cards = this.props.cards;
+      let pos = this.props.cardPosition;
+      console.log(cards);
+      console.log(pos);
       this.state = {
-        question: '',
-        answers: [
-          {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}
-        ]
+        question: cards[pos].question,
+        answers: cards[pos].answers
       }
-      this.handleInput = this.handleInput.bind(this);
     }
   
     // Updates question and specific answers due to user input
@@ -34,7 +38,6 @@ class MakerSpace extends React.Component {
       answersCopy[pos].isCorrect = !answersCopy[pos].isCorrect;
       this.setState({answers: answersCopy});
     }
-  
   
     render() {
       let answerChoices = [];
@@ -60,25 +63,26 @@ class MakerSpace extends React.Component {
                   />
               </label>
               {answerChoices}
-              <button>Add Question</button>
-              <button>Delete Question</button>
+              <button onClick={this.props.addCard}>Add Question</button>
+              <button onClick={this.props.deleteCard}>Delete Question</button>
   
               <div className="back-forth-button">
-                <button>Back One</button>
-                <button>Forward One</button>
+                <button value='back' onClick={this.props.moveCard}>Back One</button>
+                <button value='forward' onClick={this.props.moveCard}>Forward One</button>
               </div>
-              
+              <p>Question {this.props.cardPosition + 1} / {this.props.cards.length}</p>
             </form>
           </div>
           <Card 
-            question = {this.state.question}
-            answers = {answerText}
+            question={this.state.question}
+            answers={answerText}
           />
       </div>
       )
     }
 }
 
+// Groups similar Answer Fields together
 function AnswerChoice(props) {
     let inputName = 'ans' + props.index;
     return (
@@ -90,6 +94,7 @@ function AnswerChoice(props) {
     );
 }
 
+// Allows for refreshing the Answer choices in the state
 function arrayClone(arr) {
     return JSON.parse(JSON.stringify(arr));
 }
