@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul, li {
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
 .answer-choice {
   display: block;
 }
@@ -43,6 +49,7 @@ button {
   padding-top: 50px;
   background-color: #fffaf5;
 
+  margin-top: 75px;
   margin-left: 200px;
   height: 300px;
   width: 600px;
