@@ -3,18 +3,17 @@ import Card from './Card';
 import './index.css';
 
 // User can delete current card
-// Render correct card based on position <-- Work on this one next
+// Render correct card and MakerSpace based on position <-- Work on this one next
 
 class MakerSpace extends React.Component {
     constructor(props) {
       super(props);
       let cards = this.props.cards;
       let pos = this.props.cardPosition;
-      console.log(cards);
-      console.log(pos);
+
       this.state = {
         question: cards[pos].question,
-        answers: cards[pos].answers
+        answers: cards[pos].answers,
       }
     }
   
@@ -37,6 +36,21 @@ class MakerSpace extends React.Component {
       let pos = parseInt(event.target.name.substring(3,4));
       answersCopy[pos].isCorrect = !answersCopy[pos].isCorrect;
       this.setState({answers: answersCopy});
+    }
+
+    // Possible solution to rendering the next card, but this does not work currently.
+    renderNextCard = (event) => {
+      event.preventDefault();
+      this.props.moveCard(event);
+
+      let cards = this.props.cards;
+      let pos = this.props.cardPosition;
+      this.setState({
+        question: cards[pos].question,
+        answers: cards[pos].answers,
+      });
+      console.log(this.props.cards);
+      console.log(this.props.cardPosition);
     }
   
     render() {
@@ -67,8 +81,8 @@ class MakerSpace extends React.Component {
               <button onClick={this.props.deleteCard}>Delete Question</button>
   
               <div className="back-forth-button">
-                <button value='back' onClick={this.props.moveCard}>Back One</button>
-                <button value='forward' onClick={this.props.moveCard}>Forward One</button>
+                <button value='back' onClick={this.renderNextCard}>Back One</button>
+                <button value='forward' onClick={this.renderNextCard}>Forward One</button>
               </div>
               <p>Question {this.props.cardPosition + 1} / {this.props.cards.length}</p>
             </form>
