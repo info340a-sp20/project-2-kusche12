@@ -4,6 +4,7 @@ import './index.css';
 
 // User can delete current card
 // Render correct card and MakerSpace based on position <-- Work on this one next
+// User can finish and save their quiz to the homescreen
 
 class MakerSpace extends React.Component {
     constructor(props) {
