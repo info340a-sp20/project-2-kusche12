@@ -35,7 +35,6 @@ class App extends React.Component {
     } else if (event.target.value === 'back' && this.state.cardPosition > 0) {
       this.setState({cardPosition: this.state.cardPosition - 1})
     }
-    // UPDATE THE MAKER SPACE HERE
   }
 
   deleteCard = (event) => {
@@ -50,7 +49,8 @@ class App extends React.Component {
           moveCard={this.moveCard} 
           deleteCard={this.deleteCard} 
           cardPosition={this.state.cardPosition} 
-          cards={this.state.cards}/>
+          numCards={this.state.cards.length}
+          currentCard={this.state.cards[this.state.cardPosition]}/>
       </div>
     );
   }

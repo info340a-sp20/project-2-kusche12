@@ -9,13 +9,11 @@ import './index.css';
 class MakerSpace extends React.Component {
     constructor(props) {
       super(props);
-      let cards = this.props.cards;
-      let pos = this.props.cardPosition;
-
+      let currentCard = this.props.currentCard;
       this.state = {
-        question: cards[pos].question,
-        answers: cards[pos].answers,
-      }
+        question: currentCard.question,
+        answers: currentCard.answers,
+      };
     }
   
     // Updates question and specific answers due to user input
@@ -29,6 +27,7 @@ class MakerSpace extends React.Component {
         answersCopy[pos].text = target.value;
         this.setState({answers: answersCopy});
       }  
+      console.log(this.props.currentCard);
     }
   
     // Labels answer choices as correct/incorrect due to user input
@@ -37,21 +36,6 @@ class MakerSpace extends React.Component {
       let pos = parseInt(event.target.name.substring(3,4));
       answersCopy[pos].isCorrect = !answersCopy[pos].isCorrect;
       this.setState({answers: answersCopy});
-    }
-
-    // Possible solution to rendering the next card, but this does not work currently.
-    renderNextCard = (event) => {
-      event.preventDefault();
-      this.props.moveCard(event);
-
-      let cards = this.props.cards;
-      let pos = this.props.cardPosition;
-      this.setState({
-        question: cards[pos].question,
-        answers: cards[pos].answers,
-      });
-      console.log(this.props.cards);
-      console.log(this.props.cardPosition);
     }
   
     render() {
@@ -82,10 +66,10 @@ class MakerSpace extends React.Component {
               <button onClick={this.props.deleteCard}>Delete Question</button>
   
               <div className="back-forth-button">
-                <button value='back' onClick={this.renderNextCard}>Back One</button>
-                <button value='forward' onClick={this.renderNextCard}>Forward One</button>
+                <button value='back' onClick={this.props.moveCard}>Back One</button>
+                <button value='forward' onClick={this.props.moveCard}>Forward One</button>
               </div>
-              <p>Question {this.props.cardPosition + 1} / {this.props.cards.length}</p>
+              <p>Question {this.props.cardPosition + 1} / {this.props.numCards}</p>
             </form>
           </div>
           <Card 
