@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 // has a CardHolder component (array / list)
-  // has a Card component
+// has a Card component
 // has a MakerSpace component (form)
 
 class MakerSpace extends React.Component {
@@ -12,7 +12,7 @@ class MakerSpace extends React.Component {
     this.state = {
       question: '',
       answers: [
-        {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}
+        { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }
       ]
     }
     this.handleInput = this.handleInput.bind(this);
@@ -22,21 +22,21 @@ class MakerSpace extends React.Component {
   handleInput = (event) => {
     let target = event.target
     if (target.name === 'question') {
-      this.setState({question: target.value});
+      this.setState({ question: target.value });
     } else {
       let answersCopy = arrayClone(this.state.answers);
-      let pos = parseInt(target.name.substring(3,4));
+      let pos = parseInt(target.name.substring(3, 4));
       answersCopy[pos].text = target.value;
-      this.setState({answers: answersCopy});
-    }  
+      this.setState({ answers: answersCopy });
+    }
   }
 
   // Labels answer choices as correct/incorrect due to user input
   handleCorrect = (event) => {
     let answersCopy = arrayClone(this.state.answers);
-    let pos = parseInt(event.target.name.substring(3,4));
+    let pos = parseInt(event.target.name.substring(3, 4));
     answersCopy[pos].isCorrect = !answersCopy[pos].isCorrect;
-    this.setState({answers: answersCopy});
+    this.setState({ answers: answersCopy });
   }
 
 
@@ -44,7 +44,7 @@ class MakerSpace extends React.Component {
     let answerChoices = [];
     let answerText = [];
     for (let i = 0; i < 4; i++) {
-      answerChoices.push(<AnswerChoice answer={this.state.answers[i].text} handleInput={this.handleInput} handleCorrect = {this.handleCorrect} key={i} index={i}  />);
+      answerChoices.push(<AnswerChoice answer={this.state.answers[i].text} handleInput={this.handleInput} handleCorrect={this.handleCorrect} key={i} index={i} />);
       answerText.push(this.state.answers[i].text);
     }
 
@@ -56,12 +56,12 @@ class MakerSpace extends React.Component {
             <label>
               Question
                 <input
-                  className="text-input"
-                  name='question'
-                  type='text'
-                  value={this.state.question}
-                  onChange={this.handleInput} 
-                />
+                className="text-input"
+                name='question'
+                type='text'
+                value={this.state.question}
+                onChange={this.handleInput}
+              />
             </label>
             {answerChoices}
             <button>Add Question</button>
@@ -71,14 +71,14 @@ class MakerSpace extends React.Component {
               <button>Back One</button>
               <button>Forward One</button>
             </div>
-            
+
           </form>
         </div>
-        <Card 
-          question = {this.state.question}
-          answers = {answerText}
+        <Card
+          question={this.state.question}
+          answers={answerText}
         />
-    </div>
+      </div>
     )
   }
 }
@@ -87,7 +87,7 @@ class Card extends React.Component {
   render() {
     let answerTextRender = [];
     let updatedAnswers = this.props.answers;
-    
+
     // THIS DOES NOT WORK. IT SHOULD SHOW A DEFAULT ____ WHEN THERE IS NO ANSWER PROVIDED
     for (let i = 0; i < updatedAnswers.length; i++) {
       if (updatedAnswers[i].text === "") {
@@ -96,7 +96,7 @@ class Card extends React.Component {
         answerTextRender.push(<h3 className="card-answer" key={i}>{updatedAnswers[i]}</h3>);    // User made Answer
       }
     }
-  
+
     return (
       <div className="card">
         <h2 className="card-question">{this.props.question}</h2>
@@ -109,32 +109,7 @@ class Card extends React.Component {
 }
 
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // All cards, initialized with one blank
-      cards: [{question: "", 
-               answers: [{text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}]}],
-      cardPosition: 0
-    };
-  }
 
-  addCard = () => {
-    let oldCards = arrayClone(this.state.cards);
-    let newCards = oldCards.slice(0, this.cardPosition);
-    newCards.push({question: "", answers: [{text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}]}); // add a blank card below
-    newCards.push(...oldCards.slice(this.cardPosition, oldCards.length));
-  }
-
-  render() {
-    return (
-      <div>
-        <MakerSpace addCard={this.addCard} cardPosition={this.cardPosition}/>
-      </div>
-    );
-  }
-}
 
 
 
@@ -144,8 +119,8 @@ function AnswerChoice(props) {
   return (
     <label className="answer-choice">
       Answer #{props.index}
-        <input name={inputName} type="checkbox" value="true" onClick={props.handleCorrect} />
-        <input className="text-input" name={inputName} type='text' value={props.answer} onChange={props.handleInput} />
+      <input name={inputName} type="checkbox" value="true" onClick={props.handleCorrect} />
+      <input className="text-input" name={inputName} type='text' value={props.answer} onChange={props.handleInput} />
     </label>
   );
 }
@@ -156,7 +131,7 @@ function arrayClone(arr) {
 
 
 // ==================================
-ReactDOM.render(<App />,  
+ReactDOM.render(<App />,
   document.getElementById('root')
 );
 
