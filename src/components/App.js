@@ -1,12 +1,14 @@
 import React from 'react';
 import MakerSpace from './MakerSpace';
 import Card from './Card';
-
+// Submit handler
 import { confirmAlert } from 'react-confirm-alert';
 import '../../node_modules/react-confirm-alert/src/react-confirm-alert.css';
 import './index.css';
+// Firebase
+import firebase from 'firebase/app';
+import 'firebase/database';
 
-// Work on the submit handler
 // Do some Quality Assurance on the 'add' and 'delete' logic
 
 class App extends React.Component {
@@ -38,7 +40,6 @@ class App extends React.Component {
       answers: [['', false], ['', false], ['', false], ['', false]],
       cardPosition: this.state.cardPosition + 1
     });
-    console.log(this.state.cards);
   }
 
   deleteCard = (event) => {
@@ -55,7 +56,6 @@ class App extends React.Component {
       answers: oldCard.answers,
       cardPosition: this.state.cardPosition - 1
     });
-    console.log(this.state.cards);
   }
 
   // Updates question and specific answers due to user input
@@ -99,16 +99,18 @@ class App extends React.Component {
   };
 
   submitHandler = (event) => {
-    // RESET THE MAKER SPACE TO A SINGLE BLANK CARD.
-
     // Submit the final card
-    this.addCard(event);
-    
-    // JSONify the all of the cards
-    let cardObj = {...this.state.cards}
-    console.log(this.state.cards);
-    let cardString = JSON.stringify(cardObj);
-    console.log(cardString);
+    let updateCards = arrayClone(this.state.cards);
+    let newCard = {
+      question: this.state.question,
+      answers: this.state.answers
+    }
+    updateCards.push(newCard);
+
+    // JSONify all of the cards and push to firebase
+    let cardObj = {updateCards}
+    let quizzes = firebase.database().ref('quizzes');
+    quizzes.push(cardObj.updateCards);
   }
 
   render() {
