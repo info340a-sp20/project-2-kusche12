@@ -22,7 +22,7 @@ ul, li {
   margin-bottom: 10px;
 }
 
-.maker-space {
+.app-main {
   display: flex;
   flex-direction: row;
   background-color: #ffdbb0;
