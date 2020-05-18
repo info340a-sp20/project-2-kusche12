@@ -41,16 +41,6 @@ button {
   margin: 20px;
 }
 
-.submit-button {
-  display: inline-block;
-  height: 20px;
-  padding: 30px;
-  position: relative;
-  left: 50px;
-  top: 400px;
-}
-
-
 /* CARD LAYOUT */
 
 .card {
