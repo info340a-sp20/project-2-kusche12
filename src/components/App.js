@@ -47,8 +47,9 @@ class App extends React.Component {
   handleCorrect = (event) => {
     let answersCopy = arrayClone(this.state.answers);
     let pos = parseInt(event.target.name.substring(3,4));
-    answersCopy[pos].isCorrect = !answersCopy[pos].isCorrect;
+    answersCopy[pos][1] = !answersCopy[pos][1];
     this.setState({answers: answersCopy});
+    console.log(this.state.answers);
   }
 
   render() {

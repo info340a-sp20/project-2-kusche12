@@ -26,6 +26,10 @@ ul, li {
   border: solid 1px red;
 }
 
+.error-message {
+  color: red;
+}
+
 .app-main {
   display: flex;
   flex-direction: row;
