@@ -1,56 +1,73 @@
 import React from 'react';
-import MakerSpace from './MakerSpace'
+import MakerSpace from './MakerSpace';
+import Card from './Card';
 import './index.css';
+
+/* Card example
+{question: "Is the sky blue?", 
+               answers: [{text: 'Yes', isCorrect: true}, {text: 'No', isCorrect: false}, {text: 'Sometimes', isCorrect: false}, {text: 'Maybe', isCorrect: false}]}
+*/
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       // All cards, initialized with one blank
-      cards: [{question: "Is the sky blue?", 
-               answers: [{text: 'Yes', isCorrect: true}, {text: 'No', isCorrect: false}, {text: 'Sometimes', isCorrect: false}, {text: 'Maybe', isCorrect: false}]}],
-      cardPosition: 0,
+      cards: [],
+      question: "",
+      answers: [['', false], ['', false], ['', false], ['', false]]
     };
   }
 
   // add a blank card below current card
   addCard = (event) => {
     event.preventDefault();
-
-    let oldCards = arrayClone(this.state.cards);
-    // return all cards from beginning to current
-    let newCards = oldCards.slice(0, this.state.cardPosition + 1);
-    // append a new blank card
-    newCards.push({question: "", answers: [{text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}]});
-    // append the remaining cards
-    newCards.push(...oldCards.slice(this.state.cardPosition + 1, oldCards.length));
-
-    this.setState({cards: newCards}); 
+    let updateCards = arrayClone(this.state.cards);
+    updateCards.push(this.state.currentCard);
+    this.setState({
+      cards: updateCards,
+      currentCard: {question: "", answers: [{text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}]}
+    });
   }
 
-  moveCard = (event) => {
-    event.preventDefault();
-    if (event.target.value === 'forward' && this.state.cardPosition + 1 < this.state.cards.length) {
-      this.setState({cardPosition: this.state.cardPosition + 1})
-    } else if (event.target.value === 'back' && this.state.cardPosition > 0) {
-      this.setState({cardPosition: this.state.cardPosition - 1})
-    }
+  // Updates question and specific answers due to user input
+  handleInput = (event) => {
+    let target = event.target
+    if (target.name === 'question') {
+      this.setState({question: target.value});
+    } else {
+      let answersCopy = arrayClone(this.state.answers);
+      let pos = parseInt(target.name.substring(3,4));
+      answersCopy[pos][0] = target.value;
+      this.setState({answers: answersCopy});
+    }  
   }
 
-  deleteCard = (event) => {
-    event.preventDefault();
+  // Labels answer choices as correct/incorrect due to user input
+  handleCorrect = (event) => {
+    let answersCopy = arrayClone(this.state.answers);
+    let pos = parseInt(event.target.name.substring(3,4));
+    answersCopy[pos].isCorrect = !answersCopy[pos].isCorrect;
+    this.setState({answers: answersCopy});
   }
+
 
   render() {
     return (
-      <div>
+      <div className='app-main'>
         <MakerSpace 
           addCard={this.addCard} 
-          moveCard={this.moveCard} 
-          deleteCard={this.deleteCard} 
-          cardPosition={this.state.cardPosition} 
+          handleInput={this.handleInput}
+          handleCorrect={this.handleCorrect}
+          question={this.state.question}
+          answers={this.state.answers}
           numCards={this.state.cards.length}
-          currentCard={this.state.cards[this.state.cardPosition]}/>
+        />
+        <Card 
+          question={this.state.question}
+          answers={this.state.answers}
+        />
       </div>
     );
   }
