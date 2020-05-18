@@ -3,12 +3,6 @@ import MakerSpace from './MakerSpace';
 import Card from './Card';
 import './index.css';
 
-/* Card example
-{question: "Is the sky blue?", 
-               answers: [{text: 'Yes', isCorrect: true}, {text: 'No', isCorrect: false}, {text: 'Sometimes', isCorrect: false}, {text: 'Maybe', isCorrect: false}]}
-*/
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,10 +18,15 @@ class App extends React.Component {
   addCard = (event) => {
     event.preventDefault();
     let updateCards = arrayClone(this.state.cards);
-    updateCards.push(this.state.currentCard);
+    let newCard = {
+      question: this.state.question,
+      answers: this.state.answers
+    }
+    updateCards.push(newCard);
     this.setState({
       cards: updateCards,
-      currentCard: {question: "", answers: [{text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}]}
+      question: "",
+      answers: [['', false], ['', false], ['', false], ['', false]]
     });
   }
 
@@ -52,7 +51,6 @@ class App extends React.Component {
     this.setState({answers: answersCopy});
   }
 
-
   render() {
     return (
       <div className='app-main'>
@@ -68,6 +66,7 @@ class App extends React.Component {
           question={this.state.question}
           answers={this.state.answers}
         />
+        <button className="submit-button" onClick={this.submitQuiz}>Submit Quiz</button>
       </div>
     );
   }

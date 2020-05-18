@@ -22,6 +22,10 @@ ul, li {
   margin-bottom: 10px;
 }
 
+.error-notif {
+  border: solid 1px red;
+}
+
 .app-main {
   display: flex;
   flex-direction: row;
@@ -33,9 +37,13 @@ button {
   margin: 20px;
 }
 
-.back-forth-button button {
-  display: inline;
-  margin: 0;
+.submit-button {
+  display: inline-block;
+  height: 20px;
+  padding: 30px;
+  position: relative;
+  left: 50px;
+  top: 400px;
 }
 
 
