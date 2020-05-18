@@ -33,7 +33,7 @@ class MakerSpace extends React.Component {
       if (answers[i][0]) {
         numGiven++;
       }
-      if (answers[i][1]) {
+      if (answers[i][1] && answers[i][0]) {
         numCorrect++;
       }
     }
@@ -57,7 +57,25 @@ class MakerSpace extends React.Component {
       });
       return;
     } 
-    this.props.addCard(event);
+
+    // Either submit the quiz or add another card
+    if (event.target.value === 'add') {
+      this.props.addCard(event);
+    } else {
+      this.props.submitQuiz(event);
+    }
+  }
+
+  deleteCardHandler = (event) => {
+    event.preventDefault();
+
+    // Reset the error messages
+    this.setState({
+      missingQuestion: false,
+      missingAnswer: false,
+      errorMessage: '',
+    });
+    this.props.deleteCard(event);
   }
 
   render() {
@@ -86,15 +104,15 @@ class MakerSpace extends React.Component {
                 />
             </label>
             {answerChoices}
-            <button onClick={this.addCardHandler}>Add Question</button>
+            <button value='add' onClick={this.addCardHandler}>Add Question</button>
+            <button value='delete' onClick={this.deleteCardHandler}>Delete Question</button>
+            <button value='submit' onClick={this.addCardHandler}>Submit Quiz</button>
           </form>
           <p>Question #{this.props.numCards + 1}</p>
           <p className='error-message'>{this.state.errorMessage}</p>
       </div>
     )
   }
-
-
 }
 
 // Groups similar Answer Fields together
