@@ -90,7 +90,7 @@ class MakerSpace extends React.Component {
     }
 
     return (
-      <div>
+      <div className="maker-cover">
         <h3>Maker Space</h3>
         <form>
             <label>

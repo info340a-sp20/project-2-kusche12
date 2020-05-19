@@ -18,7 +18,9 @@ class Card extends React.Component {
     
       return (
         <div className="card">
-          <h2 className="card-question">{this.props.question}</h2>
+          <div className="card-question-cover">
+            <h2 className="card-question">{this.props.question}</h2>
+          </div>
           <div className="card-answer-group">
             {answerTextRender}
           </div>

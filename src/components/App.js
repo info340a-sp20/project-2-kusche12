@@ -10,6 +10,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 
 // Do some Quality Assurance on the 'add' and 'delete' logic
+// On answer checkbox press, give the answer a class to represent it as a correct answer
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class App extends React.Component {
     this.state = {
       // TESTING ENVIRONMENT
       // Imagine that there is already one card submitted and the user is currently writing card two
-      cards: [{question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]]}, {question: 'whats your favorite color?', answers: [['green', true], ['blue', false], ['purple', false], ['pink', false]]}],
+      cards: [{question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]]}, {question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]]}],
       question: "",
       answers: [['', false], ['', false], ['', false], ['', false]],
       cardPosition: 2
