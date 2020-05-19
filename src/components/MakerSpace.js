@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
-
-// User can finish and save their quiz to the homescreen
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 
 class MakerSpace extends React.Component { 
   constructor(props) {
@@ -96,7 +96,7 @@ class MakerSpace extends React.Component {
             <label>
               Question
                 <input
-                  className={`text-input${this.state.missingQuestion ? ' error-notif': ''}`}
+                  className={`text-input question-input ${this.state.missingQuestion ? ' error-notif': ''}`}
                   name='question'
                   type='text'
                   value={this.props.question}
@@ -104,12 +104,11 @@ class MakerSpace extends React.Component {
                 />
             </label>
             {answerChoices}
-            <button value='add' onClick={this.addCardHandler}>Add Question</button>
-            <button value='delete' onClick={this.deleteCardHandler}>Delete Question</button>
-            <button value='submit' onClick={this.addCardHandler}>Submit Quiz</button>
+            <p className='error-message'>{this.state.errorMessage}</p>
+            <button className='btn btn-add' value='add' onClick={this.addCardHandler}>Next Question&emsp;<FontAwesomeIcon icon={faPlusCircle} /></button>
+            <button className='btn btn-del' value='delete' onClick={this.deleteCardHandler}>Delete Question&emsp;<FontAwesomeIcon icon={faMinusCircle} /></button>
+            <button className='btn btn-sub' value='submit' onClick={this.addCardHandler}>Done</button>
           </form>
-          <p>Question #{this.props.numCards + 1}</p>
-          <p className='error-message'>{this.state.errorMessage}</p>
       </div>
     )
   }
@@ -120,8 +119,8 @@ function AnswerChoice(props) {
     let inputName = 'ans' + props.index;
     return (
       <label className="answer-choice">
-        Answer #{props.index + 1}
-          <input name={inputName} type="checkbox" value="true" onClick={props.handleCorrect} />
+        Answer {props.index + 1}
+            <input  className="checkbox" name={inputName} type="checkbox" value="true" onClick={props.handleCorrect} />
           <input  className={`text-input${props.missingAnswer ? ' error-notif': ''}`}
                   name={inputName} 
                   type='text' 

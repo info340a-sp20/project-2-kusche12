@@ -9,8 +9,13 @@ import './index.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+//FUNCTION
 // Do some Quality Assurance on the 'add' and 'delete' logic
-// On answer checkbox press, give the answer a class to represent it as a correct answer
+// Reset the correct answers back to all false after card added
+
+//STYLE
+// On answer checkbox press, make the color of the answer on the card change
+// Position the fa-icons on the add and delete buttons better
 
 class App extends React.Component {
   constructor(props) {
@@ -125,11 +130,11 @@ class App extends React.Component {
           handleCorrect={this.handleCorrect}
           question={this.state.question}
           answers={this.state.answers}
-          numCards={this.state.cardPosition}
         />
         <Card 
           question={this.state.question}
           answers={this.state.answers}
+          numCards={this.state.cardPosition + 1}
         />
       </div>
     );

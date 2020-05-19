@@ -9,20 +9,19 @@ class Card extends React.Component {
       
       // THIS DOES NOT WORK. IT SHOULD SHOW A DEFAULT ____ WHEN THERE IS NO ANSWER PROVIDED
       for (let i = 0; i < updatedAnswers.length; i++) {
-        if (updatedAnswers[i].text === "") {
-          answerTextRender.push(<h3 className="card-answer" key={i}>{i}. __________________</h3>); // Default Answer placeholder
-        } else {
-          answerTextRender.push(<h3 className="card-answer" key={i}>{updatedAnswers[i]}</h3>);    // User made Answer
-        }
+        answerTextRender.push(<h4 key={i}>{updatedAnswers[i]}</h4>);    // User made Answer
       }
     
       return (
-        <div className="card">
-          <div className="card-question-cover">
-            <h2 className="card-question">{this.props.question}</h2>
-          </div>
-          <div className="card-answer-group">
-            {answerTextRender}
+        <div className='card-title-cover'>
+          <h3>Question {this.props.numCards}</h3>
+          <div className="card">
+            <div className="card-question-cover">
+              <h2 className="card-question">{this.props.question}</h2>
+            </div>
+            <div className="card-answer-group">
+              {answerTextRender}
+            </div>
           </div>
         </div>
       )

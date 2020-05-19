@@ -1,6 +1,6 @@
 /* Designed for 600px first */
 /* Color pallete 
-lightgray: #ebeae6
+lightgray: #f0efeb
 
 */
 body {
@@ -16,50 +16,136 @@ body {
 ul, li {
   display: inline-block;
   margin-bottom: 20px;
-  margin-left: 20px;
 }
 
-h1, h2, h3 {
+
+.title {
+  display: inline-block;
+  color: orange;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+h1, h2, h3, h4 {
   font-weight: 500;
-}
-
-.error-notif {
-  border: solid 1px red;
-}
-
-.error-message {
-  color: red;
 }
 
 .app-main {
   display: flex;
   flex-direction: row;
-  background-color: #ebeae6;
+  background-color: #f0efeb;
 }
 
-button {
-  display: block;
-  margin: 20px;
-}
 
 /* Maker Space Layout */
 .maker-cover {
   margin-left: 25px;
   background-color: white;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .text-input {
   display: block;
-  background-color: #ebeae6;
-  border: solid 0px transparent;
+  background-color: #f0efeb;
+  border: solid 2px transparent;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.question-input {
+  padding-bottom: 30px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border: solid 2px transparent;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-add {
+  border-color: orange;
+  background-color: orange;
+  color: white;
+}
+
+.btn-del {
+  border-color: orange;
+  color: orange;
+  font-weight: 600;
+}
+
+.btn-sub {
+  width: 100px;
+  position: absolute;
+  left: 800px;
+  bottom: -20px;
+  color: white;
+  background-color: orange;
+  border-color: orange;
+  border-radius: 20px;
+  padding: 12px 20px 12px 20px;
+}
+
+.error-notif {
+  border: solid 2px red;
+}
+
+.error-message {
+  color: red;
+  width: 200px;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+	background-color: #bfbfbf;
+	border: solid 0px transparent;
+	padding: 9px;
+	border-radius: 5px;
+  position: relative;
+  float: right;
+}
+
+.checkbox:hover {
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  background-color: orange;
+  color: white;
+}
+
+.checkbox:checked:after {
+  content: '\2714';
+  font-size: 16px;
+  position: absolute;
+  bottom: 0px;
+  left: 3px;
+  color: white;
 }
 
 /* Card Layout */
+.card-title-cover {
+  margin-left: 75px;
+}
+
+.card-title-cover h3 {
+  text-align: center;
+  color: orange;
+  font-size: 30px;
+}
+
 .card {
   display: inline-block;
   display: flex;
@@ -72,8 +158,6 @@ button {
 
   overflow-x: hidden;
 
-  margin-top: 125px;
-  margin-left: 75px;
   height: 250px;
   width: 500px;
 
@@ -95,8 +179,9 @@ button {
   color: white;
 }
 
-.card-answer {
+.card-answer-group h4 {
   margin: 20px;
+  font-size: 24px;
 }
 
 .card-answer-group {
@@ -104,6 +189,6 @@ button {
   grid-template-areas: 
   "ans1 ans2"
   "ans3 ans4";
-  width: 80%;
+  width: 90%;
   text-align: center;
 }
