@@ -1,3 +1,8 @@
+/* Designed for 600px first */
+/* Color pallete 
+lightgray: #f0efeb
+
+*/
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,71 +12,183 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* React Router Navbar */
 ul, li {
   display: inline-block;
   margin-bottom: 20px;
-  margin-left: 20px;
 }
 
-.answer-choice {
-  display: block;
+
+.title {
+  display: inline-block;
+  color: orange;
+  font-weight: 700;
+  font-size: 40px;
 }
 
-.text-input {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.error-notif {
-  border: solid 1px red;
-}
-
-.error-message {
-  color: red;
+h1, h2, h3, h4 {
+  font-weight: 500;
 }
 
 .app-main {
   display: flex;
   flex-direction: row;
-  background-color: #ffdbb0;
+  background-color: #f0efeb;
 }
 
-button {
+
+/* Maker Space Layout */
+.maker-cover {
+  margin-left: 25px;
+  background-color: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.text-input {
   display: block;
-  margin: 20px;
+  background-color: #f0efeb;
+  border: solid 2px transparent;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
-/* CARD LAYOUT */
+.question-input {
+  padding-bottom: 30px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border: solid 2px transparent;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-add {
+  border-color: orange;
+  background-color: orange;
+  color: white;
+}
+
+.btn-del {
+  border-color: orange;
+  color: orange;
+  font-weight: 600;
+}
+
+.btn-sub {
+  width: 100px;
+  position: absolute;
+  left: 800px;
+  bottom: -20px;
+  color: white;
+  background-color: orange;
+  border-color: orange;
+  border-radius: 20px;
+  padding: 12px 20px 12px 20px;
+}
+
+.error-notif {
+  border: solid 2px red;
+}
+
+.error-message {
+  color: red;
+  width: 200px;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+	background-color: #bfbfbf;
+	border: solid 0px transparent;
+	padding: 9px;
+	border-radius: 5px;
+  position: relative;
+  float: right;
+}
+
+.checkbox:hover {
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  background-color: orange;
+  color: white;
+}
+
+.checkbox:checked:after {
+  content: '\2714';
+  font-size: 16px;
+  position: absolute;
+  bottom: 0px;
+  left: 3px;
+  color: white;
+}
+
+/* Card Layout */
+.card-title-cover {
+  margin-left: 75px;
+}
+
+.card-title-cover h3 {
+  text-align: center;
+  color: orange;
+  font-size: 30px;
+}
 
 .card {
   display: inline-block;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
-  background-color: #fffaf5;
+  padding-top: 10px;
+  background-color: white;
+  border: solid 0px transparent;
+  border-radius: 25px;
 
-  margin-top: 75px;
-  margin-left: 200px;
-  height: 300px;
-  width: 600px;
+  overflow-x: hidden;
+
+  height: 250px;
+  width: 500px;
+
   -webkit-box-shadow: 3px 8px 16px -4px rgba(140,140,140,1);
   -moz-box-shadow: 3px 8px 16px -4px rgba(140,140,140,1);
   box-shadow: 3px 8px 16px -4px rgba(140,140,140,1);
+}
 
+.card-question-cover {
+  width: 525px;
+  height: 75px;
+  background-color: orange;
+  bottom: 10px;
+  position: relative;
 }
 
 .card-question {
-  margin-bottom: 20px;
+  text-align: center;
+  color: white;
 }
 
-.card-answer {
+.card-answer-group h4 {
   margin: 20px;
+  font-size: 24px;
 }
 
 .card-answer-group {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-areas: 
+  "ans1 ans2"
+  "ans3 ans4";
   width: 90%;
+  text-align: center;
 }

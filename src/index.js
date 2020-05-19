@@ -11,6 +11,7 @@ class Main extends React.Component {
         return (
             <Router>
                 <div>
+                    <h1 className='title'>QuizMe</h1>
                     <ul>
                         <li>
                             <Link to='/home'>Home Page</Link>

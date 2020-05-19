@@ -9,7 +9,13 @@ import './index.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+//FUNCTION
 // Do some Quality Assurance on the 'add' and 'delete' logic
+// Reset the correct answers back to all false after card added
+
+//STYLE
+// On answer checkbox press, make the color of the answer on the card change
+// Position the fa-icons on the add and delete buttons better
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +23,7 @@ class App extends React.Component {
     this.state = {
       // TESTING ENVIRONMENT
       // Imagine that there is already one card submitted and the user is currently writing card two
-      cards: [{question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]]}, {question: 'whats your favorite color?', answers: [['green', true], ['blue', false], ['purple', false], ['pink', false]]}],
+      cards: [{question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]]}, {question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]]}],
       question: "",
       answers: [['', false], ['', false], ['', false], ['', false]],
       cardPosition: 2
@@ -124,11 +130,11 @@ class App extends React.Component {
           handleCorrect={this.handleCorrect}
           question={this.state.question}
           answers={this.state.answers}
-          numCards={this.state.cardPosition}
         />
         <Card 
           question={this.state.question}
           answers={this.state.answers}
+          numCards={this.state.cardPosition + 1}
         />
       </div>
     );
