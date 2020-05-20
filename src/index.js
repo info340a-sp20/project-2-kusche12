@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './components/index.css';
 import App from './components/App';
-import Home from './components/Home';
+import Home from './components/HomePage/Home';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
 
@@ -10,7 +10,7 @@ class Main extends React.Component {
     render() {
         return (
             <Router>
-                <div>
+                <div className="wrapper">
                     <h1 className='title'>QuizMe</h1>
                     <ul>
                         <li>
@@ -35,7 +35,7 @@ class Main extends React.Component {
 }
 
 // ==================================
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDGfiHoZvUjc59sAB1GHdKNKErb87Uiwlw",
     authDomain: "quiz-maker-2cd84.firebaseapp.com",
     databaseURL: "https://quiz-maker-2cd84.firebaseio.com",
@@ -48,6 +48,6 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-ReactDOM.render(<Main />,  
+ReactDOM.render(<Main />,
     document.getElementById('root')
 );

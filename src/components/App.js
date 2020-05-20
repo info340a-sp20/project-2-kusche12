@@ -23,7 +23,7 @@ class App extends React.Component {
     this.state = {
       // TESTING ENVIRONMENT
       // Imagine that there is already one card submitted and the user is currently writing card two
-      cards: [{question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]]}, {question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]]}],
+      cards: [{ question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]] }, { question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]] }],
       question: "",
       answers: [['', false], ['', false], ['', false], ['', false]],
       cardPosition: 2
@@ -68,21 +68,21 @@ class App extends React.Component {
   handleInput = (event) => {
     let target = event.target
     if (target.name === 'question') {
-      this.setState({question: target.value});
+      this.setState({ question: target.value });
     } else {
       let answersCopy = arrayClone(this.state.answers);
-      let pos = parseInt(target.name.substring(3,4));
+      let pos = parseInt(target.name.substring(3, 4));
       answersCopy[pos][0] = target.value;
-      this.setState({answers: answersCopy});
-    }  
+      this.setState({ answers: answersCopy });
+    }
   }
 
   // Labels answer choices as correct/incorrect due to user input
   handleCorrect = (event) => {
     let answersCopy = arrayClone(this.state.answers);
-    let pos = parseInt(event.target.name.substring(3,4));
+    let pos = parseInt(event.target.name.substring(3, 4));
     answersCopy[pos][1] = !answersCopy[pos][1];
-    this.setState({answers: answersCopy});
+    this.setState({ answers: answersCopy });
   }
 
   // Allows the user to submit their quiz
@@ -114,7 +114,7 @@ class App extends React.Component {
     updateCards.push(newCard);
 
     // JSONify all of the cards and push to firebase
-    let cardObj = {updateCards}
+    let cardObj = { updateCards }
     let quizzes = firebase.database().ref('quizzes');
     quizzes.push(cardObj.updateCards);
   }
@@ -122,8 +122,8 @@ class App extends React.Component {
   render() {
     return (
       <div className='app-main'>
-        <MakerSpace 
-          addCard={this.addCard} 
+        <MakerSpace
+          addCard={this.addCard}
           deleteCard={this.deleteCard}
           submitQuiz={this.submitQuiz}
           handleInput={this.handleInput}
@@ -131,7 +131,7 @@ class App extends React.Component {
           question={this.state.question}
           answers={this.state.answers}
         />
-        <Card 
+        <Card
           question={this.state.question}
           answers={this.state.answers}
           numCards={this.state.cardPosition + 1}
