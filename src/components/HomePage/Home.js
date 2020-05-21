@@ -1,5 +1,7 @@
 import React from 'react';
 import firebase from 'firebase/app';
+import BounceLoader from 'react-spinners/BounceLoader'
+// import { Spinner } from 'reactstrap';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -22,7 +24,6 @@ class HomePage extends React.Component {
             this.setState({ savedQuiz: data, loading: false })
             this.renderQuiz();
 
-
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
@@ -31,7 +32,6 @@ class HomePage extends React.Component {
     renderQuiz() {
         return (
             <div>
-                {this.state.savedQuiz}
                 {JSON.stringify(this.state.savedQuiz)}
             </div>
         )
@@ -46,8 +46,13 @@ class HomePage extends React.Component {
                         Question
                     </label>
                 </form>
-                {this.state.savedQuiz ? JSON.stringify(this.state.savedQuiz) : 'loading'}
-                {/* {JSON.stringify(this.state.savedQuiz)} */}
+                {this.state.savedQuiz ?
+                    this.renderQuiz()
+                    :
+                    <BounceLoader
+                        color={"orange"}
+                        loading={this.state.loading} />
+                }
             </div>
         )
     }
