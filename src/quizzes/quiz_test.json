@@ -1,0 +1,12 @@
+{
+  "-M7oXC4HSvvmVGDLfnvq" : [ {
+    "answers" : [ [ "Tuesday", true ], [ "Wednesday", false ], [ "Thursday", false ], [ "Friday", false ] ],
+    "question" : "what day is it?"
+  }, {
+    "answers" : [ [ "Green", true ], [ "Blue", false ], [ "Purple", false ], [ "Pink", false ] ],
+    "question" : "What is your favorite color?"
+  }, {
+    "answers" : [ [ "Sun", false ], [ "Sunny", false ], [ "IDK", false ], [ "Son", true ] ],
+    "question" : "What is Jin's last name?"
+  } ]
+}

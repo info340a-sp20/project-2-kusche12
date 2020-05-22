@@ -49,6 +49,9 @@ h1, h2, h3, h4 {
   background-color: white;
   padding-left: 50px;
   padding-right: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .text-input {
@@ -67,11 +70,10 @@ h1, h2, h3, h4 {
 
 .btn {
   display: block;
-  width: 100%;
   margin-bottom: 10px;
   padding-bottom: 5px;
   padding-top: 5px;
-  border: solid 2px transparent;
+  border: solid 2px black;
   border-radius: 5px;
   background-color: transparent;
 }
@@ -79,7 +81,11 @@ h1, h2, h3, h4 {
 .btn:hover {
   cursor: pointer;
 }
-
+.btn-directions {
+  display: flex;
+  flex-direction: row;
+}
+/*
 .btn-add {
   border-color: orange;
   background-color: orange;
@@ -103,7 +109,7 @@ h1, h2, h3, h4 {
   border-radius: 20px;
   padding: 12px 20px 12px 20px;
 }
-
+*/
 .error-notif {
   border: solid 2px red;
 }
@@ -120,19 +126,18 @@ h1, h2, h3, h4 {
 	padding: 9px;
 	border-radius: 5px;
   position: relative;
-  float: right;
 }
 
 .checkbox:hover {
   cursor: pointer;
 }
 
-.checkbox:checked {
+.checked {
   background-color: orange;
   color: white;
 }
 
-.checkbox:checked:after {
+.checked:after {
   content: '\2714';
   font-size: 16px;
   position: absolute;
