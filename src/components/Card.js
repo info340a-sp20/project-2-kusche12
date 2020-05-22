@@ -14,7 +14,7 @@ class Card extends React.Component {
     
       return (
         <div className='card-title-cover'>
-          <h3>Question {this.props.numCards}</h3>
+          <h3>Question {this.props.questionNumber + 1}</h3>
           <div className="card">
             <div className="card-question-cover">
               <h2 className="card-question">{this.props.question}</h2>

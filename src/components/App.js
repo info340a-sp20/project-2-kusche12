@@ -1,6 +1,5 @@
 import React from 'react';
 import MakerSpace from './MakerSpace';
-import Card from './Card';
 // Submit handler
 import { confirmAlert } from 'react-confirm-alert';
 import '../../node_modules/react-confirm-alert/src/react-confirm-alert.css';
@@ -9,84 +8,76 @@ import './index.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-//FUNCTION
-// Do some Quality Assurance on the 'add' and 'delete' logic
-// Reset the correct answers back to all false after card added
-
-//STYLE
-// On answer checkbox press, make the color of the answer on the card change
-// Position the fa-icons on the add and delete buttons better
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // TESTING ENVIRONMENT
+      // TESTING ENVIRONMENT SET UP
       // Imagine that there is already one card submitted and the user is currently writing card two
-      cards: [{ question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]] }, { question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]] }],
-      question: "",
-      answers: [['', false], ['', false], ['', false], ['', false]],
-      cardPosition: 2
+      cards: [{ question: 'what day is it?', answers: [['Tuesday', false], ['Wednesday', false], ['Thursday', false], ['Friday', false]] }, { question: 'What is your favorite color?', answers: [['Green', false], ['Blue', false], ['Purple', false], ['Pink', false]] }],
+      cardPosition: 1 // 0-based indexing
     };
   }
+
 
   // add a blank card below current card
   addCard = (event) => {
     event.preventDefault();
-    let updateCards = arrayClone(this.state.cards);
-    let newCard = {
-      question: this.state.question,
-      answers: this.state.answers
-    }
 
-    updateCards.push(newCard);
+    let oldCards = arrayClone(this.state.cards);
+    // return all cards from beginning to current
+    let newCards = oldCards.slice(0, this.state.cardPosition + 1);
+    // append a new blank card
+    newCards.push({question: "", answers: [["", false], ["", false], ["", false], ["", false]]});
+    // append the remaining cards
+    newCards.push(...oldCards.slice(this.state.cardPosition + 1, oldCards.length));
+
     this.setState({
-      cards: updateCards,
-      question: "",
-      answers: [['', false], ['', false], ['', false], ['', false]],
-      cardPosition: this.state.cardPosition + 1
-    });
+      cards: newCards,
+      cardPosition: this.state.cardPosition + 1,
+    }); 
   }
 
+  // delete the currently selected card
   deleteCard = (event) => {
     event.preventDefault();
-    if (this.state.cards.length < 1) {
-      return;
-    }
-
-    let updateCards = arrayClone(this.state.cards);
-    let oldCard = updateCards.pop();
-    this.setState({
-      cards: updateCards,
-      question: oldCard.question,
-      answers: oldCard.answers,
-      cardPosition: this.state.cardPosition - 1
-    });
-  }
-
-  // Updates question and specific answers due to user input
-  handleInput = (event) => {
-    let target = event.target
-    if (target.name === 'question') {
-      this.setState({ question: target.value });
-    } else {
-      let answersCopy = arrayClone(this.state.answers);
-      let pos = parseInt(target.name.substring(3, 4));
-      answersCopy[pos][0] = target.value;
-      this.setState({ answers: answersCopy });
+    if (this.state.cards.length > 1) {
+      let oldCards = arrayClone(this.state.cards);
+      let prevCards = oldCards.slice(0, this.state.cardPosition);
+      let nextCards = oldCards.slice(this.state.cardPosition + 1, oldCards.length);
+      if (this.state.cardPosition + 1 == this.state.cards.length) {
+        this.setState({
+          cards: prevCards.concat(nextCards),
+          cardPosition: this.state.cardPosition - 1
+        });
+      } else {
+        this.setState({ cards: prevCards.concat(nextCards) });
+      }
     }
   }
 
-  // Labels answer choices as correct/incorrect due to user input
-  handleCorrect = (event) => {
-    let answersCopy = arrayClone(this.state.answers);
-    let pos = parseInt(event.target.name.substring(3, 4));
-    answersCopy[pos][1] = !answersCopy[pos][1];
-    this.setState({ answers: answersCopy });
+  // Moves the card forwards or backwards and saves the current card to the master set
+  moveCard = (event, newQuestion, newAnswers) => {
+    event.preventDefault();
+    let cardsCopy = arrayClone(this.state.cards);
+    cardsCopy[this.state.cardPosition].question = newQuestion;
+    cardsCopy[this.state.cardPosition].answers = newAnswers;
+    if (event.target.value === 'next' && this.state.cardPosition < this.state.cards.length - 1) { // move forward if possible
+      this.setState({
+        cards: cardsCopy,
+        cardPosition: this.state.cardPosition + 1,
+      });
+    } else if (event.target.value === 'prev' && this.state.cardPosition > 0) { // move backward if possible
+      this.setState({
+        cards: cardsCopy,
+        cardPosition: this.state.cardPosition - 1,
+      });
+    }
   }
 
   // Allows the user to submit their quiz
   submitQuiz = (event) => {
+    event.preventDefault();
     confirmAlert({
       title: 'Confirm to submit',
       message: 'Are you ready to submit?',
@@ -102,39 +93,33 @@ class App extends React.Component {
       closeOnEscape: true,
       closeOnClickOutside: true,
     });
-  };
+  }
 
-  submitHandler = (event) => {
+  submitHandler = (newQuestion, newAnswers) => {
     // Submit the final card
-    let updateCards = arrayClone(this.state.cards);
-    let newCard = {
-      question: this.state.question,
-      answers: this.state.answers
-    }
-    updateCards.push(newCard);
+    let cardsCopy = arrayClone(this.state.cards);
+    cardsCopy[this.state.cardPosition].question = newQuestion;
+    cardsCopy[this.state.cardPosition].answers = newAnswers;
+    this.setState({ cards: cardsCopy });
 
     // JSONify all of the cards and push to firebase
-    let cardObj = { updateCards }
+    let cardObj = { cardsCopy };
     let quizzes = firebase.database().ref('quizzes');
-    quizzes.push(cardObj.updateCards);
+    quizzes.push(cardObj.cardsCopy);
   }
 
   render() {
     return (
       <div className='app-main'>
         <MakerSpace
+          question={this.state.cards[this.state.cardPosition].question}
+          answers={this.state.cards[this.state.cardPosition].answers}
+          questionNumber={this.state.cardPosition}
+          totalCards={this.state.cards.length}
           addCard={this.addCard}
           deleteCard={this.deleteCard}
+          moveCard={this.moveCard}
           submitQuiz={this.submitQuiz}
-          handleInput={this.handleInput}
-          handleCorrect={this.handleCorrect}
-          question={this.state.question}
-          answers={this.state.answers}
-        />
-        <Card
-          question={this.state.question}
-          answers={this.state.answers}
-          numCards={this.state.cardPosition + 1}
         />
       </div>
     );
