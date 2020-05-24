@@ -1,12 +1,15 @@
 import React from 'react';
 import './index.css';
 import Card from './Card';
+import ErrorAlert from './ErrorAlert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 /* FEATURES 
 -- Redo all of the error handling only upon user submit
 -- Remember to update the final card's state to master upon submission!
+-- Submit to firebase
+-- Consider making a Buttons.js class to clean up the render code
 
    STYLE
 -- Set up everything for ReactStrap
@@ -18,12 +21,12 @@ class MakerSpace extends React.Component {
     super(props);
     let originalQuestion = this.props.question;
     let originalAnswers = this.props.answers;
+    let originalErrors = this.props.errorcode;
 
     this.state = {
       question: originalQuestion,
       answers: originalAnswers,
-      missingAnswer: false,   // check for missing answers
-      missingQuestion: false, // check for missing question
+      errorcode: originalErrors
     }
   } 
 
@@ -49,6 +52,7 @@ class MakerSpace extends React.Component {
 
   moveCardHandler = (event) => {
     event.preventDefault();
+    this.checkForErrors();
     this.props.moveCard(event, this.state.question, this.state.answers);
   }
 
@@ -63,9 +67,29 @@ class MakerSpace extends React.Component {
   }
 
   checkForErrors = (event) => {
+    // check for no question
+    let errorsCopy = arrayClone(this.state.errorcode);
+    if (this.state.question === "") {
+      errorsCopy[0] = 1;
+      this.setState({errorcode: errorsCopy});
+    }
 
-
-    this.props.submitQuiz(event, this.state.question, this.state.answers);
+    // check for less than 2 answers and no correct answers
+    let answerCount = 0;
+    let correctCount = 0;
+    let answers = this.state.answers
+    for (let i = 0; i < answers.length; i++) {
+      if (answers[i][0]) answerCount++;
+      if (answers[i][1]) correctCount++;
+    }
+    if (answerCount < 2) {
+      errorsCopy[1] = 1;
+      this.setState({errorcode: errorsCopy});
+    }
+    if (correctCount < 1) {
+      errorsCopy[2] = 1;
+      this.setState({errorcode: errorsCopy});
+    }
   }
 
   render() {
@@ -80,31 +104,25 @@ class MakerSpace extends React.Component {
     }
 
     return (
-      <div className="maker-cover">
-        <form>
-            <h3>Maker Space</h3>
+      <div className="maker-space-cover">
+        <form className="maker">
             <label>
               Question
-                <input
-                  className={`text-input question-input ${this.state.missingQuestion ? ' error-notif': ''}`}
-                  name='question'
-                  type='text'
-                  value={this.state.question}
-                  onChange={this.handleInput} 
-                />
+                <input className='text-input question-input' name='question' type='text' value={this.state.question}onChange={this.handleInput} />
             </label>
             {answerChoices}
-            <p className='error-message'>{this.state.errorMessage}</p>
-            <button className='btn btn-add' value='add' onClick={this.props.addCard}>Add Question&emsp;<FontAwesomeIcon icon={faPlusCircle} /></button>
-            <button className='btn btn-del' value='delete' onClick={this.props.deleteCard}>Delete Question&emsp;<FontAwesomeIcon icon={faMinusCircle} /></button>
+            <button value='add' onClick={this.props.addCard}>Add Question&emsp;<FontAwesomeIcon icon={faPlusCircle} /></button>
+            <button alue='delete' onClick={this.props.deleteCard}>Delete Question</button>
             <div className="btn-directions">
-              <button className='btn' value='prev' onClick={this.moveCardHandler}>Backward</button>
-              <p>Question {this.props.questionNumber + 1} / {this.props.totalCards}</p>
-              <button className='btn' value='next' onClick={this.moveCardHandler}>Forward</button>
+              <button value='prev' onClick={this.moveCardHandler}>Backward</button>
+              <button value='next' onClick={this.moveCardHandler}>Forward</button>
             </div>
-            <button className='btn btn-sub' value='submit' onClick={this.checkForErrors}>Done</button>
+            <button value='submit' onClick={this.props.submitQuiz}>Done</button>
         </form>
-        <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber}/>
+        <div className="card-error-cover">
+          <ErrorAlert errorcode={this.state.errorcode} />
+          <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber} />
+        </div>
       </div>
     )
   }
