@@ -8,13 +8,20 @@ import './index.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+/* errorcode represents if there is anything missing from the question. It is returned to the user upond submission.
+errorcode = [0, 0, 0] --> no errors
+errorcode = 0 --> missing question
+errorcode = 1 --> less than 2 answers
+errorcode = 2 --> no correct answer chosen
+*/
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       // TESTING ENVIRONMENT SET UP
       // Imagine that there is already one card submitted and the user is currently writing card two
-      cards: [{ question: 'what day is it?', answers: [['Tuesday', false], ['Wednesday', false], ['Thursday', false], ['Friday', false]] }, { question: 'What is your favorite color?', answers: [['Green', false], ['Blue', false], ['Purple', false], ['Pink', false]] }],
+      cards: [{ question: 'what day is it?', answers: [['Tuesday', false], ['Wednesday', false], ['Thursday', false], ['Friday', false]], errorcode: [0, 0, 1] }, { question: 'What is your favorite color?', answers: [['Green', false], ['Blue', false], ['Purple', false], ['Pink', false]], errorcode: [0, 0, 1] }],
       cardPosition: 1 // 0-based indexing
     };
   }
@@ -114,8 +121,8 @@ class App extends React.Component {
         <MakerSpace
           question={this.state.cards[this.state.cardPosition].question}
           answers={this.state.cards[this.state.cardPosition].answers}
+          errorcode={this.state.cards[this.state.cardPosition].errorcode}
           questionNumber={this.state.cardPosition}
-          totalCards={this.state.cards.length}
           addCard={this.addCard}
           deleteCard={this.deleteCard}
           moveCard={this.moveCard}
