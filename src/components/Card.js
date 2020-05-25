@@ -3,10 +3,9 @@ import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-// back and forward buttons have their own function because there was an error when you would click on the fontawesome
-// if you can think of a better solution, please implement it haha
-
 class Card extends React.Component {
+    // back and forward buttons have their own function because there was an error when you would click on the fontawesome
+    // if you can think of a better solution, please implement it haha
     backArrow = (event) => {
       event.target.value = 'prev';
       this.props.moveCardHandler(event);
@@ -20,10 +19,14 @@ class Card extends React.Component {
       let answerTextRender = [];
       let updatedAnswers = this.props.answers;
       
-      // THIS DOES NOT WORK. IT SHOULD SHOW A DEFAULT ____ WHEN THERE IS NO ANSWER PROVIDED
-      for (let i = 0; i < updatedAnswers.length; i++) {
-        answerTextRender.push(<h5 key={i}>{updatedAnswers[i]}</h5>);    // User made Answer
-      }
+      updatedAnswers.forEach((answer, i) => {
+        console.log(answer);
+        if (answer[1]) {
+          answerTextRender.push(<h5 className="card-answer-correct" key={i}>{answer}</h5>); // Correct Answer
+        } else {
+          answerTextRender.push(<h5 key={i}>{answer}</h5>);
+        }
+      });
     
       return (
         <div className='card-total-cover'>

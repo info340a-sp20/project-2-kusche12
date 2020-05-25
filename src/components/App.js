@@ -70,6 +70,7 @@ class App extends React.Component {
     cardsCopy[this.state.cardPosition].question = newQuestion;
     cardsCopy[this.state.cardPosition].answers = newAnswers;
     cardsCopy[this.state.cardPosition].errorcode = newErrors;
+    
     if (event.target.value === 'next' && this.state.cardPosition < this.state.cards.length - 1) { // move forward if possible
       this.setState({
         cards: cardsCopy,

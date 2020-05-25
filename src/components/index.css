@@ -171,7 +171,7 @@ label {
   cursor: pointer;
 }
 
-/* card title */
+/* card main question */
 .card h4 {
   text-align: center;
   color: white;
@@ -179,9 +179,13 @@ label {
   padding: 20px 20px 0px 20px;
 }
 
+/* card answers */
 .card-answer-group h5 {
   margin: 10px;
   font-size: 20px;
+}
+.card-answer-correct {
+  color: #40cf66;
 }
 
 .card-answer-group {
@@ -191,6 +195,21 @@ label {
   "ans3 ans4";
   width: 90%;
   text-align: center;
+}
+
+.error-block {
+  color: #AC0000;
+  background-color: #F6A4A4;
+  border: 5px solid #AC0000;
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px;
+}
+
+.error-block p {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: 500;
 }
 
 @media (min-width: 575px) {

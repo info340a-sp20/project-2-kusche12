@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css';
 import Card from './Card';
 import ErrorAlert from './ErrorAlert';
+import AnswerChoice from './AnswerChoice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,9 +12,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 -- ERR: ErrorAlert fails to load in when you add a new card because it tries to generate before MakerSpace has its own state
 
    STYLE
--- Set up Bootstrap layout
--- Demonstrate which answers are the correct ones visually (on the card) (i'm thinking a little orange dot to the left of the answer choice)
--- Stylize the error messages
+-- Nothing to do currently...
 */
 
 class MakerSpace extends React.Component { 
@@ -46,7 +45,6 @@ class MakerSpace extends React.Component {
     let answersCopy = arrayClone(this.state.answers);
     let pos = parseInt(event.target.name.substring(3, 4));
     answersCopy[pos][1] = !answersCopy[pos][1];
-    console.log(answersCopy[pos]);
     this.setState({answers: answersCopy});
   }
 
@@ -59,7 +57,6 @@ class MakerSpace extends React.Component {
   // Update the state of the current Maker Space and Card position
   componentDidUpdate(prevProps) {
     if (this.props.question !== prevProps.question) {
-      console.log(this.props.errorcode);
       this.setState({
         question: this.props.question,
         answers: this.props.answers,
@@ -111,34 +108,13 @@ class MakerSpace extends React.Component {
               <button value='delete' onClick={this.props.deleteCard}>Delete Question</button>
           </form>
           <div className="card-error-cover col-xs-6 col-sm-9 col-lg-9">
-          {/*
-            <ErrorAlert errorcode={this.state.errorcode} /> */}
+            <ErrorAlert errorcode={this.state.errorcode} /> 
             <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber} moveCardHandler={this.moveCardHandler} submitQuiz={this.props.submitQuiz}/>
           </div>
         </div>
       </div>
     )
   }
-}
-
-// Groups similar Answer Fields together
-function AnswerChoice(props) {
-    let inputName = 'ans' + props.index;
-    return (
-      <label>
-        Answer {props.index + 1}
-            <input className='check-box'
-                  name={inputName} 
-                  type="checkbox" 
-                  value="true" 
-                  onClick={props.handleCorrect} />
-            <input className='text-input'
-                  name={inputName} 
-                  type='text' 
-                  value={props.answer[0]} 
-                  onChange={props.handleInput} />
-      </label>
-    );
 }
 
 function arrayClone(arr) {
