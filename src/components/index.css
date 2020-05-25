@@ -34,81 +34,82 @@ h1, h2, h3, h4 {
 }
 
 .app-main {
-  display: flex;
-  flex-direction: row;
-  background-color: #f0efeb;
+  background-color: white;
 }
 
 
 /* Maker Space Layout */
-.maker-space-cover {
-  background-color: #f0efeb;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
 .maker {
-  background-color: white;
-  padding-right: 25px;
-}
-
-.text-input {
-  display: block;
-  background-color: #f0efeb;
-  border: solid 2px transparent;
+  background-color: #ebebeb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid transparent;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
-  font-size: 16px;
+}
+
+label {
+  width: 70%;
+  font-size: 12px;
+}
+
+.text-input {
+  display: inline-block;
+  background-color: white;
+  border: solid 2px transparent;
+  border-radius: 5px;
+  padding: 4px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  width: 100%;
 }
 
 .question-input {
   padding-bottom: 30px;
 }
 
-.checkbox {
-  -webkit-appearance: none;
-	background-color: #bfbfbf;
-	border: solid 0px transparent;
-	padding: 9px;
-	border-radius: 5px;
-  position: relative;
+.check-box {
+  float: right;
 }
 
-.checkbox:hover {
+.maker button {
+  display: inline-block;
+  width: 70%;
+  margin-bottom: 10px;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.checked {
+.maker button:nth-of-type(1) {
+  border: 2px solid transparent;
+  border-radius: 5px;
+  color: white;
   background-color: orange;
-  color: white;
 }
 
-.checked:after {
-  content: '\2714';
-  font-size: 16px;
-  position: absolute;
-  bottom: 0px;
-  left: 3px;
-  color: white;
+.maker button:nth-of-type(2) {
+  background-color: transparent;
+  border: transparent;
+  text-decoration: underline;
+  font-weight: 500;
 }
 
 /* Card Layout */
-.card-error-cover {
+.card-total-cover {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.card-title-cover h3 {
-  text-align: center;
+.card-total-cover h3 {
   color: orange;
   font-size: 30px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 .card {
-  display: inline-block;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,9 +119,8 @@ h1, h2, h3, h4 {
   border-radius: 25px;
 
   overflow-x: hidden;
-
-  height: 250px;
-  width: 500px;
+  height: 300px;
+  width: 250px;
 
   -webkit-box-shadow: 3px 8px 16px -4px rgba(140,140,140,1);
   -moz-box-shadow: 3px 8px 16px -4px rgba(140,140,140,1);
@@ -128,21 +128,60 @@ h1, h2, h3, h4 {
 }
 
 .card-question-cover {
-  width: 525px;
-  height: 75px;
+  width: 320px;
+  height: 100px;
   background-color: orange;
   bottom: 10px;
   position: relative;
 }
 
-.card-question {
-  text-align: center;
-  color: white;
+.card-buttons-cover {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.card-answer-group h4 {
-  margin: 20px;
+.card-buttons-cover button {
+  padding-right: 15px;
+  padding-left: 15px;
+  font-size: 14px;
+  border: none;
+  background-color: transparent;
+  color: #525252;
+  position: relative;
+  transition: transform .3s;
+  cursor: pointer;
+}
+
+.card-buttons-cover button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.card-submit {
+  padding: 8px 12px 8px 12px;
+  background-color: orange;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 75px;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* card title */
+.card h4 {
+  text-align: center;
+  color: white;
   font-size: 24px;
+  padding: 20px 20px 0px 20px;
+}
+
+.card-answer-group h5 {
+  margin: 10px;
+  font-size: 20px;
 }
 
 .card-answer-group {
@@ -152,4 +191,84 @@ h1, h2, h3, h4 {
   "ans3 ans4";
   width: 90%;
   text-align: center;
+}
+
+@media (min-width: 575px) {
+  /* MAKER SPACE */
+  label {
+    width: 100%;
+  }
+
+  .maker button {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .font-plus {
+    display: none;
+  }
+
+  /* CARD */
+  .card {
+    width: 300px;
+    height: 250px;
+  }
+
+  .card-question-cover {
+    height: 80px;
+  }
+
+  .card h4 {
+    font-size: 20px;
+  }
+
+  .card-answer-group h5 {
+    font-size: 18px;
+  }
+
+  .card-buttons-cover button {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  /* back button animation */
+  .card-buttons-cover button:nth-of-type(1):hover {
+    transform: translate(-5px,0);
+  }
+
+  /* forward button animation */
+  .card-buttons-cover button:nth-of-type(2):hover {
+    transform: translate(5px,0);
+  }
+
+  .card-submit {
+    width: 100px;
+    font-size: 14px;
+    padding: 5px 8px 5px 8px;
+    align-self: flex-end;
+    margin-top: 50px;
+    margin-right: 50px;
+  }
+
+
+}
+
+
+@media (min-width: 800px) {
+  /* MAKER SPACE */
+  .font-plus {
+    display: inline;
+  }
+
+  /* CARD */
+  .card {
+    width: 400px;
+    height: 225px;
+  }
+
+  .card-question-cover {
+    width: 450px;
+    height: 75px;
+  }
+
 }
