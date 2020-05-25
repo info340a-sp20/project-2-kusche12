@@ -52,7 +52,7 @@ class App extends React.Component {
       let oldCards = arrayClone(this.state.cards);
       let prevCards = oldCards.slice(0, this.state.cardPosition);
       let nextCards = oldCards.slice(this.state.cardPosition + 1, oldCards.length);
-      if (this.state.cardPosition + 1 == this.state.cards.length) {
+      if (this.state.cardPosition + 1 === this.state.cards.length) {
         this.setState({
           cards: prevCards.concat(nextCards),
           cardPosition: this.state.cardPosition - 1
@@ -64,11 +64,12 @@ class App extends React.Component {
   }
 
   // Moves the card forwards or backwards and saves the current card to the master set
-  moveCard = (event, newQuestion, newAnswers) => {
+  moveCard = (event, newQuestion, newAnswers, newErrors) => {
     event.preventDefault();
     let cardsCopy = arrayClone(this.state.cards);
     cardsCopy[this.state.cardPosition].question = newQuestion;
     cardsCopy[this.state.cardPosition].answers = newAnswers;
+    cardsCopy[this.state.cardPosition].errorcode = newErrors;
     if (event.target.value === 'next' && this.state.cardPosition < this.state.cards.length - 1) { // move forward if possible
       this.setState({
         cards: cardsCopy,
@@ -102,14 +103,16 @@ class App extends React.Component {
     });
   }
 
-  submitHandler = (newQuestion, newAnswers) => {
+  submitHandler = () => {
     // Submit the final card
-    let cardsCopy = arrayClone(this.state.cards);
-    cardsCopy[this.state.cardPosition].question = newQuestion;
-    cardsCopy[this.state.cardPosition].answers = newAnswers;
-    this.setState({ cards: cardsCopy });
+    // TEMPORARILY SKIP THIS STEP IN DEVELOPMENT MODE
+    //let cardsCopy = arrayClone(this.state.cards);
+    //cardsCopy[this.state.cardPosition].question = newQuestion;
+    //cardsCopy[this.state.cardPosition].answers = newAnswers;
+    //this.setState({ cards: cardsCopy });
 
     // JSONify all of the cards and push to firebase
+    let cardsCopy = arrayClone(this.state.cards)
     let cardObj = { cardsCopy };
     let quizzes = firebase.database().ref('quizzes');
     quizzes.push(cardObj.cardsCopy);
