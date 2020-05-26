@@ -2,18 +2,16 @@ import React from 'react';
 import './index.css';
 import Card from './Card';
 import ErrorAlert from './ErrorAlert';
+import AnswerChoice from './AnswerChoice';
+import AnswerChoiceCorrect from './AnswerChoiceCorrect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 /* FEATURES 
--- Make sure the errorcode state is updating for every change of card
--- Remember to update the final card's state to master upon submission!
--- ERR: ErrorAlert fails to load in when you add a new card because it tries to generate before MakerSpace has its own state
+-- Fix the add card bug when trying to add on an unfinished card
 
    STYLE
--- Set up Bootstrap layout
--- Demonstrate which answers are the correct ones visually (on the card) (i'm thinking a little orange dot to the left of the answer choice)
--- Stylize the error messages
+-- Style the Submit Quiz Notification
 */
 
 class MakerSpace extends React.Component { 
@@ -30,6 +28,7 @@ class MakerSpace extends React.Component {
     }
   } 
 
+  // Handle Question and Answer choice input text
   handleInput = (event) => {
     if (event.target.name === 'question') {
       this.setState({question: event.target.value});
@@ -46,20 +45,31 @@ class MakerSpace extends React.Component {
     let answersCopy = arrayClone(this.state.answers);
     let pos = parseInt(event.target.name.substring(3, 4));
     answersCopy[pos][1] = !answersCopy[pos][1];
-    console.log(answersCopy[pos]);
     this.setState({answers: answersCopy});
   }
 
+  // Check and update the card's error status each time the user changes cards
   moveCardHandler = (event) => {
-    event.preventDefault();
-    this.checkForErrors();
-    this.props.moveCard(event, this.state.question, this.state.answers, this.state.errorcode);
+    let errors = this.checkForErrors();
+    this.props.moveCard(event, this.state.question, this.state.answers, errors);
+  }
+
+  submitQuizHandler = () => {
+    let errors = this.checkForErrors();
+    this.props.submitQuiz(this.state.question, this.state.answers, errors);
+  }
+
+  addCardHandler = (event) => {
+    let errors = this.checkForErrors();
+    this.props.addCard(event, this.state.question, this.state.answers, errors);
   }
 
   // Update the state of the current Maker Space and Card position
   componentDidUpdate(prevProps) {
+    console.log('componentDidUpdate prevProps:');
+    console.log(prevProps.question);
+    console.log(this.props.question);
     if (this.props.question !== prevProps.question) {
-      console.log(this.props.errorcode);
       this.setState({
         question: this.props.question,
         answers: this.props.answers,
@@ -68,34 +78,41 @@ class MakerSpace extends React.Component {
     }
   }
 
-  checkForErrors = (event) => {
-    // check for no question
-    let errorsCopy = arrayClone(this.state.errorcode);
+  // Check for all 3 errors for each card
+  checkForErrors = () => {
+    // no question
+    let errorsCopy = [0, 0, 0];
     if (this.state.question === "") {
       errorsCopy[0] = 1;
     }
 
-    // check for less than 2 answers and no correct answers
     let answerCount = 0;
     let correctCount = 0;
     let answers = this.state.answers
     for (let i = 0; i < answers.length; i++) {
       if (answers[i][0]) answerCount++;
-      if (answers[i][1]) correctCount++;
+      if (answers[i][0] && answers[i][1]) correctCount++;
     }
+    // less than 2 answer choices
     if (answerCount < 2) {
       errorsCopy[1] = 1;
     }
+    // 0 correct answer choices
     if (correctCount < 1) {
       errorsCopy[2] = 1;
     }
     this.setState({errorcode: errorsCopy});
+    return errorsCopy;
   }
 
   render() {
     let answerChoices = [];
     for (let i = 0; i < 4; i++) {
-      answerChoices.push(<AnswerChoice answer={this.state.answers[i]} handleInput={this.handleInput} handleCorrect={this.handleCorrect} missingAnswer={this.state.missingAnswer} key={i} index={i}  />);
+      if (this.state.answers[i][1]) { // if it is a correct answer, return a checked checkbox
+        answerChoices.push(<AnswerChoiceCorrect answer={this.state.answers[i]} handleInput={this.handleInput} handleCorrect={this.handleCorrect} key={i} index={i} />)
+      } else { // if it is incorrect, return an unchecked box
+        answerChoices.push(<AnswerChoice answer={this.state.answers[i]} handleInput={this.handleInput} handleCorrect={this.handleCorrect} key={i} index={i}  />);
+      }
     }
 
     return (
@@ -107,38 +124,17 @@ class MakerSpace extends React.Component {
                   <input className='text-input question-input' name='question' type='text' value={this.state.question}onChange={this.handleInput} />
               </label>
               {answerChoices}
-              <button value='add' onClick={this.props.addCard}>Add Question&emsp;<FontAwesomeIcon className='font-plus' icon={faPlusCircle} /></button>
+              <button value='add' onClick={this.addCardHandler}>Add Question&emsp;<FontAwesomeIcon className='font-plus' icon={faPlusCircle} /></button>
               <button value='delete' onClick={this.props.deleteCard}>Delete Question</button>
           </form>
           <div className="card-error-cover col-xs-6 col-sm-9 col-lg-9">
-          {/*
-            <ErrorAlert errorcode={this.state.errorcode} /> */}
-            <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber} moveCardHandler={this.moveCardHandler} submitQuiz={this.props.submitQuiz}/>
+            <ErrorAlert errorcode={this.state.errorcode || [0, 0, 0]} /> 
+            <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber} moveCardHandler={this.moveCardHandler} submitQuizHandler={this.submitQuizHandler}/>
           </div>
         </div>
       </div>
     )
   }
-}
-
-// Groups similar Answer Fields together
-function AnswerChoice(props) {
-    let inputName = 'ans' + props.index;
-    return (
-      <label>
-        Answer {props.index + 1}
-            <input className='check-box'
-                  name={inputName} 
-                  type="checkbox" 
-                  value="true" 
-                  onClick={props.handleCorrect} />
-            <input className='text-input'
-                  name={inputName} 
-                  type='text' 
-                  value={props.answer[0]} 
-                  onChange={props.handleInput} />
-      </label>
-    );
 }
 
 function arrayClone(arr) {
