@@ -3,7 +3,7 @@ import './index.css';
 
 // Groups similar Answer Fields together
 // Either a correct answer choice or an incorrect answer choice
-function AnswerChoice(props) {
+function AnswerChoiceCorrect(props) {
     let inputName = 'ans' + props.index;
     return (
       <label>
@@ -12,7 +12,8 @@ function AnswerChoice(props) {
                   name={inputName} 
                   type="checkbox" 
                   value="true" 
-                  onChange={props.handleCorrect} />
+                  onChange={props.handleCorrect} 
+                  checked />
             <input className='text-input'
                   name={inputName} 
                   type='text' 
@@ -22,4 +23,4 @@ function AnswerChoice(props) {
     );
 }
 
-export default AnswerChoice;
+export default AnswerChoiceCorrect;
