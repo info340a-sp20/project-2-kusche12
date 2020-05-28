@@ -12,6 +12,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
    STYLE
 -- Style the Submit Quiz Notification
+-- Make the error notifications less intrusive and position absolute so that they do not move down the card element
 */
 
 class MakerSpace extends React.Component { 
