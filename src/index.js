@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './components/index.css';
 import App from './components/App';
 import Home from './components/HomePage/Home';
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Switch, Route, Redirect } from 'react-router-dom';
 import firebase from 'firebase/app';
 
 class Main extends React.Component {
@@ -21,7 +21,8 @@ class Main extends React.Component {
                         </li>
                     </ul>
                     <Switch>
-                        <Route path='/home'>
+                        <Redirect exact from='/' to='/home' />
+                        <Route exact path='/home'>
                             <Home />
                         </Route>
                         <Route path='/app'>
