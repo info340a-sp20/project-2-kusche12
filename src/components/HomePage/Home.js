@@ -1,6 +1,8 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import BounceLoader from 'react-spinners/BounceLoader'
+import BounceLoader from 'react-spinners/BounceLoader';
+import QuizList from './QuizList';
+
 // import { Spinner } from 'reactstrap';
 
 class HomePage extends React.Component {
@@ -21,7 +23,14 @@ class HomePage extends React.Component {
         rootRef.on("value", (snapshot) => {
             console.log(snapshot.val());
             let data = snapshot.val();
-            this.setState({ savedQuiz: data, loading: false })
+            let quizKeys = Object.keys(data);
+            let quizArray = quizKeys.map((key) => { //map array of keys into array of tasks
+                let quiz = data[key]; //access element at that key
+                quiz.key = key; //save the key for later referencing!
+                return quiz;
+            });
+
+            this.setState({ savedQuiz: quizArray, loading: false });
             this.renderQuiz();
 
         }, function (errorObject) {
@@ -32,10 +41,11 @@ class HomePage extends React.Component {
     renderQuiz() {
         return (
             <div>
-                {JSON.stringify(this.state.savedQuiz)}
-            </div>
+                <QuizList savedQuiz={this.state.savedQuiz} />
+            </div >
         )
     }
+
 
     render() {
         return (
