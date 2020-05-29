@@ -8,12 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 /* FEATURES 
--- Fix the add card bug when trying to add on an unfinished card
--- Shrink the size of the question text after it gets too long
--- Check for errors on current card when submitting
+   Write a successful quiz upload message and return user to the home screen
 
    STYLE
--- Style the Submit Quiz Notification
+   Nothing currently...
 */
 
 class MakerSpace extends React.Component { 
@@ -68,10 +66,7 @@ class MakerSpace extends React.Component {
 
   // Update the state of the current Maker Space and Card position
   componentDidUpdate(prevProps) {
-    console.log('componentDidUpdate prevProps:');
-    console.log(prevProps.question);
-    console.log(this.props.question);
-    if (this.props.question !== prevProps.question) {
+    if (this.props.questionNumber !== prevProps.questionNumber) {
       this.setState({
         question: this.props.question,
         answers: this.props.answers,
