@@ -9,10 +9,11 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 /* FEATURES 
 -- Fix the add card bug when trying to add on an unfinished card
+-- Shrink the size of the question text after it gets too long
+-- Check for errors on current card when submitting
 
    STYLE
 -- Style the Submit Quiz Notification
--- Make the error notifications less intrusive and position absolute so that they do not move down the card element
 */
 
 class MakerSpace extends React.Component { 
@@ -115,6 +116,7 @@ class MakerSpace extends React.Component {
         answerChoices.push(<AnswerChoice answer={this.state.answers[i]} handleInput={this.handleInput} handleCorrect={this.handleCorrect} key={i} index={i}  />);
       }
     }
+    
 
     return (
       <div className="maker-space-cover container-fluid">
@@ -127,9 +129,10 @@ class MakerSpace extends React.Component {
               {answerChoices}
               <button value='add' onClick={this.addCardHandler}>Add Question&emsp;<FontAwesomeIcon className='font-plus' icon={faPlusCircle} /></button>
               <button value='delete' onClick={this.props.deleteCard}>Delete Question</button>
+              <ErrorAlert errorcode={this.state.errorcode || [0, 0, 0]} /> 
+
           </form>
           <div className="card-error-cover col-xs-6 col-sm-9 col-lg-9">
-            <ErrorAlert errorcode={this.state.errorcode || [0, 0, 0]} /> 
             <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber} moveCardHandler={this.moveCardHandler} submitQuizHandler={this.submitQuizHandler}/>
           </div>
         </div>
