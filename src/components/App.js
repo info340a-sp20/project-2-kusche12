@@ -2,8 +2,10 @@ import React from 'react';
 import MakerSpace from './MakerSpace';
 // Submit handler
 import { confirmAlert } from 'react-confirm-alert';
-import '../../node_modules/react-confirm-alert/src/react-confirm-alert.css';
 import './index.css';
+import '../../node_modules/react-confirm-alert/src/react-confirm-alert.css';
+import question_img from '../img/question-color.png';
+
 // Firebase
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -14,7 +16,7 @@ class App extends React.Component {
     this.state = {
       // TESTING ENVIRONMENT SET UP
       // Imagine that there is already one card submitted and the user is currently writing card two
-      cards: [{ question: 'what day is it?', answers: [['Tuesday', false], ['Wednesday', false], ['Thursday', false], ['Friday', false]], errorcode: [0, 0, 1] }, { question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]], errorcode: [0, 0, 0] }],
+      cards: [{ question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]], errorcode: [0, 0, 1] }, { question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]], errorcode: [0, 0, 0] }],
       cardPosition: 1 // 0-based indexing
     };
   }
@@ -29,19 +31,15 @@ class App extends React.Component {
     if (this.state.cardPosition === this.state.cards.length - 1) { // last card in deck
       oldCards.push({question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0]});
       newCards = oldCards;
-    } else {
-      // return all cards from beginning to current
+    } else { // any other card position
       newCards = oldCards.slice(0, this.state.cardPosition + 1);
-      // append a new card
       newCards.push({question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0]});
-      // append the remaining cards
       newCards.push(...oldCards.slice(this.state.cardPosition + 1, oldCards.length));
     }
     this.setState({
       cards: newCards,
       cardPosition: this.state.cardPosition + 1
     }); 
-    console.log('new card has been added to the deck');
   }
 
   // delete the currently selected card
@@ -80,7 +78,6 @@ class App extends React.Component {
 
   // Allows the user to submit their quiz
   submitQuiz = (newQuestion, newAnswers, newErrors) => {
-    // Add in the final card
     this.saveToCard(newQuestion, newAnswers, newErrors);
 
     // Check for errors in any of the cards
@@ -94,19 +91,19 @@ class App extends React.Component {
     // Ask the user to confirm their request
     if (!includesError) {
       confirmAlert({
-        title: 'Confirm to submit',
-        message: 'Are you ready to submit?',
-        buttons: [
-          {
-            label: 'Submit',
-            onClick: () => this.submitHandler()
-          },
-          {
-            label: 'No',
-          }
-        ],
-        closeOnEscape: true,
-        closeOnClickOutside: true,
+        customUI: ({ onClose }) => {
+          return (
+            <div className='react-confirm-alert-custom'>
+              <img src={question_img} alt='question mark'/>
+              <p>Submit the Quiz?</p>
+              <p>Once submitted, you will not be able to make any changes to your quiz.</p>
+              <div className='react-confirm-button-container'>
+                <button onClick={() => {this.submitHandler()}}>Submit</button>
+                <button onClick={onClose}>Cancel</button>
+              </div>
+            </div>
+          );
+        }
       });
     } else {
       alert("Make sure that none of your questions have errors before submitting...");

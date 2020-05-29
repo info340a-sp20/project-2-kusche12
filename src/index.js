@@ -14,10 +14,10 @@ class Main extends React.Component {
                     <h1 className='title'>QuizMe</h1>
                     <ul>
                         <li>
-                            <Link to='/home'>Home Page</Link>
+                            <Link className='link' to='/home'>Home Page</Link>
                         </li>
                         <li>
-                            <Link to='/app'>Make Quiz</Link>
+                            <Link className='link' to='/app'>Make Quiz</Link>
                         </li>
                     </ul>
                     <Switch>
