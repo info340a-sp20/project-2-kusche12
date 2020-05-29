@@ -18,7 +18,6 @@ class Card extends React.Component {
     render() {
       let answerTextRender = [];
       let updatedAnswers = this.props.answers;
-      
       updatedAnswers.forEach((answer, i) => {
         if (answer[1]) {
           answerTextRender.push(<h5 className="card-answer-correct" key={i}>{answer}</h5>); // Correct Answer
@@ -26,7 +25,6 @@ class Card extends React.Component {
           answerTextRender.push(<h5 key={i}>{answer}</h5>);
         }
       });
-    
       return (
         <div className='card-total-cover'>
           <h3>Question {this.props.questionNumber + 1}</h3>
@@ -34,7 +32,7 @@ class Card extends React.Component {
             <button value='prev'><FontAwesomeIcon onClick={this.backArrow} icon={faChevronLeft} size="3x"></FontAwesomeIcon></button>
             <div className="card">
               <div className="card-question-cover">
-                <h4>{this.props.question}</h4>
+                <p className={'card-question ' + (this.props.question.length > 80 ? 'card-question-short ' : '') + (this.props.question.length > 110 ? 'card-question-shortest ' : '')}>{this.props.question}</p>
               </div>
               <div className="card-answer-group">
                 {answerTextRender}

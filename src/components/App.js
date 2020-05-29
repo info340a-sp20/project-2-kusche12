@@ -5,6 +5,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import './index.css';
 import '../../node_modules/react-confirm-alert/src/react-confirm-alert.css';
 import question_img from '../img/question-color.png';
+import risk_img from '../img/risk-color.png';
 
 // Firebase
 import firebase from 'firebase/app';
@@ -15,7 +16,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       // TESTING ENVIRONMENT SET UP
-      // Imagine that there is already one card submitted and the user is currently writing card two
       cards: [{ question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]], errorcode: [0, 0, 1] }, { question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]], errorcode: [0, 0, 0] }],
       cardPosition: 1 // 0-based indexing
     };
@@ -24,9 +24,7 @@ class App extends React.Component {
   // add a blank card below current card
   addCard = (event, newQuestion, newAnswers, newErrors) => {
     event.preventDefault();
-    this.saveToCard(newQuestion, newAnswers, newErrors);
-
-    let oldCards = arrayClone(this.state.cards);
+    let oldCards = this.saveToCard(newQuestion, newAnswers, newErrors);
     let newCards;
     if (this.state.cardPosition === this.state.cards.length - 1) { // last card in deck
       oldCards.push({question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0]});
@@ -78,11 +76,11 @@ class App extends React.Component {
 
   // Allows the user to submit their quiz
   submitQuiz = (newQuestion, newAnswers, newErrors) => {
-    this.saveToCard(newQuestion, newAnswers, newErrors);
+    let cards = this.saveToCard(newQuestion, newAnswers, newErrors);
 
     // Check for errors in any of the cards
     let includesError = false;
-    this.state.cards.forEach(card => {
+    cards.forEach(card => {
       if (card.errorcode.includes(1)) {
         includesError = true;
       }
@@ -106,7 +104,20 @@ class App extends React.Component {
         }
       });
     } else {
-      alert("Make sure that none of your questions have errors before submitting...");
+      confirmAlert({
+        customUI: ({ onClose }) => {
+          return (
+            <div className='react-confirm-alert-custom'>
+              <img src={risk_img} alt='question mark'/>
+              <p>Uh oh!</p>
+              <p>Make sure to correct any errors in each of your questions before submitting.</p>
+              <div className='react-confirm-button-container'>
+                <button onClick={onClose}>Okay</button>
+              </div>
+            </div>
+          );
+        }
+      });;
     }
   }
 
@@ -125,7 +136,7 @@ class App extends React.Component {
     cardsCopy[this.state.cardPosition].answers = answers;
     cardsCopy[this.state.cardPosition].errorcode = errors;
     this.setState({ cards: cardsCopy });
-    console.log('caerd state has been saved to master');
+    return cardsCopy;
   }
 
   render() {

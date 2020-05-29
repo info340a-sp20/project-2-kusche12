@@ -51,13 +51,17 @@ h1, h2, h3, h4 {
 
 /* Maker Space Layout */
 .maker {
-  background-color: #ebebeb;
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 2px solid transparent;
   border-radius: 5px;
   padding: 10px;
+
+  -webkit-box-shadow: 1px 4px 5px -3px rgba(0,0,0,0.83);
+  -moz-box-shadow: 1px 4px 5px -3px rgba(0,0,0,0.83);
+  box-shadow: 1px 4px 5px -3px rgba(0,0,0,0.83);
 }
 
 label {
@@ -182,11 +186,21 @@ label {
 }
 
 /* card main question */
-.card h4 {
+.card-question {
   text-align: center;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: 500;
   padding: 20px 20px 0px 20px;
+}
+
+.card-question-short {
+  font-size: 16px;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+.card-question-shortest {
+  font-size: 12px;
 }
 
 /* card answers */
@@ -234,7 +248,7 @@ label {
   font-size: 15px;
   color: #666666;
   text-align: center;
-  width: 85%;
+  width: 75%;
 }
 
 .react-confirm-alert-custom p:nth-of-type(1) {
@@ -378,6 +392,18 @@ label {
     .maker button {
       padding: 10px;
       margin:0px;
+    }
+    .card-question {
+      padding-top: 30px;
+      font-size: 30px;
+    }
+    .card-question-short {
+      font-size: 22px;
+      padding-right: 25px;
+      padding-left: 25px;
+    }
+    .card-question-shortest {
+      font-size: 22px;
     }
 
 }
