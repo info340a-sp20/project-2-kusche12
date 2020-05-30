@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.css'; 
 import './components/index.css';
 import App from './components/App';
 import Home from './components/HomePage/Home';
-import { BrowserRouter as Router, Link, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
 
 class Main extends React.Component {
@@ -14,15 +15,14 @@ class Main extends React.Component {
                     <h1 className='title'>QuizMe</h1>
                     <ul>
                         <li>
-                            <Link className='link' to='/home'>Home Page</Link>
+                            <Link className='link' to='/'>Home Page</Link>
                         </li>
                         <li>
                             <Link className='link' to='/app'>Make Quiz</Link>
                         </li>
                     </ul>
                     <Switch>
-                        <Redirect exact from='/' to='/home' />
-                        <Route exact path='/home'>
+                        <Route exact path='/'>
                             <Home />
                         </Route>
                         <Route path='/app'>

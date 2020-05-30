@@ -6,7 +6,7 @@ import './index.css';
 function AnswerChoiceCorrect(props) {
     let inputName = 'ans' + props.index;
     return (
-      <label>
+      <label htmlFor={'answerInput' + props.index}>
         Answer {props.index + 1}
             <input className='check-box'
                   name={inputName} 

@@ -7,13 +7,6 @@ import AnswerChoiceCorrect from './AnswerChoiceCorrect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-/* FEATURES 
-   Write a successful quiz upload message and return user to the home screen
-
-   STYLE
-   Nothing currently...
-*/
-
 class MakerSpace extends React.Component { 
   constructor(props) {
     super(props);
@@ -64,7 +57,7 @@ class MakerSpace extends React.Component {
     this.props.addCard(event, this.state.question, this.state.answers, errors);
   }
 
-  // Update the state of the current Maker Space and Card position
+  // Update the state of the current Maker Space and Card position on card change
   componentDidUpdate(prevProps) {
     if (this.props.questionNumber !== prevProps.questionNumber) {
       this.setState({
@@ -117,7 +110,7 @@ class MakerSpace extends React.Component {
       <div className="maker-space-cover container-fluid">
         <div className="row">
           <form className="maker col-xs-6 col-sm-3 col-lg-3">
-              <label>
+              <label htmlFor='questionInput'>
                 Question
                   <input className='text-input question-input' name='question' type='text' value={this.state.question}onChange={this.handleInput} />
               </label>
