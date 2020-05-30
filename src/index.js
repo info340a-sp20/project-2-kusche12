@@ -5,6 +5,7 @@ import App from './components/App';
 import Home from './components/HomePage/Home';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
+import SingleQuizItem from './components/HomePage/SingleQuizItem';
 
 class Main extends React.Component {
     render() {
@@ -14,18 +15,22 @@ class Main extends React.Component {
                     <h1 className='title'>QuizMe</h1>
                     <ul>
                         <li>
-                            <Link to='/home'>Home Page</Link>
+                            <Link to='/'>Home Page</Link>
                         </li>
                         <li>
                             <Link to='/app'>Make Quiz</Link>
                         </li>
                     </ul>
                     <Switch>
-                        <Route path='/home'>
+                        <Route exact path='/'>
                             <Home />
                         </Route>
                         <Route path='/app'>
                             <App />
+                        </Route>
+                        <Route path="/singlequizitem/:setNum"
+                            component={SingleQuizItem}>
+                            {/* <SingleQuizItem /> */}
                         </Route>
                     </Switch>
                 </div>

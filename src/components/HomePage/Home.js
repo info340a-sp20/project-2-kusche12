@@ -11,6 +11,8 @@ class HomePage extends React.Component {
         this.state = {
             savedQuiz: '',
             loading: true,
+            renderSingleQuiz: false,
+            quizGroupContent: []
         };
     }
 
@@ -31,37 +33,36 @@ class HomePage extends React.Component {
             });
 
             this.setState({ savedQuiz: quizArray, loading: false });
-            this.renderQuiz();
 
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
     }
 
-    renderQuiz() {
-        return (
-            <div>
-                <QuizList savedQuiz={this.state.savedQuiz} />
-            </div >
-        )
-    }
+    // renderQuiz() {
+    //     return (
+    //         <div>
 
+    //         </div >
+    //     )
+    // }
 
     render() {
         return (
             <div className="maker-cover">
                 <h3>Welcome to QuizMe</h3>
-                <form>
-                    <label>
-                        Question
-                    </label>
-                </form>
-                {this.state.savedQuiz ?
-                    this.renderQuiz()
+
+                {this.state.loading ?
+                    <div>
+                        <BounceLoader
+                            color={"orange"}
+                            loading={this.state.loading} />
+                    </div>
                     :
-                    <BounceLoader
-                        color={"orange"}
-                        loading={this.state.loading} />
+                    <QuizList
+                        savedQuiz={this.state.savedQuiz}
+                        loading={this.state.loading}
+                        renderSingleQuiz={this.state.renderSingleQuiz} />
                 }
             </div>
         )
