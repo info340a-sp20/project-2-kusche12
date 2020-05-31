@@ -53,6 +53,16 @@ h1, h2, h3, h4 {
   background-color: white;
 }
 
+/* HomePage */
+.cardlist {
+  min-width: 12rem;
+}
+
+.cardlist-button { 
+  background: #ffa500;
+  border: #ffa500;
+}
+
 
 /* Maker Space Layout */
 .maker {
@@ -297,13 +307,13 @@ label {
   height: 35vh; 
 }
 
-.view.card-answer-group {
-  
+.progress { 
+  width: 35vw;
+  margin-bottom: 4em;
 }
 
 .view.card-question-cover { 
-  width: 50vw; 
-
+  width: 60vw; 
 }
 
 .view.card-answer-group h5{
@@ -319,8 +329,6 @@ label {
 
 .wrong-ans { 
   color: #E35353; 
-  /* padding: 1em;
-  border-radius: 50px;  */
 }
 
 @media (min-width: 575px) {
@@ -338,12 +346,41 @@ label {
     display: none;
   }
 
+  /* HomePage */
+  .cardlist {
+    height: 250px;
+    min-width: 14rem;
+    max-width: 14rem;
+    max-height: 220px;
+  }
+
+  /* ViewQuiz Card */
+  .view.card {
+      width: 90vw;
+      height: 35vh;
+  }
+
+  .view.card-question-cover {
+    width: 90vw;
+  }
+
+
+  .view.card-submit {
+    margin: 0px;
+    margin-top: 5em;
+    padding: 10px;
+    width: 70vw;
+    font-size: 15px;
+    align-self: center;
+  }
+
   /* CARD */
   .card {
     width: 300px;
     height: 250px;
   }
 
+  
   .card-question-cover {
     height: 80px;
   }
@@ -383,6 +420,34 @@ label {
 
 
 @media (min-width: 800px) {
+  /* HomePage */
+  .cardlist {
+    height: 250px;
+    min-width: 14rem;
+    max-width: 14rem;
+    max-height: 220px;
+  }
+
+
+  /* View Quiz Mode */
+  .view.card {
+    width: 60vw;
+    height: 35vh;
+  }
+
+  .view.card-question-cover {
+    width: 60vw;
+  }
+
+  .view.card-submit {
+    margin: 0px;
+    margin-top: 5em;
+    padding: 10px;
+    width: 30vw;
+    font-size: 14px;
+    align-self: center;
+  }
+
   /* MAKER SPACE */
   .font-plus {
     display: inline;
@@ -405,6 +470,34 @@ label {
 }
 
 @media (min-width: 1200px) {
+    /* HomePage */
+    .cardlist {
+      height: 250px;
+      min-width: 14rem;
+      max-width: 14rem;
+      max-height: 220px;
+    }
+
+    /* View Quiz Mode */
+    .view.card {
+      width: 60vw;
+      height: 35vh;
+    }
+
+    .view.card-question-cover {
+      width: 60vw;
+    }
+
+    .view.card-submit {
+      margin: 0px;
+      margin-top: 5em;
+      padding: 10px;
+      width: 30vw;
+      font-size: 14px;
+      align-self: center;
+    }
+    
+
     /* CARD */
     .card {
       width: 500px;

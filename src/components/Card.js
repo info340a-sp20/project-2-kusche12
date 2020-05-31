@@ -2,7 +2,8 @@ import React from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Alert, Progress } from 'reactstrap';
+import { Alert, Progress, Button } from 'reactstrap';
+import QuizViewModeButton from './QuizViewMode/QuizViewModeButton';
 
 class Card extends React.Component {
   constructor(props) {
@@ -136,6 +137,7 @@ class Card extends React.Component {
   render() {
     let answerTextRender = [];
     let updatedAnswers = this.props.answers;
+    let currentProgress = '';
 
     if (!this.props.renderMode) {
       updatedAnswers.forEach((answer, i) => {
@@ -145,24 +147,28 @@ class Card extends React.Component {
           answerTextRender.push(<h5 key={i}>{answer}</h5>);
         }
       })
+    } else {
+      currentProgress = ((this.state.quizArrayPosition + 1) / this.state.quiz.length);
+      console.log(currentProgress);
     }
 
     return (
       this.props.renderMode ?
         (
           <div className='card-total-cover'>
-            <Progress value="25">25%</Progress>
+            <Progress max="1" value={currentProgress}></Progress>
             <h3>Question {this.state.quizArrayPosition + 1}</h3>
             {this.renderResultMessage()}
             <div className="card-buttons-cover">
               <div className="view card">
                 {this.renderQuizBodyViewMode()}
               </div>
-              <button value='next'>
-                <FontAwesomeIcon onClick={this.viewModeNextArrow} icon={faChevronRight} size="3x"></FontAwesomeIcon>
-              </button>
             </div>
-            <button className="card-submit" value='next' onClick={this.viewModeNextArrow}>Next</button>
+            <QuizViewModeButton
+              quizArrayPosition={this.state.quizArrayPosition}
+              quiz={this.state.quiz}
+              viewModeNextArrow={this.viewModeNextArrow}
+            />
           </div>
         )
         :

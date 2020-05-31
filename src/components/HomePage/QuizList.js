@@ -18,31 +18,34 @@ export default class QuizList extends Component {
   }
 
   handleClick = (num, quiz) => {
-    console.log("clicked " + num);
     this.setState({ redirect: num, quizGroup: quiz });
   }
 
   render() {
     const cleanQuiz = this.state.quizData;
 
-    if (this.state.redirect)
+    if (this.state.redirect) {
       return (
         <Redirect push to={{
           pathname: ("/singlequizitem/" + this.state.redirect),
           state: this.state.quizGroup
         }} />
       )
+    }
+
+    let mappedQuiz =
+      cleanQuiz.map((quiz, i) => (
+        <Card key={i} className="cardlist mb-4">
+          <CardBody>
+            <CardTitle>{`Set ${i + 1}`}</CardTitle>
+            <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Go to the Quiz!</Button>
+          </CardBody>
+        </Card>
+      ))
 
     return (
-      <CardDeck>
-        {cleanQuiz.map((quiz, i) => (
-          <Card key={i}>
-            <CardBody>
-              <CardTitle>{`Set ${i + 1}`}</CardTitle>
-              <Button onClick={() => { this.handleClick(i + 1, quiz) }}>Go to the Quiz!</Button>
-            </CardBody>
-          </Card>
-        ))}
+      <CardDeck >
+        {mappedQuiz}
       </CardDeck>
     )
   }
