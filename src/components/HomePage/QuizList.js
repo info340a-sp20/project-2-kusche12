@@ -23,7 +23,8 @@ export default class QuizList extends Component {
 
   render() {
     const cleanQuiz = this.state.quizData;
-    if (this.state.redirect) { // begin quiz game
+
+    if (this.state.redirect) {
       return (
         <Redirect push to={{
           pathname: ("/singlequizitem/" + this.state.redirect),
@@ -33,20 +34,18 @@ export default class QuizList extends Component {
     }
 
     let mappedQuiz =
-      cleanQuiz.map((quiz, i) => {
-        return (
+      cleanQuiz.map((quiz, i) => (
         <Card key={i} className="cardlist mb-4">
           <CardBody>
-            <CardTitle>{quiz[quiz.length-1]}</CardTitle>
-            <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Take the Quiz!</Button>
+            <CardTitle>{`Set ${i + 1}`}</CardTitle>
+            <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Go to the Quiz!</Button>
           </CardBody>
         </Card>
-      )}); 
+      ))
 
-    return ( // show all quizzes
+    return (
       <CardDeck >
-        {/* {mappedQuiz} */}
-        <h1>This is temporary</h1>
+        {mappedQuiz}
       </CardDeck>
     )
   }
