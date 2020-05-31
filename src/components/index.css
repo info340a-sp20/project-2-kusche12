@@ -186,11 +186,9 @@ label {
 
 /* card answers */
 .card-answer-group h5 {
-  margin: 10px;
-  font-size: 20px;
-}
-.card-answer-correct {
-  color: #40cf66;
+  font-size: 18px;
+  margin-bottom: 15px;
+  width: 125px;
 }
 
 .card-answer-group {
@@ -198,8 +196,11 @@ label {
   grid-template-areas: 
   "ans1 ans2"
   "ans3 ans4";
-  width: 90%;
   text-align: center;
+}
+
+.card-answer-correct {
+  color: #40cf66;
 }
 
 .error-block {
@@ -275,7 +276,7 @@ label {
   }
 
   .card-answer-group h5 {
-    font-size: 18px;
+    width: 140px;
   }
 
   .card-buttons-cover button {
@@ -319,6 +320,10 @@ label {
   .card-question-cover {
     width: 450px;
     height: 75px;
+  }
+
+  .card-answer-group h5 {
+    width: 180px;
   }
 
 }
