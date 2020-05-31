@@ -3,8 +3,6 @@ import firebase from 'firebase/app';
 import BounceLoader from 'react-spinners/BounceLoader';
 import QuizList from './QuizList';
 
-// import { Spinner } from 'reactstrap';
-
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -21,13 +19,15 @@ class HomePage extends React.Component {
     }
 
     getData = () => {
+        // referred to the book  
         let rootRef = firebase.database().ref("quizzes");
         rootRef.on("value", (snapshot) => {
             let data = snapshot.val();
+            console.log(data);
             let quizKeys = Object.keys(data);
-            let quizArray = quizKeys.map((key) => { //map array of keys into array of tasks
-                let quiz = data[key]; //access element at that key
-                quiz.key = key; //save the key for later referencing!
+            let quizArray = quizKeys.map((key) => {
+                let quiz = data[key];
+                quiz.key = key;
                 return quiz;
             });
 
@@ -41,8 +41,6 @@ class HomePage extends React.Component {
     render() {
         return (
             <div className="maker-cover">
-                <h3>Welcome to QuizMe</h3>
-
                 {this.state.loading ?
                     <div>
                         <BounceLoader
