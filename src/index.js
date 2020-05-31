@@ -23,7 +23,7 @@ class Main extends React.Component {
                         </li>
                     </ul>
                     <Switch>
-                        <Route exact path='/' component={Home} />
+                        <Route path='/' component={Home} />
                         <Route path='/app' component={App} />
                         <Route path="/singlequizitem/:setNum" component={SingleQuizItem} />
                     </Switch>
