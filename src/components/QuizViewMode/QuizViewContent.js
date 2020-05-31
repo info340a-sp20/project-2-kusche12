@@ -1,7 +1,7 @@
 import React from 'react';
 import '../index.css';
 
-export default class QuizViewContent extends React.Component {
+export default class QuizViewModeButton extends React.Component {
 
   render() {
     let quiz = this.props.quiz;

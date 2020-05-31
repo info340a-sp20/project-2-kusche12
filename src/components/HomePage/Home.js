@@ -23,7 +23,6 @@ class HomePage extends React.Component {
         let rootRef = firebase.database().ref("quizzes");
         rootRef.on("value", (snapshot) => {
             let data = snapshot.val();
-            console.log(data);
             let quizKeys = Object.keys(data);
             let quizArray = quizKeys.map((key) => {
                 let quiz = data[key];

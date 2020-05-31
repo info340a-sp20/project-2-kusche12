@@ -33,18 +33,20 @@ export default class QuizList extends Component {
     }
 
     let mappedQuiz =
-      cleanQuiz.map((quiz, i) => (
+      cleanQuiz.map((quiz, i) => {
+        return (
         <Card key={i} className="cardlist mb-4">
           <CardBody>
-            <CardTitle>{quiz[1]}</CardTitle>
+            <CardTitle>{quiz[quiz.length-1]}</CardTitle>
             <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Take the Quiz!</Button>
           </CardBody>
         </Card>
-      ))
+      )}); 
 
     return ( // show all quizzes
       <CardDeck >
-        {mappedQuiz}
+        {/* {mappedQuiz} */}
+        <h1>This is temporary</h1>
       </CardDeck>
     )
   }

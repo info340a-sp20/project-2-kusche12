@@ -1,0 +1,13 @@
+[ {
+  "answers" : [ [ "He transfigures into a shark", false ], [ "He kisses a mermaid", false ], [ "He eats gillyweed", true ], [ "He performs a bubble-head charm", false ] ],
+  "errorcode" : [ 0, 0, 0 ],
+  "question" : "How does Harry manage to breathe underwater during the second task of the Triwizard Tournament?"
+}, {
+  "answers" : [ [ "Weasley Joke Emporium", false ], [ "Weasley's Wizard Wheezes", true ], [ "Fred & George's Wonder Emporium", false ], [ "Zonko's Joke Shop", false ] ],
+  "errorcode" : [ 0, 0, 0 ],
+  "question" : "What is the name of Fred and George's joke shop?"
+}, {
+  "answers" : [ [ "Cruciatus Curse", false ], [ "Imperius Curse", false ], [ "Sectumsempra", true ], [ "Avada Kedavra", false ] ],
+  "errorcode" : [ 0, 0, 0 ],
+  "question" : "Which of these is NOT one of the Unforgivable Curses?"
+}, "Harry Potter Quiz" ]
