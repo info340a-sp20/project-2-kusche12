@@ -236,7 +236,13 @@ label {
 .correct-ans { 
   background : #79E353; 
   padding: 1em;
-  border-radius: 20px; 
+  border-radius: 50px; 
+}
+
+.wrong-ans { 
+  color: #E35353; 
+  /* padding: 1em;
+  border-radius: 50px;  */
 }
 
 @media (min-width: 575px) {

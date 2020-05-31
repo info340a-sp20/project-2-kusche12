@@ -31,7 +31,8 @@ class Card extends React.Component {
     if (pos > 0) {
       pos--;
       this.setState({
-        quizArrayPosition: pos
+        quizArrayPosition: pos,
+        displayResultMode: false
       })
     }
   }
