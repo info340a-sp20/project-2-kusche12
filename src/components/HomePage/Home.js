@@ -23,7 +23,7 @@ class HomePage extends React.Component {
     getData = () => {
         let rootRef = firebase.database().ref("quizzes");
         rootRef.on("value", (snapshot) => {
-            console.log(snapshot.val());
+            // console.log(snapshot.val());
             let data = snapshot.val();
             let quizKeys = Object.keys(data);
             let quizArray = quizKeys.map((key) => { //map array of keys into array of tasks

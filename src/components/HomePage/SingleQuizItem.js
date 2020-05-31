@@ -18,19 +18,15 @@ export default class SingleQuizItem extends Component {
 
   render = () => {
     const quiz = this.state.quiz;
-    console.log(this.props.location.quizGroup);
 
     return (
       this.state.quiz ? (
-        // quiz.map((quiz, i) => (
         <div >
           <Card quiz={quiz} renderMode={true} />
         </div>
-
       ) : (
           <div>
             <p>Whoops! Invalid access. Please select a valid quiz</p>
-            {/* <Redirect to="/" /> */}
           </div>
         )
     )

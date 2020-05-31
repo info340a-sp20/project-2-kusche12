@@ -217,6 +217,28 @@ label {
   font-weight: 500;
 }
 
+/* Display cards on View Mode */
+.view.card { 
+  width: 50vw; 
+  height: 35vh; 
+}
+
+.view.card-question-cover { 
+  width: 50vw; 
+
+}
+
+.view.card-answer-group h5{
+  padding: 1em;
+}
+
+/* Display Card Answers on View Mode */
+.correct-ans { 
+  background : #79E353; 
+  padding: 1em;
+  border-radius: 20px; 
+}
+
 @media (min-width: 575px) {
   /* MAKER SPACE */
   label {
