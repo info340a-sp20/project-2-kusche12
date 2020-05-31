@@ -1,7 +1,7 @@
 import React from 'react';
 import MakerSpace from './MakerSpace';
-import { BrowserRouter as Redirect } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert'; // Submit handler
+import { Redirect } from 'react-router'
+import { confirmAlert } from 'react-confirm-alert'; 
 import question_img from '../img/question-color.png';
 import risk_img from '../img/risk-color.png';
 import check_img from '../img/check-color.png';
@@ -93,6 +93,7 @@ class App extends React.Component {
       confirmAlert({
         customUI: ({ onClose }) => {
           return (
+            // warning alert
             <div className='react-confirm-alert-custom'>
               <img src={question_img} alt='question mark'/>
               <p>Submit the Quiz?</p>
@@ -109,6 +110,7 @@ class App extends React.Component {
       confirmAlert({
         customUI: ({ onClose }) => {
           return (
+            // error alert
             <div className='react-confirm-alert-custom'>
               <img src={risk_img} alt='error sign'/>
               <p>Uh oh!</p>
@@ -122,7 +124,7 @@ class App extends React.Component {
       });
     }
   }
-
+  // User names the quiz
   nameHandler = (event) => { this.setState({ name: event.target.value }) }
   submitNameHandler = () => {
     confirmAlert({
@@ -144,14 +146,15 @@ class App extends React.Component {
 
   confirmationHandler = () => {
     confirmAlert({
-      customUI: () => {
+      customUI: ({ onClose }) => {
         return (
+          // success alert
           <div className='react-confirm-alert-custom'>
           <img src={check_img} alt='check mark'/>
           <p>Hooray!</p>
           <p>Your quiz has been sucessfully submitted.</p>
           <div className='react-confirm-button-container'>
-            <button onClick={this.submitHandler()}>Back to home</button>
+            <button onClick={() => {this.submitHandler(); onClose();}}>Back to home</button>
           </div>
         </div>
         );
@@ -181,23 +184,20 @@ class App extends React.Component {
 
   render() {
     if (this.state.submitted) { // quiz is complete
-      return <Redirect push to='/' />;
-    } else {
+      return <Redirect to='/' />;
+    }
       return ( // quiz is still being made
-        <div className='app-main'>
-          <MakerSpace
-            question={this.state.cards[this.state.cardPosition].question || ""}
-            answers={this.state.cards[this.state.cardPosition].answers}
-            errorcode={this.state.cards[this.state.cardPosition].errorcode}
-            questionNumber={this.state.cardPosition}
-            addCard={this.addCard}
-            deleteCard={this.deleteCard}
-            moveCard={this.moveCard}
-            submitQuiz={this.submitQuiz}
-          />
-        </div>
-      );
-    }    
+        <MakerSpace
+          question={this.state.cards[this.state.cardPosition].question || ""}
+          answers={this.state.cards[this.state.cardPosition].answers}
+          errorcode={this.state.cards[this.state.cardPosition].errorcode}
+          questionNumber={this.state.cardPosition}
+          addCard={this.addCard}
+          deleteCard={this.deleteCard}
+          moveCard={this.moveCard}
+          submitQuiz={this.submitQuiz}
+        />
+      );  
   }
 }
 
