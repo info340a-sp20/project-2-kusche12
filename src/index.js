@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.css'; 
+import 'bootstrap/dist/css/bootstrap.css';
 import './components/index.css';
 import App from './components/App';
 import Home from './components/HomePage/Home';
 import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
+import SingleQuizItem from './components/HomePage/SingleQuizItem';
 
 class Main extends React.Component {
     render() {
         return (
             <Router>
                 <div className="wrapper">
-                    <h1 className='title'>QuizMe</h1>
+                    <h1 className='title'><Link to='/' className="title" style={{ color: 'inherit', textDecoration: 'inherit' }} >QuizMe</Link></h1>
                     <ul>
                         <li>
                             <Link className='link' to='/'>Home Page</Link>
@@ -27,6 +28,9 @@ class Main extends React.Component {
                         </Route>
                         <Route path='/app'>
                             <App />
+                        </Route>
+                        <Route path="/singlequizitem/:setNum"
+                            component={SingleQuizItem}>
                         </Route>
                     </Switch>
                 </div>

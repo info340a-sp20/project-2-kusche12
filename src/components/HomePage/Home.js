@@ -1,6 +1,8 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import BounceLoader from 'react-spinners/BounceLoader'
+import BounceLoader from 'react-spinners/BounceLoader';
+import QuizList from './QuizList';
+
 // import { Spinner } from 'reactstrap';
 
 class HomePage extends React.Component {
@@ -9,6 +11,8 @@ class HomePage extends React.Component {
         this.state = {
             savedQuiz: '',
             loading: true,
+            renderSingleQuiz: false,
+            quizGroupContent: []
         };
     }
 
@@ -19,39 +23,37 @@ class HomePage extends React.Component {
     getData = () => {
         let rootRef = firebase.database().ref("quizzes");
         rootRef.on("value", (snapshot) => {
-            console.log(snapshot.val());
             let data = snapshot.val();
-            this.setState({ savedQuiz: data, loading: false })
-            this.renderQuiz();
+            let quizKeys = Object.keys(data);
+            let quizArray = quizKeys.map((key) => { //map array of keys into array of tasks
+                let quiz = data[key]; //access element at that key
+                quiz.key = key; //save the key for later referencing!
+                return quiz;
+            });
+
+            this.setState({ savedQuiz: quizArray, loading: false });
 
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
     }
 
-    renderQuiz() {
-        return (
-            <div>
-                {JSON.stringify(this.state.savedQuiz)}
-            </div>
-        )
-    }
-
     render() {
         return (
             <div className="maker-cover">
                 <h3>Welcome to QuizMe</h3>
-                <form>
-                    <label>
-                        Question
-                    </label>
-                </form>
-                {this.state.savedQuiz ?
-                    this.renderQuiz()
+
+                {this.state.loading ?
+                    <div>
+                        <BounceLoader
+                            color={"orange"}
+                            loading={this.state.loading} />
+                    </div>
                     :
-                    <BounceLoader
-                        color={"orange"}
-                        loading={this.state.loading} />
+                    <QuizList
+                        savedQuiz={this.state.savedQuiz}
+                        loading={this.state.loading}
+                        renderSingleQuiz={this.state.renderSingleQuiz} />
                 }
             </div>
         )

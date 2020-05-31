@@ -35,9 +35,14 @@ ul, li {
 
 .title {
   display: inline-block;
-  color: orange;
+  color: #ffa500;
   font-weight: 700;
   font-size: 40px;
+  transition: 0.3s;
+}
+
+.title:hover {
+  color: rgb(211, 137, 0);
 }
 
 h1, h2, h3, h4 {
@@ -205,11 +210,9 @@ label {
 
 /* card answers */
 .card-answer-group h5 {
-  margin: 10px;
-  font-size: 20px;
-}
-.card-answer-correct {
-  color: #40cf66;
+  font-size: 18px;
+  margin-bottom: 15px;
+  width: 125px;
 }
 
 .card-answer-group {
@@ -217,8 +220,11 @@ label {
   grid-template-areas: 
   "ans1 ans2"
   "ans3 ans4";
-  width: 90%;
   text-align: center;
+}
+
+.card-answer-correct {
+  color: #40cf66;
 }
 
 .error-block {
@@ -285,6 +291,38 @@ label {
   background-color: orange;
 }
 
+/* Display cards on View Mode */
+.view.card { 
+  width: 50vw; 
+  height: 35vh; 
+}
+
+.view.card-answer-group {
+  
+}
+
+.view.card-question-cover { 
+  width: 50vw; 
+
+}
+
+.view.card-answer-group h5{
+  padding: 1em;
+}
+
+/* Display Card Answers on View Mode */
+.correct-ans { 
+  background : #79E353; 
+  padding: 1em;
+  border-radius: 50px; 
+}
+
+.wrong-ans { 
+  color: #E35353; 
+  /* padding: 1em;
+  border-radius: 50px;  */
+}
+
 @media (min-width: 575px) {
   /* MAKER SPACE */
   label {
@@ -315,7 +353,7 @@ label {
   }
 
   .card-answer-group h5 {
-    font-size: 18px;
+    width: 140px;
   }
 
   .card-buttons-cover button {
@@ -341,8 +379,6 @@ label {
     margin-top: 50px;
     margin-right: 50px;
   }
-
-
 }
 
 
@@ -363,6 +399,9 @@ label {
     height: 75px;
   }
 
+  .card-answer-group h5 {
+    width: 180px;
+  }
 }
 
 @media (min-width: 1200px) {
