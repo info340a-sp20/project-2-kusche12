@@ -4,7 +4,7 @@ lightgray: #f0efeb
 
 */
 .wrapper{ 
-  margin: 0 3vw 0 3vw;
+  margin: 0vw 2vw 1vw 2vw;
 }
 
 body {
@@ -19,7 +19,18 @@ body {
 /* React Router Navbar */
 ul, li {
   display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px;
   margin-bottom: 20px;
+}
+
+.link {
+  color: gray;
+}
+
+.link:hover {
+  color: #333333;
+  text-decoration: none;
 }
 
 .title {
@@ -45,14 +56,17 @@ h1, h2, h3, h4 {
 
 /* Maker Space Layout */
 .maker {
-  background-color: #ebebeb;
+  background-color: #f2f2f2;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 2px solid transparent;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px;
+
+  -webkit-box-shadow: 1px 4px 5px -3px rgba(0,0,0,0.83);
+  -moz-box-shadow: 1px 4px 5px -3px rgba(0,0,0,0.83);
+  box-shadow: 1px 4px 5px -3px rgba(0,0,0,0.83);
 }
 
 label {
@@ -177,11 +191,21 @@ label {
 }
 
 /* card main question */
-.card h4 {
+.card-question {
   text-align: center;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: 500;
   padding: 20px 20px 0px 20px;
+}
+
+.card-question-short {
+  font-size: 16px;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+.card-question-shortest {
+  font-size: 12px;
 }
 
 /* card answers */
@@ -204,18 +228,67 @@ label {
 }
 
 .error-block {
-  color: #AC0000;
-  background-color: #F6A4A4;
-  border: 3px solid #AC0000;
-  border-radius: 5px;
+  color: red;
   text-align: center;
-  padding: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
 }
 
-.error-block p {
-  margin-top: auto;
-  margin-bottom: auto;
+/* Confirm Alert */
+.react-confirm-alert-custom {
+  background-color: white;
+  padding: 60px 40px 50px 40px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  -webkit-box-shadow: 3px 5px 13px -2px rgba(0,0,0,0.52);
+  -moz-box-shadow: 3px 5px 13px -2px rgba(0,0,0,0.52);
+  box-shadow: 3px 5px 13px -2px rgba(0,0,0,0.52);
+}
+
+
+.react-confirm-alert-custom p {
+  font-size: 15px;
+  color: #666666;
+  text-align: center;
+  width: 75%;
+}
+
+.react-confirm-alert-custom p:nth-of-type(1) {
+  font-size: 25px;
   font-weight: 500;
+  color: #333333;
+  margin-bottom: 0px;
+}
+
+.react-confirm-alert-custom img {
+  width: 100px;
+  margin-bottom: 30px;
+}
+
+.react-confirm-button-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.react-confirm-alert-custom button {
+  border: 2px solid transparent;
+  background-color: #bdbdbd;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px 5px 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  display: inline-block;
+  color: white;
+}
+
+.react-confirm-alert-custom button:nth-of-type(1) {
+  background-color: orange;
 }
 
 /* Display cards on View Mode */
@@ -329,5 +402,47 @@ label {
   .card-answer-group h5 {
     width: 180px;
   }
+}
+
+@media (min-width: 1200px) {
+    /* CARD */
+    .card {
+      width: 500px;
+      height: 350px;
+    }
+  
+    .card-question-cover {
+      width: 550px;
+      height: 125px;
+    }
+
+    .card h4 {
+      margin-top: 10px;
+      font-size: 24px;
+    }
+    
+    .card-answer-group h5 {
+      font-size: 22px;
+    }
+    .card-submit {
+      padding: 10px;
+      margin-right: 150px;
+    }
+    .maker button {
+      padding: 10px;
+      margin:0px;
+    }
+    .card-question {
+      padding-top: 30px;
+      font-size: 30px;
+    }
+    .card-question-short {
+      font-size: 22px;
+      padding-right: 25px;
+      padding-left: 25px;
+    }
+    .card-question-shortest {
+      font-size: 22px;
+    }
 
 }

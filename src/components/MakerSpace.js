@@ -7,13 +7,6 @@ import AnswerChoiceCorrect from './AnswerChoiceCorrect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-/* FEATURES 
--- Fix the add card bug when trying to add on an unfinished card
-
-   STYLE
--- Style the Submit Quiz Notification
-*/
-
 class MakerSpace extends React.Component { 
   constructor(props) {
     super(props);
@@ -64,12 +57,9 @@ class MakerSpace extends React.Component {
     this.props.addCard(event, this.state.question, this.state.answers, errors);
   }
 
-  // Update the state of the current Maker Space and Card position
+  // Update the state of the current Maker Space and Card position on card change
   componentDidUpdate(prevProps) {
-    console.log('componentDidUpdate prevProps:');
-    console.log(prevProps.question);
-    console.log(this.props.question);
-    if (this.props.question !== prevProps.question) {
+    if (this.props.questionNumber !== prevProps.questionNumber) {
       this.setState({
         question: this.props.question,
         answers: this.props.answers,
@@ -114,21 +104,23 @@ class MakerSpace extends React.Component {
         answerChoices.push(<AnswerChoice answer={this.state.answers[i]} handleInput={this.handleInput} handleCorrect={this.handleCorrect} key={i} index={i}  />);
       }
     }
+    
 
     return (
       <div className="maker-space-cover container-fluid">
         <div className="row">
           <form className="maker col-xs-6 col-sm-3 col-lg-3">
-              <label>
+              <label htmlFor='questionInput'>
                 Question
                   <input className='text-input question-input' name='question' type='text' value={this.state.question}onChange={this.handleInput} />
               </label>
               {answerChoices}
               <button value='add' onClick={this.addCardHandler}>Add Question&emsp;<FontAwesomeIcon className='font-plus' icon={faPlusCircle} /></button>
               <button value='delete' onClick={this.props.deleteCard}>Delete Question</button>
+              <ErrorAlert errorcode={this.state.errorcode || [0, 0, 0]} /> 
+
           </form>
           <div className="card-error-cover col-xs-6 col-sm-9 col-lg-9">
-            <ErrorAlert errorcode={this.state.errorcode || [0, 0, 0]} /> 
             <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber} moveCardHandler={this.moveCardHandler} submitQuizHandler={this.submitQuizHandler}/>
           </div>
         </div>

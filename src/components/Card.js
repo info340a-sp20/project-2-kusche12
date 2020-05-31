@@ -123,7 +123,7 @@ class Card extends React.Component {
     return (
       <div>
         <div className="view card-question-cover">
-          <h4>{currentPos.question}</h4>
+          <h4 className="card-question">{currentPos.question}</h4>
         </div>
         <div className="view card-answer-group m-auto">
           {answerTextRender}
@@ -169,18 +169,16 @@ class Card extends React.Component {
         (<div className='card-total-cover'>
           <h3>Question {this.props.questionNumber + 1}</h3>
           <div className="card-buttons-cover">
-            <button value='prev'><FontAwesomeIcon onClick={this.backArrow} icon={faChevronLeft} size="3x"></FontAwesomeIcon></button>
+            <button value='prev' onClick={this.backArrow}><FontAwesomeIcon onClick={this.backArrow} icon={faChevronLeft} size="3x"></FontAwesomeIcon></button>
             <div className="card">
               <div className="card-question-cover">
-                <h4>{this.props.question}</h4>
+                <p className={'card-question ' + (this.props.question.length > 80 ? 'card-question-short ' : '') + (this.props.question.length > 110 ? 'card-question-shortest ' : '')}>{this.props.question}</p>
               </div>
               <div className="card-answer-group">
                 {answerTextRender}
               </div>
             </div>
-            <button value='next'>
-              <FontAwesomeIcon onClick={this.forwardArrow} icon={faChevronRight} size="3x"></FontAwesomeIcon>
-            </button>
+            <button value='next' onClick={this.forwardArrow}><FontAwesomeIcon onClick={this.forwardArrow} icon={faChevronRight} size="3x"></FontAwesomeIcon></button>
           </div>
           <button className="card-submit" value='submit' onClick={this.props.submitQuizHandler}>Submit</button>
         </div>

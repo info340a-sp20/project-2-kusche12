@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 import './components/index.css';
 import App from './components/App';
 import Home from './components/HomePage/Home';
@@ -15,10 +16,10 @@ class Main extends React.Component {
                     <h1 className='title'><Link to='/' className="title" style={{ color: 'inherit', textDecoration: 'inherit' }} >QuizMe</Link></h1>
                     <ul>
                         <li>
-                            <Link to='/'>Home Page</Link>
+                            <Link className='link' to='/'>Home Page</Link>
                         </li>
                         <li>
-                            <Link to='/app'>Make Quiz</Link>
+                            <Link className='link' to='/app'>Make Quiz</Link>
                         </li>
                     </ul>
                     <Switch>
