@@ -24,9 +24,14 @@ ul, li {
 
 .title {
   display: inline-block;
-  color: orange;
+  color: #ffa500;
   font-weight: 700;
   font-size: 40px;
+  transition: 0.3s;
+}
+
+.title:hover {
+  color: rgb(211, 137, 0);
 }
 
 h1, h2, h3, h4 {
@@ -268,8 +273,6 @@ label {
     margin-top: 50px;
     margin-right: 50px;
   }
-
-
 }
 
 

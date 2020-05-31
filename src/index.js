@@ -12,7 +12,7 @@ class Main extends React.Component {
         return (
             <Router>
                 <div className="wrapper">
-                    <h1 className='title'>QuizMe</h1>
+                    <h1 className='title'><Link to='/' className="title" style={{ color: 'inherit', textDecoration: 'inherit' }} >QuizMe</Link></h1>
                     <ul>
                         <li>
                             <Link to='/'>Home Page</Link>
@@ -30,7 +30,6 @@ class Main extends React.Component {
                         </Route>
                         <Route path="/singlequizitem/:setNum"
                             component={SingleQuizItem}>
-                            {/* <SingleQuizItem /> */}
                         </Route>
                     </Switch>
                 </div>

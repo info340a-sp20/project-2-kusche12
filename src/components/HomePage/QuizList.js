@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
   Card, Button, CardTitle, CardDeck, CardBody
 } from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom';
-import SingleQuizItem from './SingleQuizItem';
+import { Redirect } from 'react-router-dom';
 
 export default class QuizList extends Component {
   static defaultProps = {

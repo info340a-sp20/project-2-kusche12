@@ -22,13 +22,11 @@ export default class SingleQuizItem extends Component {
 
     return (
       this.state.quiz ? (
-        quiz.map((quiz, i) => (
-          <div key={i}>
-            <Card question={quiz.question} answers={quiz.answers} />
-            {/* {quiz.question}
-            {quiz.answers} */}
-          </div>
-        ))
+        // quiz.map((quiz, i) => (
+        <div >
+          <Card quiz={quiz} renderMode={true} />
+        </div>
+
       ) : (
           <div>
             <p>Whoops! Invalid access. Please select a valid quiz</p>

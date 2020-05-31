@@ -39,14 +39,6 @@ class HomePage extends React.Component {
         });
     }
 
-    // renderQuiz() {
-    //     return (
-    //         <div>
-
-    //         </div >
-    //     )
-    // }
-
     render() {
         return (
             <div className="maker-cover">
