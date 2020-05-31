@@ -291,19 +291,22 @@ label {
   background-color: orange;
 }
 
+.react-confirm-form-title {
+  font-size: 18px !important;
+}
+
+.react-confirm-form {
+  margin-top: 10px;
+}
+
 /* Display cards on View Mode */
 .view.card { 
   width: 50vw; 
   height: 35vh; 
 }
 
-.view.card-answer-group {
-  
-}
-
 .view.card-question-cover { 
   width: 50vw; 
-
 }
 
 .view.card-answer-group h5{

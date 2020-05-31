@@ -4,6 +4,7 @@ import { BrowserRouter as Redirect } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert'; // Submit handler
 import question_img from '../img/question-color.png';
 import risk_img from '../img/risk-color.png';
+import check_img from '../img/check-color.png';
 import '../../node_modules/react-confirm-alert/src/react-confirm-alert.css';
 import './index.css';
 
@@ -15,10 +16,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // TESTING ENVIRONMENT SET UP
-      cards: [{ question: 'what day is it?', answers: [['Tuesday', true], ['Wednesday', false], ['Thursday', false], ['Friday', false]], errorcode: [0, 0, 0] }, { question: 'What is your favorite color?', answers: [['Green', true], ['Blue', false], ['Purple', false], ['Pink', false]], errorcode: [0, 0, 0] }],
-      cardPosition: 1, // 0-based indexing
-      submitted: false
+      cards: [{question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0]}],
+      cardPosition: 0,
+      submitted: false,
+      name: 'Quiz Name'
     };
   }
 
@@ -97,7 +98,7 @@ class App extends React.Component {
               <p>Submit the Quiz?</p>
               <p>Once submitted, you will not be able to make any changes.</p>
               <div className='react-confirm-button-container'>
-                <button onClick={() => {this.submitHandler(); onClose();}}>Submit</button>
+                <button onClick={() => {onClose(); this.submitNameHandler()}}>Submit</button>
                 <button onClick={onClose}>Cancel</button>
               </div>
             </div>
@@ -122,11 +123,48 @@ class App extends React.Component {
     }
   }
 
+  nameHandler = (event) => { this.setState({ name: event.target.value }) }
+  submitNameHandler = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className='react-confirm-alert-custom'>
+            <p className='react-confirm-form-title'>What would you like to name your quiz?</p> 
+              <form className='react-confirm-form'>
+                <label htmlFor='questionInput'>
+                  <input type='text' name='quiz-name' onChange={this.nameHandler}/>
+                  <button onClick={() => {onClose(); this.confirmationHandler()}}>Enter</button>
+                </label>
+              </form>
+          </div>
+        );
+      }
+    });
+  }
+
+  confirmationHandler = () => {
+    confirmAlert({
+      customUI: () => {
+        return (
+          <div className='react-confirm-alert-custom'>
+          <img src={check_img} alt='check mark'/>
+          <p>Hooray!</p>
+          <p>Your quiz has been sucessfully submitted.</p>
+          <div className='react-confirm-button-container'>
+            <button onClick={this.submitHandler()}>Back to home</button>
+          </div>
+        </div>
+        );
+      }
+    });
+  }
+
   // Save the quiz to firebase and exit Maker Space
   submitHandler = () => {
-    let cardsCopy = arrayClone(this.state.cards)
+    let cardsCopy = arrayClone(this.state.cards);
+    cardsCopy.push(this.state.name);
     let cardObj = { cardsCopy };
-    let quizzes = firebase.database().ref('quizzes');
+    let quizzes = firebase.database().ref('quizzes/');
     quizzes.push(cardObj.cardsCopy);    
     this.setState({ submitted: true });
   }
