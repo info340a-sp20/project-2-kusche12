@@ -16,11 +16,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: [{question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0]}],
+      cards: [{question: "This is a test card", answers: [["True", true], ["False", false], ["Idk", false], ["Maybe", false]], errorcode: [0, 0, 0]}],
       cardPosition: 0,
       submitted: false,
       name: 'Quiz Name'
-    };
+    }
   }
 
   // add a blank card below current card
