@@ -71,12 +71,10 @@ class Card extends React.Component {
     let pos = this.state.quizArrayPosition;
     let currentPos = quiz[pos];
     let answerTextRender = [];
-    // let answerShow = this.state.correctAnswer ? "correct-ans" : "wrong-ans";
 
     currentPos.answers.forEach((answer, i) => {
       if (this.state.displayResultMode === true) {
         if (answer.includes(this.state.answer)) {
-          console.log("displayanswer");
           answerTextRender.push(<h5 key={i} className="correct-ans">{answer}</h5>)
         } else {
           answerTextRender.push(<h5 key={i} className="wrong-ans">{answer}</h5>);
@@ -96,7 +94,7 @@ class Card extends React.Component {
         <div className="view card-question-cover">
           <h4>{currentPos.question}</h4>
         </div>
-        <div className="view card-answer-group">
+        <div className="view card-answer-group m-auto">
           {answerTextRender}
         </div>
       </div>
