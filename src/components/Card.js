@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { Alert, Progress } from 'reactstrap';
 
 class Card extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class Card extends React.Component {
       quiz: this.props.quiz || [],
       quizArrayPosition: 0,
       displayResultMode: false,
-      answer: ""
+      answer: "",
+      chosenAnswer: ""
     };
   }
   // back and forward buttons have their own function because there was an error when you would click on the fontawesome
@@ -52,7 +54,33 @@ class Card extends React.Component {
 
   checkAnswer = (e) => {
     this.setAnswer();
-    this.setState({ displayResultMode: true });
+    this.setState({
+      displayResultMode: true,
+      chosenAnswer: e.target.textContent
+    });
+
+  }
+
+  renderResultMessage = () => {
+    if (this.state.displayResultMode) {
+      if (this.state.chosenAnswer === this.state.answer) {
+        return (
+          <div>
+            <Alert color="success">
+              Correct!
+            </Alert>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <Alert color="danger">
+              Maybe next time...
+            </Alert>
+          </div>
+        )
+      }
+    }
   }
 
   setAnswer() {
@@ -64,7 +92,6 @@ class Card extends React.Component {
         });
       }
     })
-
   }
 
   renderQuizBodyViewMode() {
@@ -76,16 +103,19 @@ class Card extends React.Component {
     currentPos.answers.forEach((answer, i) => {
       if (this.state.displayResultMode === true) {
         if (answer.includes(this.state.answer)) {
-          answerTextRender.push(<h5 key={i} className="correct-ans">{answer}</h5>)
+          answerTextRender.push(<h5 key={i} className="correct-ans m-auto">{answer}</h5>)
+        } else if (answer.includes(this.state.chosenAnswer)) {
+          answerTextRender.push(<h5 key={i} className="your-ans m-auto">{answer}</h5>)
         } else {
-          answerTextRender.push(<h5 key={i} className="wrong-ans">{answer}</h5>);
+          answerTextRender.push(<h5 key={i} className="wrong-ans m-auto">{answer}</h5>);
         }
 
+        // if the resultDisplaymode is false
       } else {
         if (answer.includes(true)) {
-          answerTextRender.push(<h5 key={i} onClick={this.checkAnswer}>{answer}</h5>)
+          answerTextRender.push(<h5 key={i} className="m-auto" onClick={this.checkAnswer}>{answer}</h5>)
         } else {
-          answerTextRender.push(<h5 key={i} onClick={this.checkAnswer}>{answer}</h5>);
+          answerTextRender.push(<h5 key={i} className="m-auto" onClick={this.checkAnswer}>{answer}</h5>);
         }
       }
     });
@@ -121,9 +151,10 @@ class Card extends React.Component {
       this.props.renderMode ?
         (
           <div className='card-total-cover'>
+            <Progress value="25">25%</Progress>
             <h3>Question {this.state.quizArrayPosition + 1}</h3>
+            {this.renderResultMessage()}
             <div className="card-buttons-cover">
-              <button value='prev'><FontAwesomeIcon onClick={this.viewModeBackArrow} icon={faChevronLeft} size="3x"></FontAwesomeIcon></button>
               <div className="view card">
                 {this.renderQuizBodyViewMode()}
               </div>
