@@ -309,7 +309,7 @@ label {
 
 .progress { 
   width: 35vw;
-  margin-bottom: 4em;
+  margin-bottom: 2em;
 }
 
 .view.card-question-cover { 
@@ -320,11 +320,22 @@ label {
   padding: 1em;
 }
 
+.view.card-answer-group h5:hover {
+  cursor: pointer;
+}
+
 /* Display Card Answers on View Mode */
 .correct-ans { 
   background : #79E353; 
+  color: white;
   padding: 1em;
   border-radius: 50px; 
+}
+
+.your-ans{
+  background : #e4e4e4; 
+  border-radius: 50px; 
+  padding: 1em;
 }
 
 .wrong-ans { 
@@ -364,6 +375,11 @@ label {
     width: 90vw;
   }
 
+  .view.card-answer-group h5 {
+    padding: 1.5em;
+    margin: 2px;
+    width: 39vw;
+  }
 
   .view.card-submit {
     margin: 0px;
@@ -439,6 +455,12 @@ label {
     width: 60vw;
   }
 
+  .view.card-answer-group h5 {
+    padding: 1.5em;
+    margin: 2px;
+    width: 25vw;
+  }
+
   .view.card-submit {
     margin: 0px;
     margin-top: 5em;
@@ -486,6 +508,12 @@ label {
 
     .view.card-question-cover {
       width: 60vw;
+    }
+
+    .view.card-answer-group h5 {
+      padding: 1.5em;
+      margin: 2px;
+      width: 25vw;
     }
 
     .view.card-submit {

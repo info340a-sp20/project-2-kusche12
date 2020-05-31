@@ -2,8 +2,9 @@ import React from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Alert, Progress, Button } from 'reactstrap';
+import { Alert, Progress } from 'reactstrap';
 import QuizViewModeButton from './QuizViewMode/QuizViewModeButton';
+import QuizViewContent from './QuizViewMode/QuizViewContent';
 
 class Card extends React.Component {
   constructor(props) {
@@ -26,18 +27,6 @@ class Card extends React.Component {
   forwardArrow = (event) => {
     event.target.value = 'next';
     this.props.moveCardHandler(event);
-  }
-
-  viewModeBackArrow = (e) => {
-    let pos = this.state.quizArrayPosition;
-
-    if (pos > 0) {
-      pos--;
-      this.setState({
-        quizArrayPosition: pos,
-        displayResultMode: false
-      })
-    }
   }
 
   viewModeNextArrow = (e) => {
@@ -95,45 +84,6 @@ class Card extends React.Component {
     })
   }
 
-  renderQuizBodyViewMode() {
-    let quiz = this.state.quiz;
-    let pos = this.state.quizArrayPosition;
-    let currentPos = quiz[pos];
-    let answerTextRender = [];
-
-    currentPos.answers.forEach((answer, i) => {
-      if (this.state.displayResultMode === true) {
-        if (answer.includes(this.state.answer)) {
-          answerTextRender.push(<h5 key={i} className="correct-ans m-auto">{answer}</h5>)
-        } else if (answer.includes(this.state.chosenAnswer)) {
-          answerTextRender.push(<h5 key={i} className="your-ans m-auto">{answer}</h5>)
-        } else {
-          answerTextRender.push(<h5 key={i} className="wrong-ans m-auto">{answer}</h5>);
-        }
-
-        // if the resultDisplaymode is false
-      } else {
-        if (answer.includes(true)) {
-          answerTextRender.push(<h5 key={i} className="m-auto" onClick={this.checkAnswer}>{answer}</h5>)
-        } else {
-          answerTextRender.push(<h5 key={i} className="m-auto" onClick={this.checkAnswer}>{answer}</h5>);
-        }
-      }
-    });
-
-    return (
-      <div>
-        <div className="view card-question-cover">
-          <h4 className="card-question">{currentPos.question}</h4>
-        </div>
-        <div className="view card-answer-group m-auto">
-          {answerTextRender}
-        </div>
-      </div>
-    )
-  }
-
-
   render() {
     let answerTextRender = [];
     let updatedAnswers = this.props.answers;
@@ -156,13 +106,18 @@ class Card extends React.Component {
       this.props.renderMode ?
         (
           <div className='card-total-cover'>
+            <div className="text-center">{`${this.state.quizArrayPosition + 1} out of ${this.state.quiz.length}`}</div>
             <Progress max="1" value={currentProgress}></Progress>
             <h3>Question {this.state.quizArrayPosition + 1}</h3>
             {this.renderResultMessage()}
             <div className="card-buttons-cover">
-              <div className="view card">
-                {this.renderQuizBodyViewMode()}
-              </div>
+              <QuizViewContent
+                quizArrayPosition={this.state.quizArrayPosition}
+                quiz={this.state.quiz}
+                answer={this.state.answer}
+                chosenAnswer={this.state.chosenAnswer}
+                checkAnswer={this.checkAnswer}
+                displayResultMode={this.state.displayResultMode} />
             </div>
             <QuizViewModeButton
               quizArrayPosition={this.state.quizArrayPosition}

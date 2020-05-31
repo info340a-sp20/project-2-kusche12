@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Card from '../Card';
-import { Redirect } from 'react-router-dom';
 
-//TODO : error when the quizGroup is empty 
 
 export default class SingleQuizItem extends Component {
   static defaultProps = {
