@@ -23,7 +23,6 @@ export default class QuizList extends Component {
 
   render() {
     const cleanQuiz = this.state.quizData;
-    console.log(cleanQuiz);
 
     if (this.state.redirect) {
       return (

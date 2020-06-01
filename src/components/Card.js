@@ -43,7 +43,6 @@ class Card extends React.Component {
   }
 
   keydownCheck = (e) => {
-    console.log(e.keyCode);
     if (e.keyCode === 32 || e.keyCode === 13) {
       this.checkAnswer(e);
     }
