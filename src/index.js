@@ -23,9 +23,15 @@ class Main extends React.Component {
                         </li>
                     </ul>
                     <Switch>
-                        <Route path='/' component={Home} />
-                        <Route path='/app' component={App} />
-                        <Route path="/singlequizitem/:setNum" component={SingleQuizItem} />
+                        <Route exact path='/'>
+                            <Home />
+                        </Route>
+                        <Route path='/app'>
+                            <App />
+                        </Route>
+                        <Route path="/singlequizitem/:setNum"
+                            component={SingleQuizItem}>
+                        </Route>
                     </Switch>
                 </div>
             </Router>
@@ -46,6 +52,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
 
 ReactDOM.render(<Main />,
     document.getElementById('root')
