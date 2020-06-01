@@ -1,5 +1,6 @@
 import React from 'react';
 import '../index.css';
+import { Container, Row, Col } from 'reactstrap';
 
 export default class QuizViewModeButton extends React.Component {
 
@@ -32,10 +33,10 @@ export default class QuizViewModeButton extends React.Component {
     return (
       <div className="view card">
         <div className="view card-question-cover">
-          <h4 className="card-question">{currentPos.question}</h4>
-        </div>
-        <div className="view card-answer-group m-auto">
-          {answerTextRender}
+          <h4 className="view card-question">{currentPos.question}</h4>
+          <div className="view card-answer-group m-auto">
+            {answerTextRender}
+          </div>
         </div>
       </div>
     )

@@ -373,6 +373,7 @@ label {
 
   .view.card-question-cover {
     width: 90vw;
+    height: 100%;
   }
 
   .view.card-answer-group h5 {
@@ -453,6 +454,7 @@ label {
 
   .view.card-question-cover {
     width: 60vw;
+    height: 100%;
   }
 
   .view.card-answer-group h5 {
@@ -509,6 +511,7 @@ label {
 
     .view.card-question-cover {
       width: 60vw;
+      height: 100%;
     }
 
     .view.card-answer-group h5 {
