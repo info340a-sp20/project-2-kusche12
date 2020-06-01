@@ -18,7 +18,6 @@ class Card extends React.Component {
     };
   }
   // back and forward buttons have their own function because there was an error when you would click on the fontawesome
-  // if you can think of a better solution, please implement it haha
   backArrow = (event) => {
     event.target.value = 'prev';
     this.props.moveCardHandler(event);
