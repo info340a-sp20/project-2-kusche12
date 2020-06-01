@@ -14,11 +14,11 @@ export default class QuizViewModeButton extends React.Component {
       // for displaying the results 
       if (this.props.displayResultMode === true) {
         if (answer.includes(this.props.answer)) {
-          answerTextRender.push(<p key={i} className="correct-ans m-auto" role="button" >{answer}</p>)
+          answerTextRender.push(<p key={i} className="correct-ans m-2" role="button" >{answer}</p>)
         } else if (answer.includes(this.props.chosenAnswer)) {
-          answerTextRender.push(<p key={i} className="your-ans m-auto" role="button" >{answer}</p>)
+          answerTextRender.push(<p key={i} className="your-ans m-2" role="button" >{answer}</p>)
         } else {
-          answerTextRender.push(<p key={i} className="wrong-ans m-auto" role="button" >{answer}</p>);
+          answerTextRender.push(<p key={i} className="wrong-ans m-2" role="button" >{answer}</p>);
         }
 
         // if the resultDisplaymode is false
@@ -48,7 +48,7 @@ export default class QuizViewModeButton extends React.Component {
             <h2 className="view card-question">{currentPos.question}</h2>
           </Col>
         </Row>
-        <div className="view card-answer-group m-auto">
+        <div className="view card-answer-group mx-auto my-2">
           {answerTextRender}
         </div>
       </div>
