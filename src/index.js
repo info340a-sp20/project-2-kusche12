@@ -47,6 +47,14 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+var React1 = require('react');
+var ReactDOM1 = require('react-dom');
+
+if (process.env.NODE_ENV !== 'production') {
+    var axe = require('react-axe');
+    axe(React1, ReactDOM1, 1000);
+}
+
 ReactDOM.render(<Main />,
     document.getElementById('root')
 );

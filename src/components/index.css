@@ -45,6 +45,14 @@ ul, li {
   color: rgb(211, 137, 0);
 }
 
+.sub-title {
+  display: inline-block;
+  color: #181818;
+  font-weight: 500;
+  font-size: 1.5rem;
+  transition: 0.3s;
+}
+
 h1, h2, h3, h4 {
   font-weight: 500;
 }
@@ -131,7 +139,7 @@ label {
   flex-direction: column;
   align-items: center;
 }
-.card-total-cover h3 {
+.card-total-cover h1 {
   color: orange;
   font-size: 30px;
   margin-top: 30px;
@@ -219,9 +227,9 @@ label {
 }
 
 /* card answers */
-.card-answer-group h5 {
+.card-answer-group p {
   font-size: 18px;
-  margin-bottom: 15px;
+  margin: 15px;
   width: 125px;
 }
 
@@ -324,11 +332,17 @@ label {
   width: 60vw; 
 }
 
-.view.card-answer-group h5{
-  padding: 1em;
+.view.card-question { 
+  font-size: 20px;
+  padding: 20px;
+  margin: 0;
 }
 
-.view.card-answer-group h5:hover {
+.view.card-answer-group p{
+  margin: 1em;
+}
+
+.view.card-answer-group p:hover {
   cursor: pointer;
 }
 
@@ -376,14 +390,21 @@ label {
   /* ViewQuiz Card */
   .view.card {
       width: 90vw;
-      height: 35vh;
+      height: auto;
   }
 
   .view.card-question-cover {
     width: 90vw;
+    height: 100%;
   }
 
-  .view.card-answer-group h5 {
+  .view.card-question { 
+    font-size: 20px;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .view.card-answer-group p {
     padding: 1.5em;
     margin: 2px;
     width: 39vw;
@@ -456,14 +477,21 @@ label {
   /* View Quiz Mode */
   .view.card {
     width: 60vw;
-    height: 35vh;
+    height: auto;
   }
 
   .view.card-question-cover {
     width: 60vw;
+    height: 100%;
   }
 
-  .view.card-answer-group h5 {
+  .view.card-question { 
+    font-size: 20px;
+    padding: 20px 20px 20px 20px;
+    margin: 0;
+  }
+
+  .view.card-answer-group p {
     padding: 1.5em;
     margin: 2px;
     width: 25vw;
@@ -496,6 +524,7 @@ label {
 
   .card-answer-group h5 {
     width: 180px;
+    margin: 10px;
   }
 }
 
@@ -511,14 +540,21 @@ label {
     /* View Quiz Mode */
     .view.card {
       width: 60vw;
-      height: 35vh;
+      height: 30%;
     }
 
     .view.card-question-cover {
       width: 60vw;
+      height: 100%;
     }
 
-    .view.card-answer-group h5 {
+    .view.card-question { 
+      font-size: 20px;
+      padding: 20px 20px 20px 20px;
+      margin: 0;
+    }
+
+    .view.card-answer-group p {
       padding: 1.5em;
       margin: 2px;
       width: 25vw;

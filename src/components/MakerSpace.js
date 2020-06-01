@@ -7,7 +7,7 @@ import AnswerChoiceCorrect from './AnswerChoiceCorrect';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-class MakerSpace extends React.Component { 
+class MakerSpace extends React.Component {
   constructor(props) {
     super(props);
     let originalQuestion = this.props.question;
@@ -19,12 +19,12 @@ class MakerSpace extends React.Component {
       answers: originalAnswers,
       errorcode: originalErrors
     }
-  } 
+  }
 
   // Handle Question and Answer choice input text
   handleInput = (event) => {
     if (event.target.name === 'question') {
-      this.setState({question: event.target.value});
+      this.setState({ question: event.target.value });
     } else {
       let answersCopy = arrayClone(this.state.answers);
       let pos = parseInt(event.target.name.substring(3, 4));
@@ -38,7 +38,7 @@ class MakerSpace extends React.Component {
     let answersCopy = arrayClone(this.state.answers);
     let pos = parseInt(event.target.name.substring(3, 4));
     answersCopy[pos][1] = !answersCopy[pos][1];
-    this.setState({answers: answersCopy});
+    this.setState({ answers: answersCopy });
   }
 
   // Check and update the card's error status each time the user changes cards
@@ -91,7 +91,7 @@ class MakerSpace extends React.Component {
     if (correctCount < 1) {
       errorsCopy[2] = 1;
     }
-    this.setState({errorcode: errorsCopy});
+    this.setState({ errorcode: errorsCopy });
     return errorsCopy;
   }
 
@@ -101,27 +101,27 @@ class MakerSpace extends React.Component {
       if (this.state.answers[i][1]) { // if it is a correct answer, return a checked checkbox
         answerChoices.push(<AnswerChoiceCorrect answer={this.state.answers[i]} handleInput={this.handleInput} handleCorrect={this.handleCorrect} key={i} index={i} />)
       } else { // if it is incorrect, return an unchecked box
-        answerChoices.push(<AnswerChoice answer={this.state.answers[i]} handleInput={this.handleInput} handleCorrect={this.handleCorrect} key={i} index={i}  />);
+        answerChoices.push(<AnswerChoice answer={this.state.answers[i]} handleInput={this.handleInput} handleCorrect={this.handleCorrect} key={i} index={i} />);
       }
     }
-    
+
 
     return (
       <div className="maker-space-cover container-fluid">
         <div className="row">
           <form className="maker col-xs-6 col-sm-3 col-lg-3">
-              <label htmlFor='questionInput'>
-                Question
-                  <input className='text-input question-input' name='question' type='text' value={this.state.question}onChange={this.handleInput} />
-              </label>
-              {answerChoices}
-              <button value='add' onClick={this.addCardHandler}>Add Question&emsp;<FontAwesomeIcon className='font-plus' icon={faPlusCircle} /></button>
-              <button value='delete' onClick={this.props.deleteCard}>Delete Question</button>
-              <ErrorAlert errorcode={this.state.errorcode || [0, 0, 0]} /> 
+            <label htmlFor='questionInput'>
+              Question
+                  <input className='text-input question-input' name='question' type='text' value={this.state.question} onChange={this.handleInput} />
+            </label>
+            {answerChoices}
+            <button value='add' onClick={this.addCardHandler}>Add Question&emsp;<FontAwesomeIcon className='font-plus' icon={faPlusCircle} /></button>
+            <button value='delete' onClick={this.props.deleteCard}>Delete Question</button>
+            <ErrorAlert errorcode={this.state.errorcode || [0, 0, 0]} />
 
           </form>
           <div className="card-error-cover col-xs-6 col-sm-9 col-lg-9">
-            <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber} moveCardHandler={this.moveCardHandler} submitQuizHandler={this.submitQuizHandler}/>
+            <Card question={this.state.question} answers={this.state.answers} questionNumber={this.props.questionNumber} moveCardHandler={this.moveCardHandler} submitQuizHandler={this.submitQuizHandler} />
           </div>
         </div>
       </div>

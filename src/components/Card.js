@@ -28,16 +28,23 @@ class Card extends React.Component {
     this.props.moveCardHandler(event);
   }
 
-  viewModeNextArrow = (e) => {
+  viewModeNextArrow = () => {
     let pos = this.state.quizArrayPosition;
     let quizArray = this.state.quiz;
 
-    if (pos < quizArray.length - 1) {
+    if (pos < quizArray.length - 2) {
       pos++;
       this.setState({
         quizArrayPosition: pos,
         displayResultMode: false
       })
+    }
+  }
+
+  keydownCheck = (e) => {
+    console.log(e.keyCode);
+    if (e.keyCode === 32 || e.keyCode === 13) {
+      this.checkAnswer(e);
     }
   }
 
@@ -47,7 +54,6 @@ class Card extends React.Component {
       displayResultMode: true,
       chosenAnswer: e.target.textContent
     });
-
   }
 
   renderResultMessage = () => {
@@ -55,7 +61,7 @@ class Card extends React.Component {
       if (this.state.chosenAnswer === this.state.answer) {
         return (
           <div>
-            <Alert color="success">
+            <Alert role="result" color="success">
               Correct!
             </Alert>
           </div>
@@ -63,7 +69,7 @@ class Card extends React.Component {
       } else {
         return (
           <div>
-            <Alert color="danger">
+            <Alert role="result" color="danger">
               Maybe next time...
             </Alert>
           </div>
@@ -97,17 +103,16 @@ class Card extends React.Component {
         }
       })
     } else {
-      currentProgress = ((this.state.quizArrayPosition + 1) / this.state.quiz.length);
-      console.log(currentProgress);
+      currentProgress = ((this.state.quizArrayPosition + 1) / (this.state.quiz.length - 1));
     }
 
     return (
       this.props.renderMode ?
         (
           <div className='card-total-cover'>
-            <div className="text-center">{`${this.state.quizArrayPosition + 1} out of ${this.state.quiz.length}`}</div>
-            <Progress max="1" value={currentProgress}></Progress>
-            <h3>Question {this.state.quizArrayPosition + 1}</h3>
+            <div className="text-center">{`Number ${this.state.quizArrayPosition + 1} out of ${this.state.quiz.length - 1}`}</div>
+            <Progress role="progress" max="1" aria-valuenow={currentProgress} value={currentProgress}></Progress>
+            <h1>Question {this.state.quizArrayPosition + 1}</h1>
             {this.renderResultMessage()}
             <div className="card-buttons-cover">
               <QuizViewContent
@@ -116,7 +121,8 @@ class Card extends React.Component {
                 answer={this.state.answer}
                 chosenAnswer={this.state.chosenAnswer}
                 checkAnswer={this.checkAnswer}
-                displayResultMode={this.state.displayResultMode} />
+                displayResultMode={this.state.displayResultMode}
+                keydownCheck={this.keydownCheck} />
             </div>
             <QuizViewModeButton
               quizArrayPosition={this.state.quizArrayPosition}
