@@ -32,11 +32,11 @@ export default class QuizViewModeButton extends React.Component {
 
     return (
       <div className="view card">
-        <div className="view card-question-cover">
-          <h4 className="view card-question">{currentPos.question}</h4>
-          <div className="view card-answer-group m-auto">
-            {answerTextRender}
-          </div>
+        <Row className="view card-question-cover">
+          <Col><h4 className="view card-question">{currentPos.question}</h4></Col>
+        </Row>
+        <div className="view card-answer-group m-auto">
+          {answerTextRender}
         </div>
       </div>
     )
