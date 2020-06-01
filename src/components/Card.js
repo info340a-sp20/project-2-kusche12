@@ -33,7 +33,7 @@ class Card extends React.Component {
     let pos = this.state.quizArrayPosition;
     let quizArray = this.state.quiz;
 
-    if (pos < quizArray.length - 1) {
+    if (pos < quizArray.length - 2) {
       pos++;
       this.setState({
         quizArrayPosition: pos,
@@ -48,7 +48,6 @@ class Card extends React.Component {
       displayResultMode: true,
       chosenAnswer: e.target.textContent
     });
-
   }
 
   renderResultMessage = () => {
@@ -106,7 +105,7 @@ class Card extends React.Component {
       this.props.renderMode ?
         (
           <div className='card-total-cover'>
-            <div className="text-center">{`${this.state.quizArrayPosition + 1} out of ${this.state.quiz.length}`}</div>
+            <div className="text-center">{`${this.state.quizArrayPosition + 1} out of ${this.state.quiz.length - 1}`}</div>
             <Progress max="1" value={currentProgress}></Progress>
             <h3>Question {this.state.quizArrayPosition + 1}</h3>
             {this.renderResultMessage()}
