@@ -241,6 +241,7 @@ label {
   "ans3 ans4";
   text-align: center;
   margin: auto;
+  align-items: center;
 }
 
 .card-answer-correct {
