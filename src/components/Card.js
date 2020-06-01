@@ -98,8 +98,8 @@ class Card extends React.Component {
         }
       })
     } else {
-      currentProgress = ((this.state.quizArrayPosition + 1) / this.state.quiz.length);
-      console.log(currentProgress);
+      currentProgress = ((this.state.quizArrayPosition + 1) / (this.state.quiz.length - 1));
+      console.log(this.state.quiz);
     }
 
     return (
