@@ -40,8 +40,8 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div className="maker-cover">
-                <h3>Welcome to QuizMe</h3>
+            <div className="wrapper">
+                <p className="sub-title">Welcome to QuizMe</p>
 
                 {this.state.loading ?
                     <div>

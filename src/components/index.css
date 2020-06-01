@@ -45,6 +45,14 @@ ul, li {
   color: rgb(211, 137, 0);
 }
 
+.sub-title {
+  display: inline-block;
+  color: #181818;
+  font-weight: 500;
+  font-size: 1.5rem;
+  transition: 0.3s;
+}
+
 h1, h2, h3, h4 {
   font-weight: 500;
 }
@@ -131,7 +139,7 @@ label {
   flex-direction: column;
   align-items: center;
 }
-.card-total-cover h3 {
+.card-total-cover h1 {
   color: orange;
   font-size: 30px;
   margin-top: 30px;
@@ -219,7 +227,7 @@ label {
 }
 
 /* card answers */
-.card-answer-group h5 {
+.card-answer-group p {
   font-size: 18px;
   margin: 15px;
   width: 125px;
@@ -316,11 +324,11 @@ label {
   width: 60vw; 
 }
 
-.view.card-answer-group h5{
+.view.card-answer-group p{
   padding: 1em;
 }
 
-.view.card-answer-group h5:hover {
+.view.card-answer-group p:hover {
   cursor: pointer;
 }
 
@@ -376,7 +384,7 @@ label {
     height: 100%;
   }
 
-  .view.card-answer-group h5 {
+  .view.card-answer-group p {
     padding: 1.5em;
     margin: 2px;
     width: 39vw;
@@ -457,7 +465,7 @@ label {
     height: 100%;
   }
 
-  .view.card-answer-group h5 {
+  .view.card-answer-group p {
     padding: 1.5em;
     margin: 2px;
     width: 25vw;
@@ -514,7 +522,7 @@ label {
       height: 100%;
     }
 
-    .view.card-answer-group h5 {
+    .view.card-answer-group p {
       padding: 1.5em;
       margin: 2px;
       width: 25vw;
