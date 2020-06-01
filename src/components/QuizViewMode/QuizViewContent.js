@@ -1,5 +1,6 @@
 import React from 'react';
 import '../index.css';
+import { Row, Col } from 'reactstrap';
 
 export default class QuizViewModeButton extends React.Component {
 
@@ -10,31 +11,44 @@ export default class QuizViewModeButton extends React.Component {
     let answerTextRender = [];
 
     currentPos.answers.forEach((answer, i) => {
+      // for displaying the results 
       if (this.props.displayResultMode === true) {
         if (answer.includes(this.props.answer)) {
-          answerTextRender.push(<h5 key={i} className="correct-ans m-auto">{answer}</h5>)
+          answerTextRender.push(<p key={i} className="correct-ans m-2" role="button" >{answer}</p>)
         } else if (answer.includes(this.props.chosenAnswer)) {
-          answerTextRender.push(<h5 key={i} className="your-ans m-auto">{answer}</h5>)
+          answerTextRender.push(<p key={i} className="your-ans m-2" role="button" >{answer}</p>)
         } else {
-          answerTextRender.push(<h5 key={i} className="wrong-ans m-auto">{answer}</h5>);
+          answerTextRender.push(<p key={i} className="wrong-ans m-2" role="button" >{answer}</p>);
         }
 
         // if the resultDisplaymode is false
       } else {
         if (answer.includes(true)) {
-          answerTextRender.push(<h5 key={i} className="m-auto" onClick={this.props.checkAnswer}>{answer}</h5>)
+          answerTextRender.push(
+            <p tabIndex="0" key={i}
+              className="m-auto" role="button"
+              onClick={this.props.checkAnswer}
+              onKeyDown={this.props.keydownCheck}>{answer}</p>
+          )
         } else {
-          answerTextRender.push(<h5 key={i} className="m-auto" onClick={this.props.checkAnswer}>{answer}</h5>);
+          answerTextRender.push(
+            <p tabIndex="0" key={i}
+              className="m-auto" role="button"
+              onClick={this.props.checkAnswer}
+              onKeyDown={this.props.keydownCheck}>{answer}</p>
+          );
         }
       }
     });
 
     return (
       <div className="view card">
-        <div className="view card-question-cover">
-          <h4 className="card-question">{currentPos.question}</h4>
-        </div>
-        <div className="view card-answer-group m-auto">
+        <Row className="view card-question-cover">
+          <Col className="my-auto">
+            <h2 className="view card-question">{currentPos.question}</h2>
+          </Col>
+        </Row>
+        <div className="view card-answer-group mx-auto my-2">
           {answerTextRender}
         </div>
       </div>

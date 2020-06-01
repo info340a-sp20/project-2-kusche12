@@ -29,17 +29,17 @@ class App extends React.Component {
     let oldCards = this.saveToCard(newQuestion, newAnswers, newErrors);
     let newCards;
     if (this.state.cardPosition === this.state.cards.length - 1) { // last card in deck
-      oldCards.push({question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0]});
+      oldCards.push({ question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0] });
       newCards = oldCards;
     } else { // any other card position
       newCards = oldCards.slice(0, this.state.cardPosition + 1);
-      newCards.push({question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0]});
+      newCards.push({ question: "", answers: [["", false], ["", false], ["", false], ["", false]], errorcode: [0, 0, 0] });
       newCards.push(...oldCards.slice(this.state.cardPosition + 1, oldCards.length));
     }
     this.setState({
       cards: newCards,
       cardPosition: this.state.cardPosition + 1
-    }); 
+    });
   }
 
   // delete the currently selected card
@@ -64,7 +64,7 @@ class App extends React.Component {
   moveCard = (event, newQuestion, newAnswers, newErrors) => {
     event.preventDefault();
     this.saveToCard(newQuestion, newAnswers, newErrors);
-    
+
     if (event.target.value === 'next' && this.state.cardPosition < this.state.cards.length - 1) { // move forward if possible
       this.setState({ cardPosition: this.state.cardPosition + 1 });
     } else if (event.target.value === 'prev' && this.state.cardPosition > 0) { // move backward if possible
@@ -95,7 +95,7 @@ class App extends React.Component {
           return (
             // warning alert
             <div className='react-confirm-alert-custom'>
-              <img src={question_img} alt='question mark'/>
+              <img src={question_img} alt='question mark' />
               <p>Submit the Quiz?</p>
               <p>Once submitted, you will not be able to make any changes.</p>
               <div className='react-confirm-button-container'>
@@ -112,7 +112,7 @@ class App extends React.Component {
           return (
             // error alert
             <div className='react-confirm-alert-custom'>
-              <img src={risk_img} alt='error sign'/>
+              <img src={risk_img} alt='error sign' />
               <p>Uh oh!</p>
               <p>Make sure to correct any errors in each of your questions before submitting.</p>
               <div className='react-confirm-button-container'>

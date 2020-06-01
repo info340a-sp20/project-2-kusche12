@@ -23,6 +23,7 @@ export default class QuizList extends Component {
 
   render() {
     const cleanQuiz = this.state.quizData;
+    console.log(cleanQuiz);
 
     if (this.state.redirect) {
       return (
@@ -36,9 +37,19 @@ export default class QuizList extends Component {
     let mappedQuiz =
       cleanQuiz.map((quiz, i) => (
         <Card key={i} className="cardlist mb-4">
-          <CardBody>
-            <CardTitle>{`Set ${i + 1}`}</CardTitle>
-            <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Go to the Quiz!</Button>
+          <CardBody >
+            <div className="my-auto">
+              {typeof (quiz[quiz.length - 1] === "string") ?
+                <CardTitle>{`${quiz[quiz.length - 1]}`}</CardTitle>
+                :
+                // if not stringValue, default value
+                <div>
+                  <CardTitle>{`Set ${[i + 1]}`}</CardTitle>
+                  <p>{quiz[quiz.length - 1]}</p>
+                </div>
+              }
+              <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Go to the Quiz!</Button>
+            </div>
           </CardBody>
         </Card>
       ))
