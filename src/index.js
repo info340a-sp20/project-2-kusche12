@@ -14,13 +14,13 @@ import user from './img/user.png';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: null,
-			errorMessage: '',
-			loading: true,
-			dropdown: false
-    };
-	}
+   	this.state = {
+    	user: null,
+		errorMessage: '',
+		loading: true,
+		dropdown: false,
+	};
+  }
 
   //A callback function for registering new users
   handleSignUp = (email, password) => {
@@ -83,10 +83,10 @@ class Main extends React.Component {
 		let content = null;
 		if (this.state.loading) {
 			content = (
-        <div className="text-center">
-          <i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."></i>
-        </div>
-      );
+				<div className="text-center">
+					<i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."></i>
+				</div>
+      		);
 		} else if (this.state.user) {
 			content = (
 				<Router>
@@ -95,7 +95,6 @@ class Main extends React.Component {
 								<img role="button" src={user} onClick={this.renderDropdown}/>
 								{this.state.dropdown &&
 									<div className="nav-dropdown">
-									<div className="arrow-up"></div>
 										<p>User: {this.state.user.email}</p>
 										<button onClick={this.handleSignOut}>Sign out</button>
 									</div>
@@ -117,15 +116,17 @@ class Main extends React.Component {
 			);
 		} else { // no user signed in
 			content = ( 
-					<SignUpForm 
-						signUpCallback={this.handleSignUp} 
-            signInCallback={this.handleSignIn} 	
-					/> 
+					<div>
+						<SignUpForm 
+							signUpCallback={this.handleSignUp} 
+							signInCallback={this.handleSignIn} 	
+						/> 
+					</div>
 			);
 		}
 		return (
 			<div className="wrapper">
-				<h1 className='title'>QuizMe</h1>
+				<h1 className="title">QuizMe</h1>
 				{content}
 			</div>
 		);
