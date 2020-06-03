@@ -41,7 +41,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <div className="wrapper">
-                <p className="sub-title">Welcome to QuizMe</p>
+                <p className="sub-title">Your quizzes: </p>
 
                 {this.state.loading ?
                     <div>
