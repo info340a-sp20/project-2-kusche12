@@ -91,18 +91,13 @@ class Main extends React.Component {
 			content = (
 				<Router>
 						<ul>
-							<li> {/* THESE LINKS ARE TEMPORARY. WE WILL BE MOVING MAKEQUIZ INTO ITS OWN CARD */}
-								<Link className='link' to='/'>Home Page</Link>
-							</li>
-							<li>
-								<Link className='link' to='/app'>Make Quiz</Link>
-							</li>
 							<li className="nav-profile">
 								<img role="button" src={user} onClick={this.renderDropdown}/>
-								<p>{this.state.user.email}</p>
 								{this.state.dropdown &&
 									<div className="nav-dropdown">
-										<p>Sign out</p>
+									<div className="arrow-up"></div>
+										<p>User: {this.state.user.email}</p>
+										<button onClick={this.handleSignOut}>Sign out</button>
 									</div>
 								}
 							</li>
