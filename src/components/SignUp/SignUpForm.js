@@ -34,6 +34,11 @@ class SignUpForm extends React.Component {
     this.props.signInCallback(this.state.email, this.state.password);
   }
 
+  handleAnonSignIn = (event) => {
+	  event.preventDefault();
+	  this.props.anonSignInCallback();
+  }
+
   render() {
     return (
 			<div className="signup-wrapper">
@@ -74,7 +79,7 @@ class SignUpForm extends React.Component {
 										<button className="button" onClick={this.handleSignUp}>Sign up</button>
 										<button className="button" onClick={this.handleSignIn}>Sign in</button>
 									</div>
-									<button className="button-guest" onClick={this.handleGuest}>Continue as guest</button>
+									<button className="button-guest" onClick={this.handleAnonSignIn}>Continue as guest</button>
 								</div>
 							</form>
 						</div>

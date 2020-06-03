@@ -47,7 +47,7 @@ export default class QuizList extends Component {
                   <p>{quiz[quiz.length - 1]}</p>
                 </div>
               }
-              <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Go to the Quiz!</Button>
+              <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Start Game</Button>
             </div>
           </CardBody>
         </Card>

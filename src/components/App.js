@@ -167,7 +167,7 @@ class App extends React.Component {
     let cardsCopy = arrayClone(this.state.cards);
     cardsCopy.push(this.state.name);
     let cardObj = { cardsCopy };
-    let quizzes = firebase.database().ref('quizzes/');
+    let quizzes = firebase.database().ref('quizzes/' + this.props.userID);
     quizzes.push(cardObj.cardsCopy);
     this.setState({ submitted: true });
   }

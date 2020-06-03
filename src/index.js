@@ -37,7 +37,6 @@ class Main extends React.Component {
         alert(errorMessage);
       }
       this.setState({ errorMessage: errorMessage });
-      console.log(error);
     });
   }
 
@@ -50,9 +49,21 @@ class Main extends React.Component {
     });
   }
 
+  handleAnonSignIn = () => {
+	  this.setState({ errorMessage:null });
+	  firebase.auth().signInAnonymously()
+	  .catch(function(error) {
+		this.setState({ errorMessage:error.message });
+	  });
+  }
+
   //A callback function for logging out the current user
   handleSignOut = () => {
-    this.setState({errorMessage:null, user:null, dropdown: false }); //clear any old errors
+	this.setState({
+		errorMessage:null, 
+		user:null, 
+		dropdown: false 
+	}); //clear any old errors
     firebase.auth().signOut()
     .catch((error) => {
       this.setState({ errorMessage: error.message });
@@ -64,10 +75,11 @@ class Main extends React.Component {
 	componentDidMount() {
 		this.authUnRegFunc = firebase.auth().onAuthStateChanged((user) => {
 			if (user) {
-				this.setState({ user: user, loading: false });
+				this.setState({ user: user });
 			} else {
 				this.setState({ user: null });
 			}
+			this.setState({ loading: false });
 		});
 	}
 		
@@ -81,6 +93,7 @@ class Main extends React.Component {
 	
   render() {
 		let content = null;
+		let userID = null;
 		if (this.state.loading) {
 			content = (
 				<div className="text-center">
@@ -89,15 +102,21 @@ class Main extends React.Component {
 			  );
 			  
 		} else if (this.state.user) {
+			if (this.state.user.isAnonymous) {
+				userID = 'guestID';
+			} else {
+				userID = this.state.user.uid;
+			}
 			content = (
-						<Router>
+					<Router>
 						<h1><Link className="title title-link" to="/">QuizMe</Link></h1>
 						<ul>
+							<li><Link to="/app">Maker Space</Link></li> {/* TODO: MOVE THIS INTO ITS OWN CARD */}
 							<li className="nav-profile">
-								<img role="button" src={user} onClick={this.renderDropdown}/>
+								<img alt='user profile' role="button" src={user} onClick={this.renderDropdown}/>
 								{this.state.dropdown &&
 									<div className="nav-dropdown">
-										<p>User: {this.state.user.email}</p>
+										<p>User: {this.state.user.isAnonymous ? 'Guest' : this.state.user.email }</p>
 										<button onClick={this.handleSignOut}>Sign out</button>
 									</div>
 								}
@@ -105,16 +124,16 @@ class Main extends React.Component {
 						</ul>
 						<Switch>
 							<Route exact path='/'>
-								<Home />
+								<Home userID = {userID} isGuest = {this.state.user.isAnonymous} />
 							</Route>
 							<Route path='/app'>
-								<App />
+								<App userID = {userID} />
 							</Route>
 							<Route path="/singlequizitem/:setNum"
 								component={SingleQuizItem}>
 							</Route>
 						</Switch>
-						</Router>
+					</Router>
 			);
 		} else { // no user signed in
 			content = ( 
@@ -123,12 +142,14 @@ class Main extends React.Component {
 						<SignUpForm 
 							signUpCallback={this.handleSignUp} 
 							signInCallback={this.handleSignIn} 	
+							anonSignInCallback={this.handleAnonSignIn}
 						/> 
 					</div>
 			);
 		}
 		return (
 			<div className="wrapper">
+				<p>{this.state.errorMessage}</p>
 				{content}
 			</div>
 		);
@@ -151,11 +172,11 @@ firebase.initializeApp(firebaseConfig);
 
 var React1 = require('react');
 var ReactDOM1 = require('react-dom');
-
+/*
 if (process.env.NODE_ENV !== 'production') {
     var axe = require('react-axe');
     axe(React1, ReactDOM1, 1000);
-}
+} */
 
 ReactDOM.render(<Main />,
     document.getElementById('root')
