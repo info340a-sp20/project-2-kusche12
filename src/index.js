@@ -95,7 +95,6 @@ class Main extends React.Component {
 								<img role="button" src={user} onClick={this.renderDropdown}/>
 								{this.state.dropdown &&
 									<div className="nav-dropdown">
-									<div className="arrow-up"></div>
 										<p>User: {this.state.user.email}</p>
 										<button onClick={this.handleSignOut}>Sign out</button>
 									</div>
