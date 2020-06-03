@@ -52,7 +52,7 @@ class Main extends React.Component {
 
   //A callback function for logging out the current user
   handleSignOut = () => {
-    this.setState({errorMessage:null}); //clear any old errors
+    this.setState({errorMessage:null, user:null, dropdown: false }); //clear any old errors
     firebase.auth().signOut()
     .catch((error) => {
       this.setState({ errorMessage: error.message });
@@ -86,10 +86,12 @@ class Main extends React.Component {
 				<div className="text-center">
 					<i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."></i>
 				</div>
-      		);
+			  );
+			  
 		} else if (this.state.user) {
 			content = (
-				<Router>
+						<Router>
+						<h1><Link className="title title-link" to="/">QuizMe</Link></h1>
 						<ul>
 							<li className="nav-profile">
 								<img role="button" src={user} onClick={this.renderDropdown}/>
@@ -112,11 +114,12 @@ class Main extends React.Component {
 								component={SingleQuizItem}>
 							</Route>
 						</Switch>
-				</Router>
+						</Router>
 			);
 		} else { // no user signed in
 			content = ( 
 					<div>
+						<h1 className="title">QuizMe</h1>
 						<SignUpForm 
 							signUpCallback={this.handleSignUp} 
 							signInCallback={this.handleSignIn} 	
@@ -126,7 +129,6 @@ class Main extends React.Component {
 		}
 		return (
 			<div className="wrapper">
-				<h1 className="title">QuizMe</h1>
 				{content}
 			</div>
 		);

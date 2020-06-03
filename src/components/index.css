@@ -4,7 +4,7 @@ lightgray: #f0efeb
 
 */
 .wrapper{ 
-  margin: 0vw 2vw 1vw 2vw;
+  margin: 2vw 2vw 1vw 2vw;
 }
 
 body {
@@ -19,7 +19,7 @@ body {
 /* React Router Navbar */
 ul {
   float: right;
-  margin: 10px 20px;
+  margin: -50px 20px;
 }
 
 ul img {
@@ -37,7 +37,7 @@ ul img {
   color: gray;
   background-color: white;
   position: absolute;
-  top: 60px;
+  top: 80px;
   right: 25px;
   padding: 8px 12px;
   border: 1px solid #e0e0e0;
@@ -82,8 +82,9 @@ ul img {
   transition: 0.3s;
 }
 
-.title:hover {
+.title-link:hover {
   color: rgb(211, 137, 0);
+  text-decoration: none;
 }
 
 .sub-title {
