@@ -9,13 +9,16 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import SingleQuizItem from './components/HomePage/SingleQuizItem';
 import SignUpForm from './components/SignUp/SignUpForm';
+import user from './img/user.png';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: null,
-      errorMessage: '',
+			errorMessage: '',
+			loading: true,
+			dropdown: false
     };
 	}
 
@@ -56,7 +59,7 @@ class Main extends React.Component {
     });
 	}
 	
-	/*
+	
 	// if the user is already signed in, set the user state
 	componentDidMount() {
 		this.authUnRegFunc = firebase.auth().onAuthStateChanged((user) => {
@@ -71,19 +74,37 @@ class Main extends React.Component {
 	componentWillUnmount() {
 		this.authUnRegFunc();
 	}
-	*/
+
+	renderDropdown = (event) => {
+		this.setState({ dropdown: !this.state.dropdown });
+	}
+	
   render() {
 		let content = null;
-		if (true === false) { // change from 'true' to 'this.state.user' after everything else works
+		if (this.state.loading) {
+			content = (
+        <div className="text-center">
+          <i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."></i>
+        </div>
+      );
+		} else if (this.state.user) {
 			content = (
 				<Router>
-						<h1 className='title'><Link to='/' className="title" style={{ color: 'inherit', textDecoration: 'inherit' }} >QuizMe</Link></h1>
 						<ul>
 							<li> {/* THESE LINKS ARE TEMPORARY. WE WILL BE MOVING MAKEQUIZ INTO ITS OWN CARD */}
 								<Link className='link' to='/'>Home Page</Link>
 							</li>
 							<li>
 								<Link className='link' to='/app'>Make Quiz</Link>
+							</li>
+							<li className="nav-profile">
+								<img role="button" src={user} onClick={this.renderDropdown}/>
+								<p>{this.state.user.email}</p>
+								{this.state.dropdown &&
+									<div className="nav-dropdown">
+										<p>Sign out</p>
+									</div>
+								}
 							</li>
 						</ul>
 						<Switch>
