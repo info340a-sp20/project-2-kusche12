@@ -59,7 +59,7 @@ class HomePage extends React.Component {
         } else {
             content = (
                 <div className="wrapper">
-                    <p className="sub-title">{this.props.isGuest ? 'All Guest-Made Quizzes:' : 'Your quizzes:'} </p>                
+                    <p className="sub-title">{this.props.isGuest ? 'All Guest Quizzes:' : 'Your quizzes:'} </p>                
                     <QuizList
                         savedQuiz={this.state.savedQuiz}
                         loading={this.state.loading}
