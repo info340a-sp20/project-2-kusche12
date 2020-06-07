@@ -105,6 +105,54 @@ h1, h2, h3, h4 {
   background-color: white;
 }
 
+/* Loader */
+.loader{
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 80vh;
+  top: 50%;
+
+}
+.loader-text {
+  margin-top: 2rem;
+  font-weight: 500;
+}
+
+.loader-text #loader-text1 {
+  display: inline;
+  animation-name:loadingTextAnim;
+  animation-delay: .2s;
+	animation-duration:1s;
+  animation-iteration-count:infinite;
+}
+.loader-text #loader-text2 {
+  display: inline;
+  animation-name:loadingTextAnim;
+  animation-delay: .4s;
+	animation-duration:1s;
+  animation-iteration-count:infinite;
+}
+.loader-text #loader-text3 {
+  display: inline;
+  animation-name:loadingTextAnim;
+  animation-delay: .6s;
+	animation-duration:1s;
+  animation-iteration-count:infinite;
+}
+
+@keyframes loadingTextAnim{
+	0%{
+		color:rgb(0,0,0);
+	}
+
+	100%{
+		color:rgb(255,255,255);
+	}
+}
+
 /* HomePage */
 .card-title { 
   text-align: center;

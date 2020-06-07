@@ -30,24 +30,30 @@ class HomePage extends React.Component {
                     let quiz = data[key];
                     quiz.key = key;
                     return quiz;
-                }); 
-                this.setState({ savedQuiz: quizArray, loading: false });
+                });
+                this.setState({ savedQuiz: quizArray, loading: true });
             } else {
                 this.setState({ savedQuiz: null, loading: false });
             }
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
-        }); 
+        });
     }
 
     render() {
         let content = null;
         if (this.state.loading) {
             content = (
-                <div>
+                <div className="loader">
                     <BounceLoader
-                    color={"orange"}
-                    loading={this.state.loading} />
+                        color={"orange"}
+                        size={150}
+                        loading={this.state.loading} />
+                    <div className="loader-text">Loading
+                        <div id="loader-text1">.</div>
+                        <div id="loader-text2">.</div>
+                        <div id="loader-text3">.</div>
+                    </div>
                 </div>
             );
         } else if (!this.state.savedQuiz) {
@@ -59,11 +65,11 @@ class HomePage extends React.Component {
         } else {
             content = (
                 <div className="wrapper">
-                    <p className="sub-title">{this.props.isGuest ? 'All Guest Quizzes:' : 'Your quizzes:'} </p>                
+                    <p className="sub-title">{this.props.isGuest ? 'All Guest Quizzes:' : 'Your quizzes:'} </p>
                     <QuizList
                         savedQuiz={this.state.savedQuiz}
                         loading={this.state.loading}
-                        renderSingleQuiz={this.state.renderSingleQuiz} 
+                        renderSingleQuiz={this.state.renderSingleQuiz}
                     />
                 </div>
             );
