@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase/app';
 import BounceLoader from 'react-spinners/BounceLoader';
 import QuizList from './QuizList';
+import './homePage.css';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class HomePage extends React.Component {
                     quiz.key = key;
                     return quiz;
                 });
-                this.setState({ savedQuiz: quizArray, loading: true });
+                this.setState({ savedQuiz: quizArray, loading: false });
             } else {
                 this.setState({ savedQuiz: null, loading: false });
             }
@@ -58,14 +59,14 @@ class HomePage extends React.Component {
             );
         } else if (!this.state.savedQuiz) {
             content = (
-                <div className="wrapper">
+                <div className="home-wrapper">
                     <p className="sub-title">You have no saved quizzes!</p>
                 </div>
             );
         } else {
             content = (
-                <div className="wrapper">
-                    <p className="sub-title">{this.props.isGuest ? 'All Guest Quizzes:' : 'Your quizzes:'} </p>
+                <div className="home-wrapper">
+                    <p className="sub-title mt-3">{this.props.isGuest ? 'All Guest Quizzes:' : 'Your quizzes:'} </p>
                     <QuizList
                         savedQuiz={this.state.savedQuiz}
                         loading={this.state.loading}
