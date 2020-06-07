@@ -32,7 +32,7 @@ export default class Footer extends React.Component {
           <Col>{quizMe}</Col>
         </Row>
         <Row>
-          <Col className="justify-contents-end">{footer}</Col>
+          <Col>{footer}</Col>
         </Row>
         <hr />
         <Row>
