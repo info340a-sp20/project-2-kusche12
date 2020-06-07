@@ -111,7 +111,6 @@ class Main extends React.Component {
 				<Router>
 					<h1><Link className="title title-link" to="/">QuizMe</Link></h1>
 					<ul>
-						<li><Link to="/app">Maker Space</Link></li> {/* TODO: MOVE THIS INTO ITS OWN CARD */}
 						<li className="nav-profile">
 							<img alt='user profile' role="button" src={user} onClick={this.renderDropdown} />
 							{this.state.dropdown &&

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {
-  Card, Button, CardTitle, CardDeck, CardBody
-} from 'reactstrap';
+import { Card, CardTitle, CardDeck } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
+import AddQuizCard from './AddQuizCard';
 
 export default class QuizList extends Component {
   static defaultProps = {
@@ -35,27 +34,29 @@ export default class QuizList extends Component {
 
     let mappedQuiz =
       cleanQuiz.map((quiz, i) => (
-        <Card key={i} className="cardlist mb-4">
-          <CardBody >
-            <div className="my-auto">
-              {typeof (quiz[quiz.length - 1] === "string") ?
-                <CardTitle>{`${quiz[quiz.length - 1]}`}</CardTitle>
-                :
-                // if not stringValue, default value
-                <div>
-                  <CardTitle>{`Set ${[i + 1]}`}</CardTitle>
-                  <p>{quiz[quiz.length - 1]}</p>
-                </div>
-              }
-              <Button className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Start Game</Button>
+        <Card key={i} className="cardlist mb-4 p-0">
+          {/* last element in the array contains String: name of the quiz */}
+          {typeof (quiz[quiz.length - 1] === "string") ?
+            <div className="cl-cardtitle" onClick={() => { this.handleClick(i + 1, quiz) }}>
+              {`${quiz[quiz.length - 1]}`}
             </div>
-          </CardBody>
+            :
+            // if not stringValue, default value which sets the name of the quiz to "set" 
+            <div>
+              <CardTitle className="cl-cardtitle" onClick={() => { this.handleClick(i + 1, quiz) }}>
+                {`Set ${[i + 1]}`}
+              </CardTitle>
+              <p>{quiz[quiz.length - 1]}</p>
+            </div>
+          }
+          <div className="cardlist-button" onClick={() => { this.handleClick(i + 1, quiz) }}>Start Game</div>
         </Card>
       ))
 
     return (
       <CardDeck >
         {mappedQuiz}
+        <AddQuizCard />
       </CardDeck>
     )
   }

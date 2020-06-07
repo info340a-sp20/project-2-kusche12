@@ -4,7 +4,7 @@ lightgray: #f0efeb
 
 */
 .wrapper{ 
-  margin: 2vw 2vw 1vw 2vw;
+  margin: 2vw 3vw 2vw 3vw;
 }
 
 body {
@@ -67,11 +67,13 @@ ul img {
 
 .link {
   color: gray;
+  font-weight: 500;
 }
 
 .link:hover {
   color: #333333;
   text-decoration: none;
+  transition: .5s;
 }
 
 .title {
@@ -93,6 +95,7 @@ ul img {
   font-weight: 500;
   font-size: 1.5rem;
   transition: 0.3s;
+  margin-left: 1rem;
 }
 
 h1, h2, h3, h4 {
@@ -104,15 +107,9 @@ h1, h2, h3, h4 {
 }
 
 /* HomePage */
-.cardlist {
-  min-width: 12rem;
+.home-wrapper{ 
+  margin: 2vw 3vw 2vw 3vw;
 }
-
-.cardlist-button { 
-  background: #ffa500;
-  border: #ffa500;
-}
-
 
 /* Maker Space Layout */
 .maker {
