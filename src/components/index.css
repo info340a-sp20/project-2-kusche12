@@ -111,58 +111,6 @@ h1, h2, h3, h4 {
   margin: 2vw 3vw 2vw 3vw;
 }
 
-.card-title { 
-  text-align: center;
-}
-
-.cardlist {
-  min-width: 12rem;
-}
-
-.cl-cardtitle {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background: orange;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 2.5rem;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.cardlist-button { 
-  display: flex;
-  width: 100%;
-  transform: translateY(50px);
-  transition: 0.2s;
-  height: 0;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.cardlist:hover .cardlist-button{ 
-  background: white;
-  transform: translateY(0);
-  height: 50px;
-}
-
-.cardbody {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center;
-}
-
-.cl-qm-cardbody{
-  justify-content: center; 
-  align-items: center;
-}
-
-
 /* Maker Space Layout */
 .maker {
   background-color: #f2f2f2;

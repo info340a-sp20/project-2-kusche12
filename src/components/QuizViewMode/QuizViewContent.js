@@ -2,7 +2,11 @@ import React from 'react';
 import '../index.css';
 import { Row, Col } from 'reactstrap';
 
-export default class QuizViewModeButton extends React.Component {
+/**
+ * To be used in Card.js 
+ * 
+ */
+export default class QuizViewContent extends React.Component {
 
   render() {
     let quiz = this.props.quiz;

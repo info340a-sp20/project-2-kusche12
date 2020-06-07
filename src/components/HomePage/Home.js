@@ -2,6 +2,8 @@ import React from 'react';
 import firebase from 'firebase/app';
 import BounceLoader from 'react-spinners/BounceLoader';
 import QuizList from './QuizList';
+import Footer from './Footer/Footer';
+import AddQuizCard from './AddQuizCard';
 import './homePage.css';
 
 class HomePage extends React.Component {
@@ -61,12 +63,13 @@ class HomePage extends React.Component {
             content = (
                 <div className="home-wrapper">
                     <p className="sub-title">You have no saved quizzes!</p>
+                    <AddQuizCard />
                 </div>
             );
         } else {
             content = (
                 <div className="home-wrapper">
-                    <p className="sub-title mt-3">{this.props.isGuest ? 'All Guest Quizzes:' : 'Your quizzes:'} </p>
+                    <p className="sub-title mt-3">{this.props.isGuest ? 'All Guest Quizzes :' : 'Here are Your Quizzes :'} </p>
                     <QuizList
                         savedQuiz={this.state.savedQuiz}
                         loading={this.state.loading}
@@ -75,9 +78,12 @@ class HomePage extends React.Component {
                 </div>
             );
         }
+
+
         return (
             <div>
                 {content}
+                <Footer />
             </div>
         );
     }

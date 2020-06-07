@@ -1,3 +1,10 @@
+hr { 
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 /* Loader */
 .loader{
   display: flex; 
@@ -43,5 +50,115 @@
 
 	100%{
 		color:rgb(255,255,255);
-	}
+  }
+}
+
+
+/* Quiz-Card List */
+.card-title { 
+  text-align: center;
+}
+
+.cardlist {
+  min-width: 12rem;
+}
+
+.cl-cardtitle {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: orange;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2.5rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cardlist-button { 
+  display: flex;
+  width: 100%;
+  transform: translateY(50px);
+  transition: 0.2s;
+  height: 0;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cardlist:hover .cardlist-button{ 
+  background: white;
+  transform: translateY(0);
+  height: 50px;
+}
+
+.cardbody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}
+
+.cl-qm-cardbody{
+  justify-content: center; 
+  align-items: center;
+}
+
+/* Footer */
+.footer { 
+  margin-top: 13rem;
+}
+
+.footer .quizMe { 
+  color: rgb(214, 214, 214);
+}
+
+.quizMe .title { 
+  font-size: 1.3rem;
+  /* color: rgb(214, 214, 214); */
+}
+
+.quizMe p {
+  font-size: .8rem;
+  font-weight: 400;
+  color: rgb(214, 214, 214);
+  margin-bottom: .5rem;
+}
+
+.footer a { 
+  color: rgb(214, 214, 214);
+  font-weight: 600;
+  margin-bottom: 0px;
+  font-size: .9rem;
+}
+
+.footer p.copyright {
+  font-size: .7rem;
+  font-weight: 500;
+  color: rgb(214, 214, 214);
+  margin-bottom: 0;
+}
+
+/* Feedback Component */
+.fb-form-wrapper{
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.feedback-fa {
+  position: absolute;
+  left: 10px;
+  top: calc(50% - 0.5em);
+}
+
+.fb-input {
+  left: 20px;
+  margin-bottom: 1rem;
+}
+
+.feedback .title { 
+  font-size: 1.5rem;
+  color: grey;
 }
