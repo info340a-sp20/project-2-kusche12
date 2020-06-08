@@ -20,9 +20,15 @@ export default class MemberInfo extends Component {
     }
   }
 
+  keydownCheck = (e) => {
+    if (e.keyCode === 32 || e.keyCode === 13) {
+      this.renderContent();
+    }
+  }
+
   render() {
     const circle = (
-      <div className="team-circle">
+      <div tabIndex="0" className="team-circle" onKeyDown={this.keydownCheck}>
         <div ref={this.ref} className="team-circle-img">
           {this.props.name === "Jin" ?
             <h2 target="name">
