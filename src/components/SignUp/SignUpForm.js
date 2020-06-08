@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {
-	Container, Row, Col, Alert
+	Container, Row, Col, Alert, Button
 } from 'reactstrap';
 import './SignUp.css';
 import signuppic from '../../img/signuppic.png';
@@ -13,6 +13,7 @@ class SignUpForm extends React.Component {
 		this.state = {
 			email: "",
 			password: "",
+			signIn: true
 		};
 	}
 
@@ -43,6 +44,13 @@ class SignUpForm extends React.Component {
 		this.props.anonSignInCallback();
 	}
 
+	switchMode = (event) => {
+		event.preventDefault();
+		this.setState({
+			signIn: !this.state.signIn
+		})
+	}
+
 	render() {
 		let errormessage = this.props.errorMessage;
 
@@ -60,6 +68,21 @@ class SignUpForm extends React.Component {
 			<Alert color="danger">{errormessage}</Alert>
 		)
 
+		const signupMode = (
+			this.state.signIn ? <p>Sign In!</p> : <p>Sign up!</p>
+		)
+
+		const buttons = (
+			<div className="form-group buttons">
+				<Button className="button" onClick={this.handleSignUp}>{this.state.signIn ? "Sign In" : "Sign Up"}</Button>
+				<div className="mt-4 d-flex flex-column justify-contents-center">
+					<button className="button-guest" onClick={this.switchMode}>{!this.state.signIn ? "Sign In" : "Don't have an account? Sign Up"}</button>
+					<button className="button-guest" onClick={this.handleAnonSignIn}>Continue as guest</button>
+				</div>
+			</div>
+		)
+
+
 		return (
 			<div className="signup-wrapper">
 				<Container className="d-flex justify-content-center">
@@ -75,10 +98,12 @@ class SignUpForm extends React.Component {
 						</Col>
 
 						<Col className="form-wrapper flex-grow-2 col-sm-10 col-md-6 col-lg-5 col-xl-5 pl-4 ml-lg-5 ml-md-2 ml-xl-5">
-							<p>Sign up!</p>
+							{signupMode}
+
 							{/* ErrorMessage */}
 							{errormessage && displayerrormessage}
 							<form className="form">
+
 								{/* email */}
 								<div className="form-group">
 									<label htmlFor="email">Email</label>
@@ -102,13 +127,8 @@ class SignUpForm extends React.Component {
 								</div>
 
 								{/* buttons */}
-								<div className="form-group buttons">
-									<div className="form-button-inline">
-										<button className="button" onClick={this.handleSignUp}>Sign up</button>
-										<button className="button" onClick={this.handleSignIn}>Sign in</button>
-									</div>
-									<button className="button-guest" onClick={this.handleAnonSignIn}>Continue as guest</button>
-								</div>
+								{buttons}
+
 							</form>
 						</Col>
 					</Row>
