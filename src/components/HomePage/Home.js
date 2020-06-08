@@ -79,7 +79,6 @@ class HomePage extends React.Component {
             );
         }
 
-
         return (
             <div>
                 {content}

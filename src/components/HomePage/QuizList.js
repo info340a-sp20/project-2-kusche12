@@ -32,7 +32,7 @@ export default class QuizList extends Component {
       )
     }
 
-    let mappedQuiz =
+    const mappedQuiz =
       cleanQuiz.map((quiz, i) => (
         <Card key={i} className="cardlist mb-4 p-0">
           {/* last element in the array contains String: name of the quiz */}

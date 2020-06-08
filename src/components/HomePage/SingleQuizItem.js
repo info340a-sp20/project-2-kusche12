@@ -18,10 +18,12 @@ export default class SingleQuizItem extends Component {
 
   render() {
     const quiz = this.state.quiz;
-    let back = (
-      <Link to="/" style={{ color: 'orange' }}>
-        <Back />
-      </Link>
+    const back = (
+      <div className="back">
+        <Link to="/" style={{ color: 'orange' }}>
+          <Back />
+        </Link>
+      </div>
     )
 
     return (

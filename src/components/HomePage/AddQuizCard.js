@@ -8,7 +8,7 @@ import './homePage.css';
 export default class AddQuizCard extends Component {
   render() {
     return (
-      <Card className="d-flex cardlist justify-content-center mb-4">
+      <Card className="d-flex cardlist justify-content-center mb-4 addquiz">
         <Link className='link' to="/createQuiz">
           <div className="cl-qm-cardbody d-flex ">
             <CardBody className="my-auto">
