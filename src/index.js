@@ -10,6 +10,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import SingleQuizItem from './components/HomePage/SingleQuizItem';
 import SignUpForm from './components/SignUp/SignUpForm';
+import Team from './components/Team/Team';
 // import Footer from './components/HomePage/Footer/Footer';
 import user from './img/user.png';
 
@@ -129,6 +130,9 @@ class Main extends React.Component {
 						</Route>
 						<Route path="/singlequizitem/:setNum"
 							component={SingleQuizItem}>
+						</Route>
+						<Route path="/team" component={Team}>
+
 						</Route>
 					</Switch>
 				</Router >

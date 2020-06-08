@@ -14,7 +14,7 @@ export default class Footer extends React.Component {
 
     const footer = (
       <div>
-        <Link to="/" className="link">Meet the Team</Link>
+        <Link to="/team" className="link">Meet the Team</Link>
       </div>
     )
 
