@@ -130,7 +130,7 @@ class Main extends React.Component {
 
 						</Route>
 					</Switch>
-				</Router >
+				</Router>
 			);
 		} else { // no user signed in
 			content = (

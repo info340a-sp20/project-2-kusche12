@@ -72,15 +72,28 @@ class SignUpForm extends React.Component {
 			this.state.signIn ? <p>Sign In!</p> : <p>Sign up!</p>
 		)
 
-		const buttons = (
-			<div className="form-group buttons">
-				<Button className="button" onClick={this.handleSignUp}>{this.state.signIn ? "Sign In" : "Sign Up"}</Button>
-				<div className="mt-4 d-flex flex-column justify-contents-center">
-					<button className="button-guest" onClick={this.switchMode}>{!this.state.signIn ? "Sign In" : "Don't have an account? Sign Up"}</button>
-					<button className="button-guest" onClick={this.handleAnonSignIn}>Continue as guest</button>
+		let buttons;
+		if (this.state.signIn) {
+			buttons = (
+				<div className="form-group buttons">
+					<Button className="button" onClick={this.handleSignIn}>Sign In</Button>
+					<div className="mt-4 d-flex flex-column justify-content-center">
+						<button className="button-guest" onClick={this.switchMode}>Don't have an account? Sign Up</button>
+						<button className="button-guest" onClick={this.handleAnonSignIn}>Continue as guest</button>
+					</div>
 				</div>
-			</div>
-		)
+			);
+		} else {
+			buttons = (
+				<div className="form-group buttons">
+					<Button className="button" onClick={this.handleSignUp}>Sign Up</Button>
+					<div className="mt-4 d-flex flex-column justify-content-center">
+						<button className="button-guest" onClick={this.switchMode}>Sign In</button>
+						<button className="button-guest" onClick={this.handleAnonSignIn}>Continue as guest</button>
+					</div>
+				</div>
+			);
+		}
 
 
 		return (
