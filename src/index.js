@@ -32,13 +32,8 @@ class Main extends React.Component {
 		firebase.auth().createUserWithEmailAndPassword(email, password)
 			.catch((error) => {
 				// Handle Errors here.
-				var errorCode = error.code;
+				// var errorCode = error.code;
 				var errorMessage = error.message;
-				if (errorCode === 'auth/weak-password') {
-					alert('The password is too weak.');
-				} else {
-					alert(errorMessage);
-				}
 				this.setState({ errorMessage: errorMessage });
 			});
 	}
