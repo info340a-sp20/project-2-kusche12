@@ -9,7 +9,7 @@ export default class AddQuizCard extends Component {
   render() {
     return (
       <Card className="d-flex cardlist justify-content-center mb-4">
-        <Link className='link' to="/app">
+        <Link className='link' to="/createQuiz">
           <div className="cl-qm-cardbody d-flex ">
             <CardBody className="my-auto">
               <div className="mb-4">

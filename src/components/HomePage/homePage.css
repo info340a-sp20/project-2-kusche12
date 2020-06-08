@@ -59,9 +59,9 @@ hr {
   text-align: center;
 }
 
-.cardlist {
+/* .cardlist {
   min-width: 12rem;
-}
+} */
 
 .cl-cardtitle {
   display: flex;

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import Card from '../Card';
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-
+import Back from '../GeneralComponents/Back';
 
 export default class SingleQuizItem extends Component {
   static defaultProps = {
@@ -22,11 +20,7 @@ export default class SingleQuizItem extends Component {
     const quiz = this.state.quiz;
     let back = (
       <Link to="/" style={{ color: 'orange' }}>
-        <FontAwesomeIcon
-          icon={faChevronLeft}
-          style={{ color: 'orange' }}
-          className="mr-2" />
-        Back
+        <Back />
       </Link>
     )
 

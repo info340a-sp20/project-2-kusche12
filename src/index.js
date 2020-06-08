@@ -125,7 +125,7 @@ class Main extends React.Component {
 						<Route exact path='/'>
 							<Home userID={userID} isGuest={this.state.user.isAnonymous} />
 						</Route>
-						<Route path='/app'>
+						<Route path='/createQuiz'>
 							<App userID={userID} />
 						</Route>
 						<Route path="/singlequizitem/:setNum"
