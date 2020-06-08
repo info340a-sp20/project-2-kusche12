@@ -145,15 +145,15 @@ class Main extends React.Component {
 						signUpCallback={this.handleSignUp}
 						signInCallback={this.handleSignIn}
 						anonSignInCallback={this.handleAnonSignIn}
+						errorMessage={this.state.errorMessage}
 					/>
 				</div>
 			);
 		}
 		return (
 			<div className="wrapper">
-				<p>{this.state.errorMessage}</p>
+				{/* <p>{this.state.errorMessage}</p> */}
 				{content}
-				{/* <Footer /> */}
 			</div>
 		);
 	}

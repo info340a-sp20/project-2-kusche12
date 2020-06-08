@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {
-	Container, Row, Col
+	Container, Row, Col, Alert
 } from 'reactstrap';
 import './SignUp.css';
 import signuppic from '../../img/signuppic.png';
@@ -11,8 +11,8 @@ class SignUpForm extends React.Component {
 		super(props);
 
 		this.state = {
-			'email': undefined,
-			'password': undefined,
+			email: "",
+			password: "",
 		};
 	}
 
@@ -44,6 +44,8 @@ class SignUpForm extends React.Component {
 	}
 
 	render() {
+		let errormessage = this.props.errorMessage;
+
 		const img = (
 			<div>
 				<img
@@ -53,6 +55,11 @@ class SignUpForm extends React.Component {
 					alt='sign up' />
 			</div>
 		)
+
+		const displayerrormessage = (
+			<Alert color="danger">{errormessage}</Alert>
+		)
+
 		return (
 			<div className="signup-wrapper">
 				<Container className="d-flex justify-content-center">
@@ -69,6 +76,8 @@ class SignUpForm extends React.Component {
 
 						<Col className="form-wrapper flex-grow-2 col-sm-10 col-md-6 col-lg-5 col-xl-5 pl-4 ml-lg-5 ml-md-2 ml-xl-5">
 							<p>Sign up!</p>
+							{/* ErrorMessage */}
+							{errormessage && displayerrormessage}
 							<form className="form">
 								{/* email */}
 								<div className="form-group">
