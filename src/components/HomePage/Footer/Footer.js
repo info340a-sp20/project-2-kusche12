@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col, Container } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import Feedback from './Feedback';
 import '../homePage.css';
 
 export default class Footer extends React.Component {
@@ -15,7 +14,7 @@ export default class Footer extends React.Component {
 
     const footer = (
       <div>
-        <Link className="link">Meet the Team</Link>
+        <Link to="/" className="link">Meet the Team</Link>
       </div>
     )
 

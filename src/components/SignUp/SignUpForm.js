@@ -1,76 +1,95 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import './SignUp.css'
+import {
+	Container, Row, Col
+} from 'reactstrap';
+import './SignUp.css';
+import signuppic from '../../img/signuppic.png';
 
 class SignUpForm extends React.Component {
-  constructor(props){
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.state = {
-      'email': undefined,
-      'password': undefined,
-    }; 
-  }
+		this.state = {
+			'email': undefined,
+			'password': undefined,
+		};
+	}
 
-  //update state for specific field
-  handleChange = (event) => {
-  	let field = event.target.name; //which input
-    let value = event.target.value; //what value
+	//update state for specific field
+	handleChange = (event) => {
+		let field = event.target.name; //which input
+		let value = event.target.value; //what value
 
-    let changes = {}; //object to hold changes
-    changes[field] = value; //change this field
-    this.setState(changes); //update state
-  }
+		let changes = {}; //object to hold changes
+		changes[field] = value; //change this field
+		this.setState(changes); //update state
+	}
 
-  //handle signUp button
-  handleSignUp = (event) => {
-    event.preventDefault(); //don't submit
-    this.props.signUpCallback(this.state.email, this.state.password);
-  }
+	//handle signUp button
+	handleSignUp = (event) => {
+		event.preventDefault(); //don't submit
+		this.props.signUpCallback(this.state.email, this.state.password);
+	}
 
-  //handle signIn button
-  handleSignIn = (event) => {
-    event.preventDefault(); //don't submit
-    this.props.signInCallback(this.state.email, this.state.password);
-  }
+	//handle signIn button
+	handleSignIn = (event) => {
+		event.preventDefault(); //don't submit
+		this.props.signInCallback(this.state.email, this.state.password);
+	}
 
-  handleAnonSignIn = (event) => {
-	  event.preventDefault();
-	  this.props.anonSignInCallback();
-  }
+	handleAnonSignIn = (event) => {
+		event.preventDefault();
+		this.props.anonSignInCallback();
+	}
 
-  render() {
-    return (
+	render() {
+		const img = (
+			<div>
+				<img
+					src={signuppic}
+					id="signuppic"
+					height='auto'
+					alt='sign up' />
+			</div>
+		)
+		return (
 			<div className="signup-wrapper">
-				<div className="container">
-					<div className="row">
-						<div className="signup-info col-xs-12 col-sm-5 col-xl-4 px-4 mr-sm-1">
-							<h1>Make Quizzes at the touch of a button!</h1>
-							<p>Create, save, and share multiple choice quizzes in no time</p>
-						</div>
-						<div className="form-wrapper col-xs-12 col-sm-6 col-xl-6 pl-4 ml-xl-auto">
+				<Container className="d-flex justify-content-center">
+					<Row className="signup-container d-flex justify-content-around">
+						<Col className="signup-info col-sm-10 col-md-5 col-xl-4 mr-md-6 mr-lg-5 mr-xl-3">
+							<Row>
+								<h1>Make Quizzes <br /> at the touch of a button!</h1>
+								<p>Create, save, and share multiple choice quizzes in no time</p>
+							</Row>
+							<Row>
+								{img}
+							</Row>
+						</Col>
+
+						<Col className="form-wrapper flex-grow-2 col-sm-10 col-md-6 col-lg-5 col-xl-5 pl-4 ml-lg-5 ml-md-2 ml-xl-5">
 							<p>Sign up!</p>
 							<form className="form">
 								{/* email */}
 								<div className="form-group">
 									<label htmlFor="email">Email</label>
-									<input className="form-control" 
-										id="email" 
-										type="email" 
+									<input className="form-control"
+										id="email"
+										type="email"
 										name="email"
 										onChange={this.handleChange}
-										/>
+									/>
 								</div>
-								
+
 								{/* password */}
 								<div className="form-group">
 									<label htmlFor="password">Password</label>
-									<input className="form-control" 
-										id="password" 
+									<input className="form-control"
+										id="password"
 										type="password"
 										name="password"
 										onChange={this.handleChange}
-										/>
+									/>
 								</div>
 
 								{/* buttons */}
@@ -82,12 +101,12 @@ class SignUpForm extends React.Component {
 									<button className="button-guest" onClick={this.handleAnonSignIn}>Continue as guest</button>
 								</div>
 							</form>
-						</div>
-					</div>
-				</div>
+						</Col>
+					</Row>
+				</Container>
 			</div>
-    );
-  }
+		);
+	}
 }
 
 export default SignUpForm

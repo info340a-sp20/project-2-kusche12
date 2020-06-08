@@ -17,10 +17,6 @@ body {
 }
 
 /* React Router Navbar */
-ul {
-  float: right;
-  margin: -50px 20px;
-}
 
 ul img {
   width: 40px;

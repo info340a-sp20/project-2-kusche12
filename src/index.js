@@ -4,11 +4,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './components/index.css';
 import App from './components/App';
 import Home from './components/HomePage/Home';
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import Navigation from './components/NavBar/Navbar';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import SingleQuizItem from './components/HomePage/SingleQuizItem';
 import SignUpForm from './components/SignUp/SignUpForm';
+// import Footer from './components/HomePage/Footer/Footer';
 import user from './img/user.png';
 
 class Main extends React.Component {
@@ -107,20 +109,17 @@ class Main extends React.Component {
 			} else {
 				userID = this.state.user.uid;
 			}
+
 			content = (
 				<Router>
-					<h1><Link className="title title-link" to="/">QuizMe</Link></h1>
-					<ul>
-						<li className="nav-profile">
-							<img alt='user profile' role="button" src={user} onClick={this.renderDropdown} />
-							{this.state.dropdown &&
-								<div className="nav-dropdown">
-									<p>User: {this.state.user.isAnonymous ? 'Guest' : this.state.user.email}</p>
-									<button onClick={this.handleSignOut}>Sign out</button>
-								</div>
-							}
-						</li>
-					</ul>
+					<Navigation
+						user={user}
+						renderDropdown={this.renderDropdown}
+						dropdown={this.state.dropdown}
+						isAnonymous={this.state.user.isAnonymous}
+						email={this.state.user.email}
+						handleSignOut={this.handleSignOut}
+					/>
 					<Switch>
 						<Route exact path='/'>
 							<Home userID={userID} isGuest={this.state.user.isAnonymous} />
@@ -132,7 +131,7 @@ class Main extends React.Component {
 							component={SingleQuizItem}>
 						</Route>
 					</Switch>
-				</Router>
+				</Router >
 			);
 		} else { // no user signed in
 			content = (
@@ -150,6 +149,7 @@ class Main extends React.Component {
 			<div className="wrapper">
 				<p>{this.state.errorMessage}</p>
 				{content}
+				{/* <Footer /> */}
 			</div>
 		);
 	}
