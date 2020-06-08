@@ -35,7 +35,7 @@
 }
 
 .team-circle-img.item-clicked { 
-  background-color: red;
+  background-color: #f54242;
   border-radius: 30%;
   transform: translate(-4vw);
   transition: all .5s, border-radius 1s;
@@ -48,9 +48,14 @@
   transition: all .5s, border-radius 1s;
 }
 
+.team-circle:focus {
+  outline: none;
+}
+
 .member-content {
   display: inline;
   transition: all .2s; 
+  border-color: transparent;
 }
 
 .member-content p {

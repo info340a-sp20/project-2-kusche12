@@ -73,7 +73,7 @@ hr {
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 2.5rem;
+  font-size: 2rem;
   overflow: hidden;
   cursor: pointer;
 }
@@ -88,12 +88,14 @@ hr {
   align-items: center;
   font-weight: 500;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .cardlist:hover .cardlist-button{ 
   background: white;
   transform: translateY(0);
   height: 50px;
+  overflow: hidden;
 }
 
 .cardbody {
@@ -101,6 +103,7 @@ hr {
   flex-direction: column;
   justify-content: center; 
   align-items: center;
+  overflow: hidden;
 }
 
 .cl-qm-cardbody{
@@ -174,9 +177,26 @@ hr {
   color: grey;
 }
 
-@media (min-width: 200px) {
+@media screen and (min-width: 200px) {
   /* HomePage */
   .back { 
     width: 60px;
   }
+
+  .cardbody {
+    overflow: hidden;
+  }
+
+  .cardlist {
+    overflow: hidden;
+  }
+
+  .cardlist-button {
+    overflow: hidden;
+  }
+
+  .cl-cardtitle {
+    overflow:hidden;
+  }
+
 } 
