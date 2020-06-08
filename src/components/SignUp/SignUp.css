@@ -115,12 +115,13 @@
     .signup-wrapper {
         margin-top: 5vw;
     }
+
     .signup-info {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: auto 0 auto 0;
+        margin: 0 auto 0 auto;
     }
     .signup-info h1 {
         font-size: 28px;
@@ -146,5 +147,16 @@
     }
     .signup-info h1 {
         font-size: 32px;
+        margin: 0 0 1rem 0;
     }
+
+    #signuppic {
+        width: 330px;
+    } 
 }
+
+@media (min-width: 1000px) {
+    #signuppic {
+        width: 450px;
+    } 
+} 
