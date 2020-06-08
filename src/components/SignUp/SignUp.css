@@ -151,6 +151,12 @@
     }
 
     #signuppic {
-        width: 450px;
+        width: 330px;
     } 
 }
+
+@media (min-width: 1000px) {
+    #signuppic {
+        width: 450px;
+    } 
+} 
