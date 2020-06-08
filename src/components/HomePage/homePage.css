@@ -53,15 +53,17 @@ hr {
   }
 }
 
+/* SingleQuizItem - back button */
+.back { 
+  position: relative;
+  width: 10vw;
+  left: 5vw;
+}
 
 /* Quiz-Card List */
 .card-title { 
   text-align: center;
 }
-
-/* .cardlist {
-  min-width: 12rem;
-} */
 
 .cl-cardtitle {
   display: flex;
@@ -141,6 +143,15 @@ hr {
   margin-bottom: 0;
 }
 
+.addquiz {
+  transition: .3s all;
+}
+
+.addquiz:hover { 
+  transform: scale(1.05);
+  transition: .3s all;
+}
+
 /* Feedback Component */
 .fb-form-wrapper{
   position: relative;
@@ -162,3 +173,10 @@ hr {
   font-size: 1.5rem;
   color: grey;
 }
+
+@media (min-width: 200px) {
+  /* HomePage */
+  .back { 
+    width: 60px;
+  }
+} 

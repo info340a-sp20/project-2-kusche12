@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import MemberInfo from './MemberInfo';
 import '.././index.css';
 import './team.css';
-import orgCircle from '../../img/orgCircle.png';
 
 export default class Team extends Component {
   state = {
@@ -37,7 +36,7 @@ You can learn more about the app
 
     return (
       <div className="wrapper d-flex flex-column mt-3">
-        <h1>Meet the Team</h1>
+        <h1 className="team-h1">Meet the Team</h1>
         <MemberInfo name={"Kyle"} content={kyle} />
         <MemberInfo name={"Jin"} content={jin} />
       </div>

@@ -1,8 +1,9 @@
-.wrapper h1 {
+.wrapper .team-h1 {
   color: orange; 
   text-align: center;
   margin-bottom: 3rem;
 }
+
 .team-circle {
   display: flex;
   justify-content: center;

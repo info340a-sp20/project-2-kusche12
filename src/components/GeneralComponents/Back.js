@@ -11,7 +11,8 @@ export default class Back extends Component {
         <FontAwesomeIcon
           icon={faChevronLeft}
           style={{ color: 'orange' }}
-          className="mr-2" />
+          className="mr-2"
+          alt="back" />
         Back
       </div>
     )
