@@ -26,7 +26,7 @@ export default class Footer extends React.Component {
     )
 
     return (
-      <Container fluid="xl" className="footer">
+      <Container className="footer">
         <Row>
           <Col>{quizMe}</Col>
         </Row>

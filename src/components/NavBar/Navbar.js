@@ -11,7 +11,7 @@ export default class Navigation extends Component {
       <Navbar color="white" expand="md" sticky={'top'} className="d-flex justify-content-between">
         <NavbarBrand className="title title-link " href="/">QuizMe</NavbarBrand>
         <Nav className="d-flex justify-content-between" navbar>
-          <li className="nav-profile">
+          <li>
             <img alt='user profile' role="button" src={this.props.user} onClick={this.props.renderDropdown} />
             {this.props.dropdown &&
               <div className="nav-dropdown">
