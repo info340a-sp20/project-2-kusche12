@@ -111,6 +111,9 @@ hr {
 /* Footer */
 .footer { 
   margin-top: 13rem;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
 }
 
 .footer .quizMe { 
