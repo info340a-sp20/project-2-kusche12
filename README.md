@@ -18,6 +18,9 @@ Click any of these quizzes to begin the quiz game.
 
 Upon completion, your score will be calculated on how many questions you got correct.
 
+### Where to play?
+You can use our application at this website: https://quiz-maker-2cd84.web.app/
+
 
 Please feel free to fork this repo to learn more.
 Thanks for reading!
